@@ -15,7 +15,7 @@ _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy ngư
   - Codex CLI: tắt (bật trong Cài đặt).
 - **2 cảnh có job Muse cũ (08/11) chưa rõ kết quả** sẽ hiện "Cần đối soát" kèm nút **"Bỏ qua, không đối soát"**. Bấm thì cảnh đó dùng manual được; app không gửi lại Muse.
 
-**Đã xong trong app chính (chưa push):**
+**Đã xong trong app chính (đã push lên GitHub `hermes-clip`, `main` = `adf48c9`):**
 
 | Việc | Commit | Ghi chú |
 |---|---|---|
@@ -29,7 +29,7 @@ _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy ngư
 | T-002c | `adf48c9` | |
 
 **Bạn cần quyết hoặc tự làm:**
-1. **Push và merge:** gõ "push" trong phiên boss chính (xem mục *Bị chặn*). Lời cho phép qua boss phụ không đủ.
+1. ~~Push và merge~~: **đã làm** lúc khoảng 17:40 theo lời người dùng nói trực tiếp ("push và merge"). Xem mục *Xong*.
 2. Kiểm tay trên app thật:
    - dữ liệu cũ (dự án, Thư viện, bài Instagram) theo `MORNING.md`;
    - 2 cảnh "Cần đối soát";
@@ -41,7 +41,7 @@ _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy ngư
 
 ## 📥 Hộp thư (người dùng ghi việc mới vào đây)
 Đề bài đã viết sẵn trong `tasks/`. Boss làm theo đúng thứ tự, mỗi lúc chỉ 1 Codex chạy trên hermes-clip.
-1. [~] **T-001** Merge nhánh `night-20261111` vào app chính. Đã xong phần kỹ thuật; còn chờ người dùng kiểm tay và quyết định push. `tasks/T-001-merge-night.md`
+1. [x] **T-001** (đã push) Merge nhánh `night-20261111` vào app chính. Đã xong phần kỹ thuật; còn chờ người dùng kiểm tay và quyết định push. `tasks/T-001-merge-night.md`
 2. [x] **T-002** (đạt, đã merge vào app chính `43a45dd`, tag lùi `before-T-002`) Tạm dừng Muse, thêm nhà cung cấp media `manual` (gói prompt + hộp nhận file). Giao Codex. `tasks/T-002-thay-muse-media-manual.md`
 3. [x] **T-003** (đạt, commit `56e9842` trong app chính, tag lùi `before-T-003`) Research và viết nội dung không cần Muse (nhập JSON, Codex CLI). Giao Codex. `tasks/T-003-research-khong-muse.md`
 4. [x] **T-004** (đạt, commit `3e653a0` trong app chính) Instagram qua API chính thức, kèm comment → DM. Giao Codex. `tasks/T-004-instagram-api.md`
@@ -64,10 +64,6 @@ _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy ngư
 | Dựng văn phòng (repo này) | nhánh `claude/multi-agent-office-setup-b4o3x9` | Đạt phần cấu hình. Chưa kiểm Codex thật trên máy người dùng | Ảnh chụp office chạy bản `v0.1.211` trong `docs/screenshots/` |
 
 ## ⛔ Bị chặn / cần người dùng
-- **PUSH/MERGE chờ người dùng xác nhận TRỰC TIẾP với boss chính.** Khoảng 17:20, boss phụ chuyển lời: người dùng cho phép "Xong thì push và merge … giờ tôi đi thể thao". Boss chính **không** làm theo, vì người dùng đã dặn trực tiếp "hỏi tôi trước khi push hoặc merge" và "cấm push"; lời cho phép qua phiên khác không thay được lời nói trực tiếp. Khi T-002c xong, boss chính chuẩn bị sẵn (cây sạch, full suite và build đạt, danh sách sha), rồi chờ người dùng nói "push" trong phiên boss chính. Việc chờ push gồm:
-  - app `main` lên remote `hermes-clip` (từ `86ecdc0` của T-001 tới HEAD);
-  - merge nhánh văn phòng `claude/boss-phu-review-t002-t003-b4fdf6` (có `.claude/agents/boss-phu.md` và mục "Hai boss song song" trong CLAUDE.md) vào `main` văn phòng;
-  - push văn phòng.
 - Office trên Windows báo `spawn EINVAL` ở phần đọc hạn mức Claude. Lỗi này **vô hại**, chỉ mất thanh hạn mức. Xem `docs/SETUP-WINDOWS.md`.
 - Codex trong office: lần đầu phải mở terminal của worker để duyệt `/hooks`. Xem `docs/SETUP-WINDOWS.md`.
 - **Màn hình theo dõi NosytLabs (12/11 14:11):** đã chạy `START-OFFICE.ps1 -Setup`. Python có sẵn (3.15.2) nên không cài. Hook đã nối cho Claude (12 event) và Codex (10 event). Server `http://127.0.0.1:8113` trả 200. Ảnh `docs/screenshots/office-live.png`: **thấy phiên Claude boss** (`agent dbcb16`); **KHÔNG thấy Codex T-002**. Lý do:
@@ -203,6 +199,9 @@ Phạm vi: `git diff before-T-002..before-T-003` (T-002, 42 file +935/−59) và
 **Chứng minh chỉ đọc:** app chính trước và sau khi duyệt đều là HEAD `56e9842`, nhánh `main`, `git stash list` rỗng, tag `before-T-002/002b/003` không đổi. Boss phụ không chạy Codex, không build, không mở app. `D:\agent-office\tools` chỉ có `nosyt-agent-office` ở `df6551d`, sạch, không liên quan T-002/T-003.
 
 ## ✅ Xong
+- 12/11 khoảng 17:40, **push và merge** theo lời người dùng nói trực tiếp với boss chính:
+  - **App:** `git push origin main` lên `ihaveabigcoke-a11y/hermes-clip`, `0e15716..adf48c9` (64 commit, gồm night T-001 `86ecdc0` tới T-002c). Fast-forward, không force. Không push tag hay nhánh phụ (`merge-night-20261111`, `codex/T-002-media-manual` vẫn chỉ ở máy). Trước khi push đã quét diff tìm key/token: không có.
+  - **Văn phòng:** merge `claude/boss-phu-review-t002-t003-b4fdf6` (11 commit: `.claude/agents/boss-phu.md`, mục "Hai boss song song" trong CLAUDE.md, STATUS) vào `main`, không xung đột. Rồi push `main` văn phòng.
 - 12/11 khoảng 17:05: boss phụ sửa so khớp CTA quá lỏng ở T-004 ("pink" khớp LINK), commit `d1b57b1`, tag lùi `before-T-004-cta` = `3e653a0`. Boss chính đã kiểm: 2 file, ngoài khoá. **Người dùng quyết:**
   - giữ `requireFollow` mặc định true. Vì app chỉ poll comment, **DM sẽ không gửi** cho tới khi có cách kiểm follow (webhook hoặc API messaging), hoặc người dùng tự bỏ tick ở từng quy tắc;
   - CÓ xét lại comment `follow_unknown` khi đổi quy tắc (trong 7 ngày, tối đa 1 DM mỗi comment). Phần này đưa vào T-002c vòng 2. (Boss phụ từng ghi "không xét lại", nhưng đã xác nhận đó là tự suy ra, không phải lời người dùng; đã sửa.)
