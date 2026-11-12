@@ -59,6 +59,9 @@ _Cập nhật lần cuối: 12/11/2026 chiều, bởi boss Claude (trên máy ng
    - Lưu ý cho boss sau: `D:\hermes-wt\evidence\node_modules` và `desktop\node_modules` là **junction** trỏ vào node_modules thật. Muốn gỡ thì dùng `cmd /c rmdir`, **không** dùng `rm -rf`.
 
 ## ✅ Xong
+- 12/11 khoảng 17:05: boss phụ sửa so khớp CTA quá lỏng ở T-004 ("pink" khớp LINK), commit `d1b57b1`, tag lùi `before-T-004-cta` = `3e653a0`. Boss chính đã kiểm: 2 file, ngoài khoá. **Người dùng quyết:**
+  - giữ `requireFollow` mặc định true. Vì app chỉ poll comment, **DM sẽ không gửi** cho tới khi có cách kiểm follow (webhook hoặc API messaging), hoặc người dùng tự bỏ tick ở từng quy tắc;
+  - CÓ xét lại comment `follow_unknown` khi đổi quy tắc (trong 7 ngày, tối đa 1 DM mỗi comment). Phần này đưa vào T-002c vòng 2. Boss phụ báo người dùng nói *không* xét lại; boss chính làm theo câu trả lời trực tiếp và đã báo boss phụ.
 - 12/11: pull luật mới (sửa thẳng trên app, kèm tag lùi lại). Chép 3 skill Hermes bản mới (có *Office mode*) vào app chính, commit `2661a5a`. Repo app có danh tính git local, chép từ clone night.
 - 12/11: sửa `C:\Users\ADMIN\.claude\settings.json`: thêm dấu phẩy thiếu ở dòng 8, bản sao lưu là `settings.json.bak-20261112`. Cài FFmpeg 9.0.2 bằng winget.
 - 12/11: app chính `C:\Users\ADMIN\Downloads\Product-Lab-Local\Product-Lab-Local` giờ là repo git (remote `hermes-clip`), đang ở `86ecdc0`. Các thư mục cục bộ (backup, `local-dist`, `.integrations`, `tools`) vẫn giữ nguyên và được git bỏ qua (ignored).
