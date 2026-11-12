@@ -133,6 +133,17 @@ Phạm vi: `git diff before-T-002..before-T-003` (T-002, 42 file +935/−59) và
   - chặn hẳn `worker.resume` với job **có** providerId sau khi bỏ qua: để boss chính quyết (worker.mjs).
 - **Lùi lại:** `git revert ab94531`. **Không** `reset --hard`, vì sẽ xoá WIP T-004.
 
+### Boss phụ vòng 3 (12/11, khoảng 17:10): T-004 `3e653a0`, chạy song song với Codex T-002c
+| Việc | Kết luận | Lý do |
+|---|---|---|
+| T-004 | **Đạt về code**, kèm 1 bản sửa của boss phụ (`d1b57b1`) và 1 câu hỏi cho người dùng | Codex CLI không còn bị ép provider; Instagram trình duyệt tắt mặc định (fail closed), bật phải qua cảnh báo; DM idempotent, có giới hạn tốc độ, có nút dừng khẩn cấp; follow chưa rõ thì không gửi link |
+- **Đã tự sửa (Vừa):**
+  - **Lỗi:** `matchCta` quá lỏng. LINK khớp pink, line, ink; SHOP khớp stop, show, ship; WANT khớp went. Khách sẽ bị DM nhầm.
+  - **Sửa:** từ khoá 4–5 chữ chỉ nhận đúng từ, s/es, hoặc đảo 2 chữ liền nhau; từ khoá ≥ 6 chữ mới nhận 1 lần sửa chữ. Test cũ đổi thành chặt hơn (có chủ ý).
+  - **Kiểm (chạy riêng):** `instagram-official` 12/12; tsc 0 lỗi. Tag lùi `before-T-004-cta`.
+- **Hỏi người dùng:** quy tắc DM mặc định "chỉ gửi khi đã follow", mà polling không kiểm được follow. Nên với mặc định, **không DM nào được gửi**. Muốn chạy thì tắt ô đó cho từng quy tắc.
+- **Chưa kiểm:** full suite, `local:build` (boss chính chạy sau T-002c), tài khoản Meta thật, ảnh 1366/1920.
+
 **Chứng minh chỉ đọc:** app chính trước và sau khi duyệt đều là HEAD `56e9842`, nhánh `main`, `git stash list` rỗng, tag `before-T-002/002b/003` không đổi. Boss phụ không chạy Codex, không build, không mở app. `D:\agent-office\tools` chỉ có `nosyt-agent-office` ở `df6551d`, sạch, không liên quan T-002/T-003.
 
 ## ✅ Xong
