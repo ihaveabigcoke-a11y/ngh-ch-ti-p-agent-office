@@ -54,7 +54,7 @@ _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy ngư
 ## 🔨 Đang làm
 | Việc | Worker | Nhánh / PR | Ghi chú |
 |---|---|---|---|
-| T-007 khung kịch bản v2 | Codex (`codex exec`, effort high), boss chính thuê | sửa thẳng trong app, tag `before-T-007` = `85fbc66`, khoá `codex-T-007.txt` | Bắt đầu khoảng 22:45. **Đừng mở app** |
+| T-007 khung kịch bản v2 | Codex **vòng 2** (resume `01a1d06b`) | sửa thẳng trong app, tag `before-T-007` = `85fbc66`, khoá `codex-T-007.txt` | Vòng 1 logic ĐẠT: typecheck 0; test 212/212; api 28/28; desktop 449 pass, 0 fail; build 0; không có nhãn "AI"; seed v1 giữ nguyên, thêm v2 cho 6 công thức. Vòng 2 chỉ sửa bảng shot: giờ bị bẻ dòng, id thô `beat_2`, hộp thoại hẹp. Lúc khoảng 22:50 lệnh nền bị Claude Code dừng vì máy thiếu RAM (Codex vẫn chạy tiếp và xong lúc 23:02). **Đừng mở app** |
 
 ## 👀 Chờ người dùng duyệt
 | Việc | PR | Boss đánh giá | Bằng chứng |
