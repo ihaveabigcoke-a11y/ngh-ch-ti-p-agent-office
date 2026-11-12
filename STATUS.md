@@ -1,5 +1,38 @@
 # Bảng tiến độ
 
+## Trạng thái hiện hành — 01:13:47 13/11/2026 (Asia/Saigon)
+
+**Một main agent Codex đã tiếp quản và hoàn tất T-009.** Không spawn, không worker phụ, không chạy orchestrator.
+
+- App `main`: **17cb38c**; cây sạch. Code sửa T-009: `e47b51d`. Build `pnpm local:build` đạt lúc **2026-11-13T01:11:29.4096762+07:00**, đúng HEAD. Có thể mở bằng `START-HERMES-CLIP.cmd`; lượt này không mở Electron trên DB thật.
+- Kiểm sau sửa: TypeScript đạt; domain **213/213**; API **28/28**; desktop **465 pass / 1 skip OpenMontage / 0 fail**; Python bridge **2/2**. Không cộng dồn các bộ kiểm có test trùng.
+- T-008 đã bổ sung nghiệm thu công cụ thật: rea-video ghim revision, Python 3.12.14 riêng, model local; một MP4 snapshot 10 giây xử lý 62504 ms, 1 shot, OCR có mốc, SHA-256 gốc không đổi. Xuất review, main agent đọc contact sheet rồi nhập qua CLI: **complete, 1 narrative + 1 prompt**. DB riêng là fixture.
+- UI T-008: 4 PNG ở 1366/1920, 0 lỗi trang, 0 request ngoài fixture. Giữ theme/font.
+- App có cấu hình cũ nay nhận đường dẫn rea-video thiếu; giữ đường dẫn riêng đã chọn. Cache model dùng chung cạnh checkout, không tải lại cho từng job.
+- T-001–T-008 đã có code; **kế hoạch boss dự phòng đã xong bằng HANDOVER một main agent**. Không có job code nào đang chạy.
+- **Chưa kiểm:** Electron trên dữ liệu thật, Codex/Gemini VLM thật, Meta/DM thật, file mới từ Flow/Gemini, Thùng rác Windows thật. OCR có thể nhận chữ in trên sản phẩm là overlay; cần kiểm mắt. Không chọn lại sản phẩm cũ làm pilot.
+- Không push/merge trong phiên này. Bảng này đã cập nhật local; điện thoại/GitHub chưa nhận các commit mới cho tới lần push được yêu cầu rõ.
+
+Đọc [HANDOVER.md](HANDOVER.md), [T-009](tasks/T-009-codex-mot-main-agent.md), [REVIEW-T-009.md](REVIEW-T-009.md). Bằng chứng local: [FINAL.md](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/office-20261113/FINAL.md). Không đọc AppData/SQLite/profile thật để xác minh.
+
+### Hộp thư hiện hành
+
+| Việc | Kết luận | Phần còn lại |
+| --- | --- | --- |
+| T-001–T-005 | Đã triển khai trước khi tiếp quản; hồi quy hiện tại đạt | Những lượt kiểm tài khoản/dữ liệu thật nêu trên |
+| T-006 | Code/FFmpeg fixture đạt trong bộ kiểm hiện tại | Thùng rác và file Flow/Gemini mới chưa kiểm |
+| T-007 | Kịch bản v2, test đạt | Chất lượng video tạo mới chưa nghiệm thu |
+| T-008 | Code, CLI trên MP4 và nhập tay thật đạt; UI fixture đạt | VLM Codex/Gemini thật chưa kiểm |
+| T-009 / boss dự phòng | **Xong** — một main agent, tài liệu và build đồng bộ | Không cần chờ Claude Pro |
+
+Các mục dưới giữ làm lịch sử ngày 12/11; không dùng SHA/build/WIP hay quy trình hai boss cũ để ghi đè trạng thái hiện hành.
+
+---
+
+## Lịch sử trước T-009 (giữ nguyên để đối chiếu)
+
+# Bảng tiến độ
+
 Boss cập nhật file này sau mỗi bước. Người dùng xem nó, hoặc xem `/lite` của office trên điện thoại.
 
 _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy người dùng)._
