@@ -2,7 +2,42 @@
 
 Boss cập nhật file này sau mỗi bước. Người dùng xem nó, hoặc xem `/lite` của office trên điện thoại.
 
-_Cập nhật lần cuối: 12/11/2026 chiều, bởi boss Claude (trên máy người dùng)._
+_Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy người dùng)._
+
+## 📣 Báo cáo cho người dùng (12/11 17:30)
+**Mở app được chưa?** **ĐƯỢC, an toàn** (bằng `START-HERMES-CLIP.cmd` như cũ), với điều kiện boss phụ và Codex không sửa app trong lúc bạn dùng (boss chính đã báo boss phụ ngừng).
+- App ở commit `adf48c9` (cây sạch). `desktop/local-dist` build lúc 17:23:59 từ đúng commit đó. Không có Codex nào đang chạy.
+- Lần đầu mở:
+  - **Muse: Đang tạm dừng** (mặc định). Không có request nào tới Muse;
+  - **Instagram trình duyệt: tắt.** Mở app không tự mở Instagram;
+  - API Instagram chưa có token, nên không gọi Meta;
+  - DM tự động: chưa gửi gì, vì quy tắc đòi follow mà poll không kiểm được follow;
+  - Codex CLI: tắt (bật trong Cài đặt).
+- **2 cảnh có job Muse cũ (08/11) chưa rõ kết quả** sẽ hiện "Cần đối soát" kèm nút **"Bỏ qua, không đối soát"**. Bấm thì cảnh đó dùng manual được; app không gửi lại Muse.
+
+**Đã xong trong app chính (chưa push):**
+
+| Việc | Commit | Ghi chú |
+|---|---|---|
+| T-001 night | `86ecdc0` | Có T01–T24, T26, T27, F01–F03; T25 không tồn tại |
+| T-002 media manual | `43a45dd` | |
+| T-003 research không cần Muse | `56e9842` | |
+| T-002b Muse Bật/Tạm dừng + tự chuyển | `4d5e672` | |
+| G, lối ra cho cảnh kẹt | `ab94531` | boss phụ sửa |
+| T-004 Instagram API | `3e653a0` | |
+| Siết so khớp CTA | `d1b57b1` | boss phụ sửa |
+| T-002c | `adf48c9` | |
+
+**Bạn cần quyết hoặc tự làm:**
+1. **Push và merge:** gõ "push" trong phiên boss chính (xem mục *Bị chặn*). Lời cho phép qua boss phụ không đủ.
+2. Kiểm tay trên app thật:
+   - dữ liệu cũ (dự án, Thư viện, bài Instagram) theo `MORNING.md`;
+   - 2 cảnh "Cần đối soát";
+   - thử xuất gói prompt và thả 1 file thật từ Flow vào Hộp nhận media.
+3. Muốn DM thật: tạo Meta App và cấp 4 quyền (xem `REVIEW-T-004.md`).
+4. Muốn Codex hiện trên màn theo dõi: mở `codex`, gõ `/hooks` và chấp nhận.
+
+**Chưa kiểm:** Electron thật trên dữ liệu thật; tài khoản Meta thật; `codex exec` thật qua `session_gateway`; file tải thật từ Flow/Gemini.
 
 ## 📥 Hộp thư (người dùng ghi việc mới vào đây)
 Đề bài đã viết sẵn trong `tasks/`. Boss làm theo đúng thứ tự, mỗi lúc chỉ 1 Codex chạy trên hermes-clip.
@@ -15,17 +50,17 @@ _Cập nhật lần cuối: 12/11/2026 chiều, bởi boss Claude (trên máy ng
 ## 🔨 Đang làm
 | Việc | Worker | Nhánh / PR | Ghi chú |
 |---|---|---|---|
-| T-002c: lỗi G (media kẹt "Cần đối soát") | **G xong:** commit `ab94531` do boss phụ sửa (10 file, +142/−17), boss chính đã kiểm: đúng 10 file, WIP T-004 (35 file) nguyên vẹn, không trùng | tag `before-T-002c` = `4d5e672`. **Lùi bằng `git revert ab94531`**, không `reset --hard` | Boss phụ chạy test riêng: production 32/32; desktop provider-routing + manual-media 37/37; api production 5/5; tsc 0. **Chưa:** chạy đủ bộ, build, Electron. Còn lại cho Codex sau T-004: worker.mjs chặn resume/recheck job cũ có providerId của cảnh đã bỏ qua (dữ liệu thật: 2 job đều không có providerId, nên đã được G phủ); H nhãn tiếng Việt; I bỏ polling 1,5 giây. Đề: `D:\hermes-wt\prompts\T-002c-head.md` |
-| T-002c phần còn lại + xét lại follow_unknown | Codex **vòng 2** (resume `01a1cf32`) | sửa thẳng trong app, tag `before-T-002c2` = `3e653a0`; base hiện tại `d1b57b1` | Vòng 1: typecheck 0; test 204/204; api 26/26; desktop 402 pass, 0 fail; build 0. Assertion đổi đều chặt hơn. Script UI lỗi ở bước "Dán JSON" (nghi do `page.clock`), vòng 2 sửa. Vòng 2 thêm việc xét lại comment `follow_unknown` khi đổi quy tắc (người dùng quyết) |
+| _(trống: không có Codex nào đang chạy)_ | | | |
 
 ## 👀 Chờ người dùng duyệt
 | Việc | PR | Boss đánh giá | Bằng chứng |
 |---|---|---|---|
 | T-001 merge night | Chưa push. Commit `86ecdc0` nằm trên nhánh cục bộ `merge-night-20261111`, app chính đang ở commit này | Đạt phần kỹ thuật. **Chưa kiểm:** app mở lại được và dữ liệu cũ còn nguyên (người dùng tự kiểm theo `E:\Hermes Night\hermes-night3\boss\MORNING.md`). Giữ F03 theo lựa chọn của người dùng | Sao lưu tại `D:\backup\hermes-20261112-1346`: AppData 2476 file / 361.792.710 byte, khớp nguồn; tar app 18145/18145 file. Merge không xung đột. Kết quả kiểm chạy trong app chính: typecheck exit 0; test 196/196; test:api 24/24; test:desktop 317 pass, 1 skip (OpenMontage), 0 fail; `local:build` exit 0 |
-| T-002 media `manual` | Đã merge vào `main` cục bộ của app chính: `43a45dd` (commit việc `7d8e022`). Tag lùi `before-T-002`. Worktree `D:\hermes-wt\T-002` vẫn giữ | **Đạt.** Xem `REVIEW-T-002.md`. **Chưa kiểm:** Electron thật, file tải thật từ Flow/Gemini | Kiểm trong app sau merge: typecheck 0; test 196/196; api 24/24; desktop 328 pass, 1 skip, 0 fail; `local:build` 0. Ảnh `D:\hermes-wtrtifacts\T-002\T-002-tao-video-{1366,1920}.png` |
-| T-003 research không Muse | Commit `56e9842` trên `main` cục bộ của app chính. Tag lùi `before-T-003` | **Đạt.** Có: nhập JSON hoặc file kiểm theo schema, báo lỗi từng trường; nhận JSON của skill `hermes-product-check`; Copy prompt research; Codex CLI tắt mặc định (không shell, timeout 180 giây, giới hạn 2 MB, test bằng `codex` giả); content và landing. **Chưa kiểm:** `codex exec` thật. App ép `model_provider=openai`, trong khi Codex trên máy dùng `session_gateway`, nên có thể phải chỉnh khi bật thật. Quy tắc tự chuyển Muse cho research và nội dung sẽ làm trong T-002b | Kiểm ngoài sandbox: typecheck 0; test 202/202; api 26/26; desktop 337 pass, 1 skip, 0 fail; build 0. Ảnh `D:\hermes-wtrtifacts\T-003\T-003-nghien-cuu-{1366,1920}.png`: 10 ứng viên `import:Claude`, null hiện "Chưa biết", CNY giữ nguyên, 0/3 chọn. `desktop/local-dist` đã build lại lúc 15:43:46 từ `56e9842` |
+| T-002 media `manual` | Đã merge vào `main` cục bộ của app chính: `43a45dd` (commit việc `7d8e022`). Tag lùi `before-T-002`. Worktree `D:\hermes-wt\T-002` vẫn giữ | **Đạt.** Xem `REVIEW-T-002.md`. **Chưa kiểm:** Electron thật, file tải thật từ Flow/Gemini | Kiểm trong app sau merge: typecheck 0; test 196/196; api 24/24; desktop 328 pass, 1 skip, 0 fail; `local:build` 0. Ảnh `D:\hermes-wt\artifacts\T-002\T-002-tao-video-{1366,1920}.png` |
+| T-003 research không Muse | Commit `56e9842` trên `main` cục bộ của app chính. Tag lùi `before-T-003` | **Đạt.** Có: nhập JSON hoặc file kiểm theo schema, báo lỗi từng trường; nhận JSON của skill `hermes-product-check`; Copy prompt research; Codex CLI tắt mặc định (không shell, timeout 180 giây, giới hạn 2 MB, test bằng `codex` giả); content và landing. **Chưa kiểm:** `codex exec` thật. App ép `model_provider=openai`, trong khi Codex trên máy dùng `session_gateway`, nên có thể phải chỉnh khi bật thật. Quy tắc tự chuyển Muse cho research và nội dung sẽ làm trong T-002b | Kiểm ngoài sandbox: typecheck 0; test 202/202; api 26/26; desktop 337 pass, 1 skip, 0 fail; build 0. Ảnh `D:\hermes-wt\artifacts\T-003\T-003-nghien-cuu-{1366,1920}.png`: 10 ứng viên `import:Claude`, null hiện "Chưa biết", CNY giữ nguyên, 0/3 chọn. `desktop/local-dist` đã build lại lúc 15:43:46 từ `56e9842` |
 | T-002b Muse Bật/Tạm dừng + tự chuyển | Commit `4d5e672` trên `main` cục bộ của app. Tag lùi `before-T-002b` | **Đạt** sau 3 vòng (xem `REVIEW-T-002b.md`). Bật lại Muse không tự gửi job cũ (mặc định an toàn, người dùng có thể đổi) | typecheck 0; test 203/203; api 26/26; desktop 378 pass, 0 fail; build 0; 12 ảnh tại `D:\hermes-wt\artifacts\T-002b\` |
 | T-004 Instagram API + comment→DM + tắt Instagram trình duyệt + Codex CLI session_gateway | Commit `3e653a0`. Tag lùi `before-T-004` (= `4d5e672`, trước cả commit G `ab94531`, nên lùi riêng T-004 thì dùng `git revert 3e653a0`) | **Đạt** (xem `REVIEW-T-004.md`). **Chưa kiểm:** tài khoản Meta thật, safeStorage trên Electron thật | typecheck 0; test 204/204; api 26/26; desktop 396 pass, 0 fail (2 lần); build 0; 4 ảnh tại `D:\hermes-wt\artifacts\T-004\` |
+| T-002c: lối ra cho cảnh kẹt "Cần đối soát" (G) + chặn job Muse cũ + nhãn tiếng Việt + bỏ polling + bảng Instagram 1366 + xét lại `follow_unknown` | `ab94531` (G, boss phụ), `d1b57b1` (siết CTA, boss phụ), `adf48c9` (Codex, 2 vòng). Tag lùi `before-T-002c` / `before-T-004-cta` / `before-T-002c2`; lùi từng commit bằng `git revert` | **Đạt** (xem `REVIEW-T-002c.md`). Nhỏ còn lại: màn Tạo video lặp dòng "Muse đang tạm dừng…" 3 lần | Cây sạch: typecheck 0; test 204/204; api 26/26; desktop 418 pass, 1 skip, 0 fail; `local:build` thật 0 lúc **17:23:59** từ `adf48c9`. 10 ảnh tại `D:\hermes-wt\artifacts\T-002c\` |
 | Dựng văn phòng (repo này) | nhánh `claude/multi-agent-office-setup-b4o3x9` | Đạt phần cấu hình. Chưa kiểm Codex thật trên máy người dùng | Ảnh chụp office chạy bản `v0.1.211` trong `docs/screenshots/` |
 
 ## ⛔ Bị chặn / cần người dùng
