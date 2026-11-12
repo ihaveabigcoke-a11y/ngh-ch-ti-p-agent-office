@@ -34,6 +34,13 @@ Không có MCP? Dùng lệnh `office-workers` (đã có trong PATH của bạn),
    - **Chưa đạt:** `tell_worker` kèm danh sách lỗi cụ thể (file, dòng, cách tái hiện).
 8. **Báo cáo** người dùng ngắn gọn bằng tiếng Việt: xong gì, bằng chứng gì, còn gì chưa kiểm.
 
+## Ngoại lệ cho hermes-clip (chạy local)
+Nhánh chính của hermes-clip chỉ nằm trên máy người dùng; bản trên GitHub đã cũ. Vì vậy với hermes-clip:
+- Codex chạy `codex exec` trong worktree riêng (`D:\hermes-wt\T-xxx`), mỗi việc một nhánh `codex/T-xxx-…`, **chỉ commit**: không push, không mở PR.
+- Boss duyệt bằng `git diff <nhánh chính>...codex/T-xxx`, rồi chạy lại các lệnh kiểm trong worktree.
+- Việc sau (T-003, T-004) phải cắt nhánh **sau khi** việc trước đã được người dùng merge vào nhánh chính, để tránh xung đột.
+- Commit `STATUS.md` của repo văn phòng sau mỗi bước, để người dùng xem được trên điện thoại.
+
 ## Giới hạn
 - **Số Codex cùng lúc:** tối đa **1** trên tầng `hermes-clip` (luật cũ của dự án: mỗi lúc chỉ một bên sửa repo). Tầng khác tối đa **2**.
 - Boss chỉ sửa trực tiếp những việc nhỏ (tài liệu, `STATUS.md`, đề bài). Việc code thì giao Codex.
