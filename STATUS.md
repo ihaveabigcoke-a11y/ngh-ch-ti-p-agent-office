@@ -144,6 +144,10 @@ Phạm vi: `git diff before-T-002..before-T-003` (T-002, 42 file +935/−59) và
 - **Người dùng đã quyết (12/11):** **giữ** "chỉ gửi khi đã follow" ("Giữ, an toàn hơn"). Polling không kiểm được follow, nên hiện **không DM nào được gửi**, cho tới khi có cách kiểm follow. Người dùng cũng trả lời trực tiếp boss chính: **có xét lại** các comment `follow_unknown` còn trong hạn 7 ngày khi đổi quy tắc, mỗi comment tối đa 1 DM. Việc này giao cho T-002c vòng 2 (file `instagram-comments.mjs` và test đã vào khoá Codex).
 - **Chưa kiểm:** full suite, `local:build` (boss chính chạy sau T-002c), tài khoản Meta thật, ảnh 1366/1920.
 
+### Push và merge: chờ người dùng xác nhận trực tiếp với boss chính
+- Người dùng nhắn boss phụ "Xong thì push và merge nhé", nhưng trước đó đã nói trực tiếp với boss chính "Hỏi tôi trước khi push hoặc merge" và "cấm push". Boss chính giữ lời nói trực tiếp, nên **chưa push, chưa merge**. Boss phụ cũng không làm thay.
+- **Việc của người dùng khi về:** nhắn thẳng vào phiên boss chính câu "push và merge". Boss chính đã chuẩn bị sẵn (cây sạch, test và build đạt, danh sách sha).
+
 **Chứng minh chỉ đọc:** app chính trước và sau khi duyệt đều là HEAD `56e9842`, nhánh `main`, `git stash list` rỗng, tag `before-T-002/002b/003` không đổi. Boss phụ không chạy Codex, không build, không mở app. `D:\agent-office\tools` chỉ có `nosyt-agent-office` ở `df6551d`, sạch, không liên quan T-002/T-003.
 
 ## ✅ Xong
