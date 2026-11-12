@@ -2,6 +2,8 @@
 
 ## Trạng thái hiện hành — 01:13:47 13/11/2026 (Asia/Saigon)
 
+Chế độ: CODEX-BOSS  <!-- người dùng đổi thành CLAUDE-BOSS khi muốn Claude làm boss; xem CHE-DO-VAN-PHONG.md -->
+
 **Một main agent Codex đã tiếp quản và hoàn tất T-009.** Không spawn, không worker phụ, không chạy orchestrator.
 
 - App `main`: **17cb38c**; cây sạch. Code sửa T-009: `e47b51d`. Build `pnpm local:build` đạt lúc **2026-11-13T01:11:29.4096762+07:00**, đúng HEAD. Có thể mở bằng `START-HERMES-CLIP.cmd`; lượt này không mở Electron trên DB thật.

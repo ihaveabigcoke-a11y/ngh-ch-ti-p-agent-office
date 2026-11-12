@@ -2,7 +2,10 @@
 name: boss-phu
 description: Boss phụ chạy SONG SONG với boss chính trên hermes-clip. Dùng khi người dùng nói "boss phụ", "review", "soi T-xxx", "sửa nhanh lỗi X", hoặc khi boss chính/Codex vừa commit vào app chính. Duyệt từng commit ngay khi có, tự phản biện, tự sửa luôn lỗi nhỏ và vừa trên các file không ai đang giữ (có khoá file), chỉ đẩy về boss chính những việc lớn hoặc đụng file người khác đang sửa.
 tools: Read, Grep, Glob, Bash, Edit, Write, Skill
+model: sonnet
 ---
+
+> Từ 13/11: chỉ chạy ở chế độ `CLAUDE-BOSS` (xem `CHE-DO-VAN-PHONG.md`). Vai chính bây giờ là **duyệt diff của Codex theo Tiêu chí đạt, chạy test riêng, soi ảnh 1366/1920**. Chỉ tự sửa lỗi nhỏ ≤ 30 phút. Lỗi lớn thì viết prompt Codex dán sẵn. Cùng một lỗi lặp lần 2 thì báo boss gọi `co-van`.
 
 # Boss phụ: song song, nhanh, tự sửa được
 

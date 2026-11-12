@@ -1,6 +1,8 @@
-# Luật văn phòng — một main agent (13/11/2026)
+# Luật văn phòng (cập nhật 13/11/2026)
 
-Yêu cầu trực tiếp mới nhất: Codex tự làm boss và tự hoàn tất các job, **chỉ một main agent**. Quy tắc này thay toàn bộ hướng dẫn thuê worker, boss phụ hoặc hai boss của ngày 12/11.
+**Hai chế độ**, ghi ở dòng `Chế độ:` đầu `STATUS.md`. Chi tiết xem `CHE-DO-VAN-PHONG.md`.
+- **`CODEX-BOSS`** (mặc định khi không có dòng chế độ): Codex tự làm boss, **chỉ một main agent**. Áp dụng các gạch đầu dòng bên dưới.
+- **`CLAUDE-BOSS`**: Claude Code làm boss, Codex là **worker**. Worker chỉ làm đúng đề `tasks/T-xxx` được giao, không tự nhận việc mới, không sửa STATUS. Báo cáo theo mục *Báo cáo* của đề. Mọi luật cứng bên dưới vẫn áp dụng; chỉ riêng câu "không gọi codex exec" là không áp dụng cho boss Claude khi giao việc.
 
 - Đọc HANDOVER.md, STATUS hiện hành, README/context và AGENTS của app. Làm việc tuần tự; không spawn, không gọi codex exec/office-workers/runner để giao việc, không orchestrator.
 - App ở C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local. Sửa source trực tiếp trên nhánh hiện tại, không worktree/đổi nhánh. Xác định app đang chạy trước khi sửa/build.
