@@ -43,7 +43,12 @@ Người dùng không muốn clone hay worktree. Codex sửa **thẳng trong th�
 2. Codex chạy `codex exec` (effort high) **trong chính thư mục app**, chỉ commit vào nhánh chính hiện tại. Không push, không tạo nhánh mới, không đụng AppData/SQLite/media/profile.
 3. Boss duyệt bằng skill `hermes-night-review` (mục *Office mode*): `git diff before-T-xxx..HEAD`, chạy lại toàn bộ lệnh kiểm.
 4. **Hỏng** (kiểm không đạt sau 3 vòng sửa, hoặc build hỏng): `git reset --hard before-T-xxx` để trả app về như cũ, rồi ghi lý do vào `STATUS.md`.
-5. **Đạt:** giữ nguyên các commit, ghi vào `STATUS.md`, rồi mới sang việc sau.
+5. **Đạt:**
+   - giữ nguyên các commit;
+   - **build lại app** (`pnpm local:build`, app đang tắt) để lần sau người dùng mở `START-HERMES-CLIP.cmd` là chạy bản mới;
+   - ghi thời gian build vào `STATUS.md`, rồi mới sang việc sau.
+
+   Người dùng **không bao giờ** được mở ra một bản Hermes Clip cũ hơn code đã merge.
 6. Mỗi lúc chỉ **một** bên sửa app. Không có worktree, nên không chạy hai Codex song song.
 7. Commit `STATUS.md` của repo văn phòng sau mỗi bước, để người dùng xem được trên điện thoại.
 
