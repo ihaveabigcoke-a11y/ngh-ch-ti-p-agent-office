@@ -92,6 +92,33 @@ Phạm vi: `git diff before-T-002..before-T-003` (T-002, 42 file +935/−59) và
   - **B.** `setMusePaused({paused:false})` gọi `this.tick()`, mà tạm dừng không còn xoá `approvedIds`. Nên **bật lại Muse là tự gửi ngay** các job đã duyệt từ trước khi tạm dừng, người dùng không bấm Chạy lần nữa. Với rủi ro khoá tài khoản, đây là quyết định của người dùng, cần hỏi.
   - **C.** AsyncLocalStorage truyền sang cả timer và listener được tạo trong job đã nhận. Callback nào chạy sau khi tạm dừng mà chỉ gọi `assertMuseAvailable` sẽ lọt qua chốt chặn. Cần một test: tạm dừng giữa job, rồi gọi `context()` hoặc `measureQuota()` từ một `setTimeout` tạo bên trong job, thì phải ra `MUSE_PAUSED`.
 
+### Boss phụ vòng 2 (12/11, khoảng 17:05): T-002b commit `4d5e672` (`git diff 56e9842..4d5e672`: 51 file, +1220/−179)
+| Việc | Kết luận | Lý do |
+|---|---|---|
+| T-002b | **Cần sửa** (1 lỗi Nặng, 2 Nhỏ) | A–E đã sửa đúng trong code. Còn kẹt đối soát ở phía **media** |
+
+**Lỗi vòng trước, kiểm lại trong code:**
+- **A: Đã sửa.** `provider-routing.mjs` dùng `textProviderReceipts` lọc theo `taskScope`/`batchId`, tôn trọng `reconciled`. Có `researchSkipReconciliation` và `museChatSkipReconciliation` (lưu bền, `resume`/`run` từ chối run đã bỏ qua).
+- **B: Đã sửa.** `setMusePaused(true)` gọi `pause()`, hàm này xoá `approvedIds`. Bật lại thì chỉ tăng `dispatchVersion`, không `tick()`. Có test `T-002b B`/`D`.
+- **C: Đã sửa.** `runMuseTask` gắn `jobId`+`profileId`; `task.active=false` khi xong; `assertMuseAvailable` chỉ cho qua khi khớp đúng id. Có test `T-002b C`.
+- **D (`model_provider="openai"`, `codex-cli.mjs:66`): Chưa sửa.** Đã xếp vào T-004.
+- **E: Đã sửa** theo báo cáo Codex (landing ghi `import:<tool>`, báo số mới/trùng). Chưa đọc kỹ UI.
+- Test bị xoá hay sửa đều có lý do: test route cũ (hành vi đã bỏ có chủ ý) được thay bằng "pause persists without closing contexts…"; test công tắc cũ được thay bằng 3 test `MuseSwitch`; `instagram-ai-label.test.mjs` bỏ timeout 180 ms và `setDefaultTimeout(1500)` (mục F, chống chập chờn, assertion giữ nguyên, nằm ngoài phạm vi nhưng chấp nhận được).
+- Bằng chứng test là của boss chính chạy ngoài sandbox: typecheck 0; test 203/203; api 26/26; desktop 378 pass/1 skip; build 0. Boss phụ **không chạy lại**.
+
+**Lỗi mới:**
+- **G (Nặng): media kẹt "Cần đối soát" mà không có lối ra khi Muse bị khoá.**
+  - `ManualMedia.route()` (`desktop/src/manual-media.mjs`) và guard `manual_result` (`app/api/production/route.ts:14-20`) đưa **mọi** job Muse của cảnh vào `previous`. Đưa vào không kèm `reconciled`, cùng mọi `attempt.status==='unknown'`.
+  - Cảnh nào có một job Muse ở `needs_attention` (hoặc attempt `unknown`) thì bị chặn vĩnh viễn: không xuất được gói prompt, hộp nhận không gắn file, gắn tay cũng lỗi 422.
+  - Muốn đối soát thì cần `resume`/`recheckResult`, mà hai lệnh này đòi Muse bật, trong khi tài khoản Muse đã bị khoá. **Không có** `skipReconciliation` cho job media (chỉ có cho research và chat).
+  - Tái hiện: một job `needs_attention` có `request.projectId=P, sceneId=S` → `manualMedia.exportPack({projectId:P})` trả "Duyệt ít nhất một cảnh manual…", và `status()` ghi trạng thái cảnh là "Cần đối soát".
+  - **Chưa kiểm** dữ liệu thật có job như vậy không (boss phụ không đọc SQLite), nhưng rất có thể có, từ hôm tài khoản bị khoá.
+- **H (Nhỏ):** `components/lab/text-exchange.tsx:70` hiện id thô "Mặc định: import:json / codex / muse" cho người dùng. Nên dùng nhãn tiếng Việt: "Nhập JSON", "Codex CLI", "Muse".
+- **I (Nhỏ):** mỗi `TextExchange` gọi IPC `museChatList` (×2) và `researchStatus` mỗi 1,5 giây (`setInterval(read,1500)`), dù đã nghe sẵn `workspace-changed`. Nên chỉ đọc lại khi có sự kiện, hoặc giãn ra ≥ 10 giây.
+- Tự phản biện:
+  - Đã bỏ nghi vấn "auto → manual lệch giữa `production.ts` và resolver", vì guard ở `route.ts` chạy trước và chặn đúng.
+  - Đã bỏ nghi vấn "MUSE_STATUS không có", vì `desktop/local/server.mjs:33` có cung cấp kèm `jobs`.
+
 **Chứng minh chỉ đọc:** app chính trước và sau khi duyệt đều là HEAD `56e9842`, nhánh `main`, `git stash list` rỗng, tag `before-T-002/002b/003` không đổi. Boss phụ không chạy Codex, không build, không mở app. `D:\agent-office\tools` chỉ có `nosyt-agent-office` ở `df6551d`, sạch, không liên quan T-002/T-003.
 
 ## ✅ Xong
