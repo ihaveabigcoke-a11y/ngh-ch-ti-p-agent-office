@@ -1,18 +1,25 @@
-# Hàng việc tiếp theo và phân vai (13/11/2026)
+# Hàng việc — sáng 13/11/2026
 
-**Chỉ đạo trực tiếp mới nhất:** T-010 và T-011 đều làm trong Hermes Clip. T-010 dùng `buildOfficeView` qua route local, không ghi `live/snapshot.json`; T-011 thêm hai màn trong app. Không dùng repo production-office, không áp patch phòng ban. Các cột lịch sử bên dưới được đọc theo phạm vi mới này.
+Chế độ CODEX-BOSS: một main agent, không phân vai/delegation. Chỉ đạo người dùng 04:00 thay các mốc dừng cũ. Office ở trong Hermes; không repo/snapshot ngoài, patch mẫu chỉ tham khảo.
 
-T-010 và T-011 theo mốc nghiệm thu đầu tiên trong `CLAUDE.md` của Hermes Clip. Cột *Phân vai* chỉ áp dụng ở chế độ `CLAUDE-BOSS`. Ở `CODEX-BOSS`, một main agent làm tuần tự từ trên xuống.
+| Việc | Trạng thái | Commit / giới hạn |
+| --- | --- | --- |
+| T-002–T-008, T-010/T-011 | Có từ trước, không làm lại | baseline a473b72 |
+| T-012 | Xong | e29dec7; fixture và dựng từ clip Muse cũ |
+| T-023 | Xong phần app | ea5d1ea; Muse giả kiểm quota/từ chối/timeout |
+| M: Muse mới | Kẹt dịch vụ | f098843; 1 gửi/0 clip mới/2 lỗi, Tạm dừng hạn chế vùng |
+| T-017 | Xong draft | 6c09a9f / 8a8755b; 9 ô fixture, ba draft thật chưa đăng |
+| T-013 | Xong | fb7829a |
+| T-014 | Xong | dbf3b55 |
+| T-015 | Xong | c307a96 |
+| T-018 | Xong | 04ddc1f; ngưỡng mặc định null |
+| T-019 | Xong | 3b4d68b; preview và import nguyên lô |
+| T-020 | Xong | 47bb61a; 10 bước/13 fixture |
+| T-021 | Xong | c5be1da; 13 link hướng dẫn |
+| T-022 | Review/build cuối | SHA và suite/build cuối ở STATUS |
+| T-022a | Xong | c0474fb; test rủi ro, chống trùng thời điểm khác ISO offset |
+| T-022b | Xong | c5958fd; bảy màn trống, 14 PNG |
+| T-022c | Xong | 8ec2aa5; sửa bảng/role lỗi, axe sáu trạng thái, 18 focus, 8 PNG |
+| T-016 | Bỏ qua ngoài danh sách | Không làm deep-link repo Office ngoài |
 
-| # | Việc | Repo | Độ khó | Phân vai (CLAUDE-BOSS) |
-|---|---|---|---|---|
-| T-010 | Đã đạt `4f759c3`: ngày VN, `productKey` tự gán, `rank` tự xếp, n/3; hàm thuần `buildOfficeView` qua route local đã xác thực | hermes-clip | Vừa–khó | Một main agent thực hiện và tự review theo yêu cầu trực tiếp |
-| T-011 | Đã đạt 7007d08 (báo cáo a473b72), build 02:39:54: hai màn trong app: tươi/cũ/mất kết nối/mô phỏng; Tín hiệu & Phòng chờ theo lượt, Phòng sản xuất theo sản phẩm; ảnh 1366/1920 | hermes-clip | Vừa | Một main agent thực hiện và tự review |
-| — | **Mốc dừng 1:** MP4 local mới đổi unmatched → received thì màn Tín hiệu đổi nhóm trong ≤1 phút; fixture ra "Hôm nay 3/3 · Đang triển khai 4". DB kiểm riêng, không tài khoản/dữ liệu thật | hermes-clip | — | Báo đã kiểm/chưa kiểm trong STATUS; không tự sang T-012 |
-| T-012 | Một video xuyên suốt: `renderPlan`, chọn đoạn in/out, cắt + ghép + đè chữ, **giữ tiếng gốc**, xuất MP4 đã kiểm, 3 hook trên một thân video, `content_plan.variantId` | hermes-clip | Khó | co-van **1 lần** chốt `renderPlan` trước khi code → Codex → boss-phu duyệt, xem MP4 bằng ffprobe |
-| T-013 | Đổi "Kịch bản" thành **Khung content**; thêm **link video đối thủ** vào hồ sơ, có nút "Dùng làm khung content"; nối với rea-video nếu có | hermes-clip | Nhẹ–vừa | Codex → trinh-sat soát nhãn, boss-phu soi ảnh |
-| T-014 | Hồ sơ sản phẩm nhiều tab (đề cũ "T-010 hồ sơ" đổi số) | hermes-clip | Vừa | Codex → boss-phu |
-| T-015 | Menu theo phòng ban (đề cũ "T-009 menu" đổi số, vì T-009 đã dùng cho Codex main agent) | hermes-clip | Nhẹ–vừa | Codex → boss-phu ảnh 1366/1920 |
-| T-016 | (Chờ người dùng chốt) Link mở thẳng Hermes từ Office: `hermes-clip://product/<id>` | hermes-clip + office | Nhẹ | Codex; co-van **1 lần** về an toàn của handler |
-
-Việc chỉ sửa tài liệu hoặc STATUS: boss làm luôn hoặc giao trinh-sat. Không gọi Codex cho việc này.
+Không tự thêm tính năng. Phần cần người dùng: quyền video Muse/khu vực hợp lệ; ngưỡng tín hiệu; đúng SKU/nội dung và tài khoản/landing trước đăng. SAC đã tắt, Electron chạy; không chỉnh bảo mật thêm. Các task code không mở dữ liệu thật.

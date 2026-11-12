@@ -1,8 +1,81 @@
+# Claude xác nhận sáng 13/11 (khoảng 06:00)
+- Claude chạy lại full suite trên app `25a1407`, cây sạch: typecheck 0; test 247/247; api 29/29; desktop 488 pass / 1 skip / 0 fail. **Khớp đúng** số Codex báo (764/1/0).
+- Quét diff `a473b72..HEAD` (107 file): không có key, token hay email; không có file nhị phân.
+- **Đã push app** lên GitHub: `8b7d88f..b13fe26 main`, không force. `b13fe26` là merge `-s ours` để nối lịch sử PR #1 (cây trùng hệt `17cb38c` có sẵn ở máy), nội dung không đổi.
+- **Đã push văn phòng** `main` theo cách tương tự (cây remote trùng `cdf25c8`), kèm báo cáo sáng này của Codex.
+- Chưa kiểm thêm ngoài phần Codex đã ghi "Chưa kiểm" bên dưới. Muse đang **Tạm dừng** (hạn chế vùng).
+
+# Sáng 13/11 — đọc cái này trước
+Chế độ: CODEX-BOSS · main **25a1407** · local:build đạt **05:43:37 +07** trên cây sạch/app tắt; không push/merge.
+
+| Việc | Kết quả | SHA |
+| --- | --- | --- |
+| Mục 0 | Xong: Electron chạy, đóng êm; không đổi bảo mật | checkpoint 04:00 |
+| T-012 / T-023 | Xong phần app: render / Muse chính và phanh | e29dec7 / ea5d1ea |
+| M: clip Muse mới | **Kẹt hạn chế vùng; không thử lại** | f098843 |
+| T-017 | Xong: ma trận, ba draft thật chưa đăng | 6c09a9f / 8a8755b |
+| T-013 / T-014 / T-015 | Xong: Khung content, chín tab, menu | fb7829a / dbf3b55 / c307a96 |
+| T-018 / T-019 / T-020 | Xong: so hook, CSV, mười bước tiếp | 04ddc1f / 3b4d68b / 47bb61a |
+| T-021 | Xong: Hướng dẫn và 13 link | c5be1da |
+| T-022 | Xong review/build/báo cáo; ba sửa receipt/MP4/null | 8a2753d / c9546a4 / a38a226 / 25a1407 |
+| T-022a / b / c | Xong: test rủi ro, nhãn/trống, bàn phím | c0474fb / c5958fd / 8ec2aa5 |
+
+- Kiểm cuối: **764 đạt / 1 bỏ qua / 0 lỗi**, typecheck đạt (247 domain + 29 API + 488 desktop); skip montage-live tùy chọn. Axe 6 trạng thái/0 violation, 18 focus; không chứng nhận WCAG toàn app.
+- Muse: **1 gửi / 0 clip mới / 2 lỗi** (một trước gửi). Cuối đêm **Tạm dừng**, phản hồi còn hoạt động nhưng video hạn chế theo vùng; lượt chưa rõ giữ needs_attention.
+- Clip thật là nguồn Muse **cũ 12/11**, SHA256 `42921bd4f8c8792d4e71008e300121c09ca027d5bcad0556fd904ac835e073e1`; chưa xác minh SKU/công dụng, không gọi là clip mới đêm nay.
+- MP4 thật `outputs/M-20261113/m20261113_three_0.mp4`: SHA256 `6f86cb78aeef7b24076e0b95b73674153046100c6156c83696f643f21e20304a`.
+- MP4 thật `outputs/M-20261113/m20261113_three_1.mp4`: SHA256 `88ca19f52987f0aa57d1cf785f04e8feabfe591e3ab7494e14b9cb2e7cd0d82d`.
+- MP4 thật `outputs/M-20261113/m20261113_three_2.mp4`: SHA256 `a411a727a18689f37a40166df4c47b6dabff8e3cf997f582ef406920110ea35f`.
+- Cả ba 720×1280, 6,033333s, lệch âm/hình 0,021333s, chung thân. Có ba draft thật; **chưa đăng**, thiếu tài khoản/landing/UTM. [Báo cáo và hash](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/docs/context/2026-11-13-OFFICE-MORNING.md).
+- Ảnh 1366/1920: [chọn đoạn](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/T-012-ui), [Electron thật](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/M-20261113), [trạng thái trống](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/T-022b-ui), [bàn phím/axe](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/T-022c-ui).
+- **Cần anh chốt:** ngưỡng tín hiệu đang null; quyền video Muse/khu vực; tài khoản/landing và duyệt nội dung trước đăng. **Smart App Control đã tắt, Electron chạy; không cần chỉnh thêm.**
+- **Chưa kiểm:** Muse mới, Meta/DM, Flow mới, Thùng rác, toàn luồng dữ liệu thật sau build cuối, NVDA/200%/high contrast; axe incomplete đã ghi. **Chạy tiếp:** START-HERMES-CLIP.cmd → Hướng dẫn/Bước tiếp theo; Muse giữ dừng, dùng manual cho clip mới.
+
+---
+
+## Lịch sử checkpoint — không dùng thay trạng thái sáng ở trên
+
+# Sáng 13/11 — checkpoint đang làm
+
+Chế độ: CODEX-BOSS. Một main agent; tiếp tục WIP T-012 rồi M/T-023 và danh sách người dùng 04:00.
+
+- Mục 0: Electron 45.2.2 chạy được; không còn spawn UNKNOWN. Launcher một lần với QA_USER_DATA riêng, chưa đọc AppData thật. App báo ERR_MODULE_NOT_FOUND: desktop/local-dist/server/lib/lab/render-plan.mjs do WIP T-012 chưa build.
+- CloseMainWindow đóng hộp lỗi nhưng tiến trình lỗi không thoát; đã gọi app.quit qua inspector của chính tiến trình kiểm, không kill. Electron đã tắt. Log outputs/T-000-electron.
+- Muse đêm này: 0 gửi / 0 thành công / 0 lỗi; chưa đánh giá phiên. Chỉ worker app được dùng phiên hiện có.
+- T-012 **e29dec7**; báo cáo app ops/office/reports/T-012.md và REVIEW-T-012.md. 723 test đạt/1 skip/0 lỗi. 3 MP4 fixture qua OpenMontage thật; ảnh outputs/T-012-ui (1366/1920). Chưa Muse thật; build sau T-023 theo lịch hai task. Đã nhả khóa T-012.
+- T-023 **ea5d1ea**, typecheck, domain 215, API 28, desktop 485 đạt/1 skip/0 lỗi (tổng 728 đạt). Nút gói, interval 60s, ledger12/đêm, stop refusal/2 lỗi, UI 6 ảnh outputs/T-023-ui. local:build đạt 04:13 trên cây sạch. M đang bắt đầu; chưa gửi thật tại checkpoint này.
+
+- T-013 **fb7829a**: nhãn Khung content, video đối thủ HTTPS/rea/link. 735 đạt/1 skip/0 lỗi; typecheck; 4 ảnh outputs/T-013-ui. Tự review Đạt, nhả khóa; tiếp T-014.
+
+- T-014 **dbf3b55**: chín tab/URL/phím/checklist chung. 738 đạt/1 skip/0 lỗi, 9 PNG outputs/T-014-ui; T-013 UI hồi quy đạt. Nhả khóa; build sau hai việc T-013/T-014.
+
+- T-015 **c307a96**: menu phòng ban, 17 view cũ, lọc ngày; 738 đạt/1 skip/0 lỗi, 4 ảnh. Build T-014 dbf3b55 đạt. Nhả khóa, tiếp T-018.
+
+- T-018 **04ddc1f**: so hook/latest/null, ngưỡng người dùng, lịch sử quyết định. 741 đạt/1 skip/0 lỗi, 5 ảnh. Nhả khóa, build sau T-015/T-018 rồi T-019.
+
 # Bảng tiến độ
+
+## M — checkpoint 04:22 13/11/2026
+- Muse đã tự Tạm dừng, không thử lại đêm này: 1 gửi / 0 thành công / 2 lỗi (một lỗi ảnh trước gửi; một phản hồi không tạo media, needs_attention).
+- 3 job chưa gửi đã hủy nháp qua app, giữ lịch sử; 4 cảnh đã xuất gói manual. Lượt đã gửi giữ needs_attention. Muse phản hồi tính năng video không khả dụng cho tài khoản tại quốc gia/khu vực hiện tại và thử lại không giúp; không suy rộng thành khóa toàn bộ tài khoản.
+- Clip Muse hợp lệ cũ ngày 12/11 của sản phẩm mới nhất được kiểm riêng để tiếp tục nghiệm thu dựng; không gọi là clip mới đêm nay. Không đăng/DM/Meta.
+- Đã dựng 3 MP4 từ clip cũ bằng OpenMontage, 720×1280, 6,033333s, âm/hình lệch 0,021333s; 3 hash và plan chung thân tại app outputs/M-20261113/result.json. Phát được trong Electron, ảnh 1366/1920; chỉ duyệt kỹ thuật cho draft nội bộ. Tài khoản cuối: còn trả lời, video bị hạn chế vùng; Muse Tạm dừng. Đã đóng app bằng CloseMainWindow.
+- M full suite 728 đạt/1 skip/0 lỗi, typecheck đạt. T-017 bắt đầu, đề đã viết, khóa đúng path; tiếp tục một main agent, không gửi dịch vụ ngoài.
+- M report commit **f098843**; T-017 code **6c09a9f**, 733 test đạt/1 skip/0 lỗi, typecheck đạt. 5 ảnh outputs/T-017-ui, 9 ô fixture/CTA drift/link đúng render. local:build đạt 04:44 cây sạch/app tắt sau M + T-017. Đang tạo ba draft thật từ ba render cũ; Muse giữ Tạm dừng, Meta/DM tắt.
+- T-017 thật đạt 04:45: 3 draft gắn 3 render, PAWS/giá hồ sơ 5,99 USD cùng nhau; chưa tài khoản/landing nên chưa UTM. Không đăng. Evidence outputs/M-20261113/three-real-drafts.json + drafts-real-{1366,1920}.png. App đóng êm; Muse ledger vẫn 1/0/2, dừng hết đêm. Tiếp T-013.
 
 ## Trạng thái hiện hành — 02:40 13/11/2026 (Asia/Saigon)
 
 Chế độ: CODEX-BOSS
+
+**Chỉ đạo mới 03:36 13/11:** bước 0 a–d đã thử, Electron vẫn bị Smart App Control chặn; tiếp tục T-012 → T-015 bằng một main agent. Chỉ đạo này thay mốc dừng cũ bên dưới.
+
+- Chữ ký: electron.exe và 5 DLL NotSigned; d3dcompiler_47.dll Valid (Microsoft). Bản chính thức có cùng hash với bản cũ.
+- Lockfile Electron 45.2.2 x64. ZIP chính thức khớp SHASUMS256.txt: `a234388419ccbcb18dd2feec856e4ae1832499e200837f23f8e653bd51ff3be5`. Đã thay dist và giữ bản cũ trong outputs/SAC-20261113/dist-before-official-reinstall.
+- Unblock-File 73 file trong dist; Zone.Identifier trước/sau đều 0, hash nội dung không đổi.
+- START-HERMES-CLIP.cmd với dữ liệu kiểm riêng báo `spawn UNKNOWN`. Code Integrity 3077 lúc 03:35:51 +07: policy `VerifiedAndReputableDesktop`, status `0xc0e90002`, electron.exe 45.2.2.0. Không có cửa sổ Electron; đã đóng launcher kiểm.
+- Ghi chú theo yêu cầu người dùng: **“Chỉ còn cách người dùng tắt Smart App Control”**. Bằng chứng xác nhận a–d chưa gỡ chặn bản hiện tại; chưa xác minh đây là phương án duy nhất của Windows. Agent không tắt SAC/Defender, không sửa registry bảo mật, không ký binary.
+- Bằng chứng local tại app `outputs/SAC-20261113`: signatures-before.json, signatures-official.json, download-verification.json, reinstall-unblock.json, launcher.stderr.log, codeintegrity-events.json. Không mở dữ liệu/profile thật.
 
 **Đạt mốc nghiệm thu 1 của T-010/T-011 trong Hermes Clip; dừng trước T-012.** Một main agent làm và tự review, không spawn/worker phụ. Không push/merge.
 
@@ -283,3 +356,27 @@ Phạm vi: `git diff before-T-002..before-T-003` (T-002, 42 file +935/−59) và
 - Ghi chú cho boss sau: lệnh build đúng là `pnpm local:build` (`pnpm build` lỗi vì repo không có `scripts/run-framework.mjs`). Các test cần `ffmpeg` trong PATH.
 - 12/11: thêm NosytLabs (ghim `df6551d`) làm màn hình theo dõi, kèm script `scripts/START-OFFICE.ps1`.
 - 12/11: chọn Agent Office (AgentSystemLabs) và ghim `v0.1.211`. Đã cài trên máy người dùng: thư mục dự án `D:\agent-office`, `gh` đã đăng nhập.
+
+## T-019 — hoàn tất
+- Commit 3b4d68b; 745 đạt/1 skip/0 lỗi, typecheck đạt. 4 ảnh outputs/T-019-ui; review Đạt. Nhả khóa, tiếp T-020; build sau T-019/T-020.
+
+
+## T-020 — hoàn tất
+- 758 đạt/1 skip/0 lỗi, typecheck; 4 ảnh outputs/T-020-ui; review Đạt. SHA theo git log T-020. Nhả khóa, build sau T-019/T-020.
+
+- T-020 SHA 47bb61a; local:build đạt 05:22, cây sạch/app tắt. T-021 bắt đầu.
+
+## T-021 — hoàn tất
+- 758 đạt/1 skip/0 lỗi, typecheck; 13 link, 2 PNG outputs/T-021-ui; review Đạt. Tiếp T-022 review tổng và build cuối.
+
+
+## T-022 — build đạt, kiểm bổ sung theo brief
+- HEAD f374593; 760 pass/1 skip/0 fail, typecheck; local:build exit 0 lúc 05:29:56 +07, cây sạch/app tắt. Tiếp 3 mục bổ sung người dùng giao: test rủi ro, nhãn/trống, khả năng truy cập; không tính năng mới.
+
+- T-022a test rủi ro xong: 764 pass/1 skip/0 fail; lỗi trùng ISO offset đã sửa. Tiếp kiểm nhãn/trống.
+
+- T-022b **c5958fd**: 7 màn trống, 14 PNG, null/nhãn/nút thiếu đầu vào đạt; full suite 764 pass/1 skip/0 fail, typecheck. REVIEW-T-022b.md. Nhả khóa, build sau T-022a/b rồi kiểm khả năng truy cập.
+
+
+- T-022c **8ec2aa5**: sửa vùng cuộn/role danh sách lỗi; axe 6 trạng thái/0 violation, 18 focus, 8 PNG; 764 pass/1 skip/0 fail, typecheck. Chưa NVDA; chi tiết REVIEW-T-022c.md. Nhả khóa và chốt báo cáo/build cuối.
+
