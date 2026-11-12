@@ -37,6 +37,15 @@ Tài khoản Muse đã bị khoá ngày 12/11/2026. App phải tiếp tục làm
    - Nút **Xuất gói prompt** và **Mở hộp nhận media** đặt ở thanh hành động trên cùng của màn đó.
    - Nhãn tiếng Việt có dấu. Giữ font và theme graphite–lime.
 
+## Quy tắc tự chuyển Muse ↔ worker khác (áp dụng cho T-002 và T-003)
+- **Muse sẵn sàng** khi: nút Muse đang **Bật**, có profile đã đăng nhập, và còn hạn mức. Đúng logic `ready` hiện có trong `lib/lab/muse-connection.ts`.
+- Muse sẵn sàng thì app **mặc định dùng Muse** cho research, nội dung và media, y như trước.
+- Muse **không** sẵn sàng (tạm dừng, chưa đăng nhập, hết hạn mức, lỗi phiên) thì app **tự quay về**:
+  - research và nội dung đi qua Codex hoặc nhập JSON (T-003);
+  - media đi qua nhà cung cấp `manual`, tức gói prompt cho Flow/Gemini (T-002).
+- Mỗi tác vụ ghi rõ nó đã chạy bằng nhà cung cấp nào. Người dùng vẫn chọn tay được cho từng cảnh nếu muốn.
+- Không tự gửi lại job Muse có kết quả chưa rõ sang nhà cung cấp khác; phải đối soát trước.
+
 ## Không làm
 - Không tự động hoá Flow, Gemini web hay Muse bằng trình duyệt.
 - Không gọi API trả phí.
