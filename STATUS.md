@@ -199,6 +199,7 @@ Phạm vi: `git diff before-T-002..before-T-003` (T-002, 42 file +935/−59) và
 **Chứng minh chỉ đọc:** app chính trước và sau khi duyệt đều là HEAD `56e9842`, nhánh `main`, `git stash list` rỗng, tag `before-T-002/002b/003` không đổi. Boss phụ không chạy Codex, không build, không mở app. `D:\agent-office\tools` chỉ có `nosyt-agent-office` ở `df6551d`, sạch, không liên quan T-002/T-003.
 
 ## ✅ Xong
+- 12/11 17:45: mở Hermes Clip cho người dùng (Electron PID 34736, bản `adf48c9`; không có trình duyệt Muse hay Instagram nào tự bật). Tạo shortcut `C:\Users\ADMIN\Desktop\Hermes Clip.lnk` trỏ tới `START-HERMES-CLIP.cmd`: cửa sổ cmd chạy thu nhỏ, icon tạm của Electron vì app chưa có `.ico`.
 - 12/11 khoảng 17:40, **push và merge** theo lời người dùng nói trực tiếp với boss chính:
   - **App:** `git push origin main` lên `ihaveabigcoke-a11y/hermes-clip`, `0e15716..adf48c9` (64 commit, gồm night T-001 `86ecdc0` tới T-002c). Fast-forward, không force. Không push tag hay nhánh phụ (`merge-night-20261111`, `codex/T-002-media-manual` vẫn chỉ ở máy). Trước khi push đã quét diff tìm key/token: không có.
   - **Văn phòng:** merge `claude/boss-phu-review-t002-t003-b4fdf6` (11 commit: `.claude/agents/boss-phu.md`, mục "Hai boss song song" trong CLAUDE.md, STATUS) vào `main`, không xung đột. Rồi push `main` văn phòng.
