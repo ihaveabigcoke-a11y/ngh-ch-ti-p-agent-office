@@ -54,7 +54,7 @@ _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy ngư
 ## 🔨 Đang làm
 | Việc | Worker | Nhánh / PR | Ghi chú |
 |---|---|---|---|
-| T-008 rea-video phân tích mẫu | Codex (`codex exec`, effort high), boss chính thuê | sửa thẳng trong app, tag `before-T-008` = `2c2e876`, khoá `codex-T-008.txt`; fixture 48 file ở `desktop/test/fixtures/rea-video/` | Bắt đầu khoảng 23:25. **Đừng mở app** |
+| T-008 rea-video phân tích mẫu | Codex **vòng 2** (resume `01a1d091`) | sửa thẳng trong app, tag `before-T-008` = `2c2e876`, khoá `codex-T-008.txt`; fixture 48 file | Vòng 1 logic ĐẠT: typecheck 0; test 213/213; api 28/28; desktop 462 pass, 0 fail; `rea-bridge.test.py` 2/2; build 0; 12 mẫu, 116 shot. rea-video ghim commit `2f50ab3` (Apache-2.0), chỉ cài khi người dùng tự chạy `SETUP-INTEGRATIONS.ps1` (venv riêng). Key Gemini lưu mã hoá; file env tạm khoá quyền và bị xoá sau khi chạy. Gemini phải tick xác nhận chi phí, mặc định dùng Codex. Vòng 2 chỉ đổi nhãn enum thô (static, push-in, hook…) trong timeline sang tiếng Việt. **Đừng mở app** |
 
 ## 👀 Chờ người dùng duyệt
 | Việc | PR | Boss đánh giá | Bằng chứng |
