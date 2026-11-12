@@ -16,7 +16,7 @@ _Cập nhật lần cuối: 12/11/2026 chiều, bởi boss Claude (trên máy ng
 | Việc | Worker | Nhánh / PR | Ghi chú |
 |---|---|---|---|
 | T-004 Instagram API + comment→DM + tắt Instagram trình duyệt mặc định + Codex CLI cho session_gateway | Codex (`codex exec`, effort high) | sửa thẳng trong app chính, tag `before-T-004` | Không push. Xong thì build lại `local-dist` và báo người dùng lúc mở app an toàn |
-| T-002c: lối ra cho cảnh media kẹt "Cần đối soát" (lỗi G, nặng) + H, I nhỏ | Codex, chạy **sau T-004** | sửa thẳng trong app chính, tag `before-T-002c` | Boss phụ báo, boss chính đã xác minh trên `4d5e672`: không có skip đối soát cho job media, và manual-media/route.ts không truyền `reconciled`. Dữ liệu thật (chỉ đọc): 2 job `needs_attention` từ 08/11 gắn với dự án và cảnh, nên 2 cảnh sẽ bị khoá vĩnh viễn nếu chưa sửa. Đề: `D:\hermes-wt\prompts\T-002c-head.md` |
+| T-002c: lỗi G (media kẹt "Cần đối soát") + H, I nhỏ | **G: boss phụ sửa trực tiếp** (theo lời người dùng, boss phụ báo lại), song song với Codex T-004. H, I: Codex sau T-004 | tag `before-T-002c` = `4d5e672`. Boss phụ chỉ commit đúng các file của mình | Ngoại lệ với luật "một bên sửa app": lúc kiểm, WIP T-004 không trùng file nào với G (production.ts, route.ts, manual-media.*, tests). Điều kiện boss chính gửi: kiểm `git status` trước khi commit, `git commit -- <paths>`, không stash/reset/add -A, test riêng, không build hay mở app. **Lùi G bằng `git revert`, KHÔNG `reset --hard`** (sẽ xoá WIP T-004). Thiết kế: action `skip_reconciliation {sceneId}`, lưu `scene.museReconciledAt` |
 
 ## 👀 Chờ người dùng duyệt
 | Việc | PR | Boss đánh giá | Bằng chứng |
