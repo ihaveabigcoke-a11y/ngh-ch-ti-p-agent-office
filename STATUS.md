@@ -16,6 +16,7 @@ _Cập nhật lần cuối: 12/11/2026 chiều, bởi boss Claude (trên máy ng
 | Việc | Worker | Nhánh / PR | Ghi chú |
 |---|---|---|---|
 | T-004 Instagram API + comment→DM + tắt Instagram trình duyệt mặc định + Codex CLI cho session_gateway | Codex (`codex exec`, effort high) | sửa thẳng trong app chính, tag `before-T-004` | Không push. Xong thì build lại `local-dist` và báo người dùng lúc mở app an toàn |
+| T-002c: lối ra cho cảnh media kẹt "Cần đối soát" (lỗi G, nặng) + H, I nhỏ | Codex, chạy **sau T-004** | sửa thẳng trong app chính, tag `before-T-002c` | Boss phụ báo, boss chính đã xác minh trên `4d5e672`: không có skip đối soát cho job media, và manual-media/route.ts không truyền `reconciled`. Dữ liệu thật (chỉ đọc): 2 job `needs_attention` từ 08/11 gắn với dự án và cảnh, nên 2 cảnh sẽ bị khoá vĩnh viễn nếu chưa sửa. Đề: `D:\hermes-wt\prompts\T-002c-head.md` |
 
 ## 👀 Chờ người dùng duyệt
 | Việc | PR | Boss đánh giá | Bằng chứng |
