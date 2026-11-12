@@ -1,5 +1,38 @@
 # Bảng tiến độ
 
+## Trạng thái hiện hành — 01:13:47 13/11/2026 (Asia/Saigon)
+
+**Một main agent Codex đã tiếp quản và hoàn tất T-009.** Không spawn, không worker phụ, không chạy orchestrator.
+
+- App `main`: **17cb38c**; cây sạch. Code sửa T-009: `e47b51d`. Build `pnpm local:build` đạt lúc **2026-11-13T01:11:29.4096762+07:00**, đúng HEAD. Có thể mở bằng `START-HERMES-CLIP.cmd`; lượt này không mở Electron trên DB thật.
+- Kiểm sau sửa: TypeScript đạt; domain **213/213**; API **28/28**; desktop **465 pass / 1 skip OpenMontage / 0 fail**; Python bridge **2/2**. Không cộng dồn các bộ kiểm có test trùng.
+- T-008 đã bổ sung nghiệm thu công cụ thật: rea-video ghim revision, Python 3.12.14 riêng, model local; một MP4 snapshot 10 giây xử lý 62504 ms, 1 shot, OCR có mốc, SHA-256 gốc không đổi. Xuất review, main agent đọc contact sheet rồi nhập qua CLI: **complete, 1 narrative + 1 prompt**. DB riêng là fixture.
+- UI T-008: 4 PNG ở 1366/1920, 0 lỗi trang, 0 request ngoài fixture. Giữ theme/font.
+- App có cấu hình cũ nay nhận đường dẫn rea-video thiếu; giữ đường dẫn riêng đã chọn. Cache model dùng chung cạnh checkout, không tải lại cho từng job.
+- T-001–T-008 đã có code; **kế hoạch boss dự phòng đã xong bằng HANDOVER một main agent**. Không có job code nào đang chạy.
+- **Chưa kiểm:** Electron trên dữ liệu thật, Codex/Gemini VLM thật, Meta/DM thật, file mới từ Flow/Gemini, Thùng rác Windows thật. OCR có thể nhận chữ in trên sản phẩm là overlay; cần kiểm mắt. Không chọn lại sản phẩm cũ làm pilot.
+- Không push/merge trong phiên này. Bảng này đã cập nhật local; điện thoại/GitHub chưa nhận các commit mới cho tới lần push được yêu cầu rõ.
+
+Đọc [HANDOVER.md](HANDOVER.md), [T-009](tasks/T-009-codex-mot-main-agent.md), [REVIEW-T-009.md](REVIEW-T-009.md). Bằng chứng local: [FINAL.md](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/office-20261113/FINAL.md). Không đọc AppData/SQLite/profile thật để xác minh.
+
+### Hộp thư hiện hành
+
+| Việc | Kết luận | Phần còn lại |
+| --- | --- | --- |
+| T-001–T-005 | Đã triển khai trước khi tiếp quản; hồi quy hiện tại đạt | Những lượt kiểm tài khoản/dữ liệu thật nêu trên |
+| T-006 | Code/FFmpeg fixture đạt trong bộ kiểm hiện tại | Thùng rác và file Flow/Gemini mới chưa kiểm |
+| T-007 | Kịch bản v2, test đạt | Chất lượng video tạo mới chưa nghiệm thu |
+| T-008 | Code, CLI trên MP4 và nhập tay thật đạt; UI fixture đạt | VLM Codex/Gemini thật chưa kiểm |
+| T-009 / boss dự phòng | **Xong** — một main agent, tài liệu và build đồng bộ | Không cần chờ Claude Pro |
+
+Các mục dưới giữ làm lịch sử ngày 12/11; không dùng SHA/build/WIP hay quy trình hai boss cũ để ghi đè trạng thái hiện hành.
+
+---
+
+## Lịch sử trước T-009 (giữ nguyên để đối chiếu)
+
+# Bảng tiến độ
+
 Boss cập nhật file này sau mỗi bước. Người dùng xem nó, hoặc xem `/lite` của office trên điện thoại.
 
 _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy người dùng)._
@@ -45,7 +78,11 @@ _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy ngư
 2. [x] **T-002** (đạt, đã merge vào app chính `43a45dd`, tag lùi `before-T-002`) Tạm dừng Muse, thêm nhà cung cấp media `manual` (gói prompt + hộp nhận file). Giao Codex. `tasks/T-002-thay-muse-media-manual.md`
 3. [x] **T-003** (đạt, commit `56e9842` trong app chính, tag lùi `before-T-003`) Research và viết nội dung không cần Muse (nhập JSON, Codex CLI). Giao Codex. `tasks/T-003-research-khong-muse.md`
 4. [x] **T-004** (đạt, commit `3e653a0` trong app chính) Instagram qua API chính thức, kèm comment → DM. Giao Codex. `tasks/T-004-instagram-api.md`
-5. [ ] Kế hoạch boss dự phòng sau khi Claude Pro hết hạn (khoảng 19/11).
+5. [x] **T-005** (đạt, commit `04732a4`, build 18:42:29) Chọn 3 sản phẩm xong thì tự tạo hồ sơ và triển khai sang Tạo video (boss phụ viết đề và tìm ra nguyên nhân lỗi 422 ở `productFromCandidate`). Đang làm. `tasks/T-005-trien-khai-3-san-pham.md`
+6. [x] **T-006** (đạt, `85fbc66`) Tự nén file mới, video < 6 MB (boss phụ viết đề, c915857). Làm SAU T-005. Chờ người dùng xác nhận trực tiếp với boss chính việc chuyển file gốc vào Thùng rác và xoá bản render tạm. `tasks/T-006-nen-file-va-video.md`
+7. [x] **T-007** (đạt, `2c2e876`) Khung kịch bản v2: nhịp khoảng 1,5 giây/shot, chữ đè, CTA đè cảnh kết quả (số đo 12 mẫu rea-video). Làm sau T-006. `tasks/T-007-khung-kich-ban-v2.md`
+8. [x] **T-008** (đạt, `bd8aba9`) rea-video thay bước phân tích mẫu tay; 3 đường đọc ảnh (Codex CLI mặc định, Gemini API, nhập tay). Làm sau T-007. Cần đường dẫn `rea-video-12-mau.zip`. `tasks/T-008-rea-video-phan-tich-mau.md`
+9. [ ] Kế hoạch boss dự phòng sau khi Claude Pro hết hạn (khoảng 19/11).
 
 ## 🔨 Đang làm
 | Việc | Worker | Nhánh / PR | Ghi chú |
@@ -61,9 +98,14 @@ _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy ngư
 | T-002b Muse Bật/Tạm dừng + tự chuyển | Commit `4d5e672` trên `main` cục bộ của app. Tag lùi `before-T-002b` | **Đạt** sau 3 vòng (xem `REVIEW-T-002b.md`). Bật lại Muse không tự gửi job cũ (mặc định an toàn, người dùng có thể đổi) | typecheck 0; test 203/203; api 26/26; desktop 378 pass, 0 fail; build 0; 12 ảnh tại `D:\hermes-wt\artifacts\T-002b\` |
 | T-004 Instagram API + comment→DM + tắt Instagram trình duyệt + Codex CLI session_gateway | Commit `3e653a0`. Tag lùi `before-T-004` (= `4d5e672`, trước cả commit G `ab94531`, nên lùi riêng T-004 thì dùng `git revert 3e653a0`) | **Đạt** (xem `REVIEW-T-004.md`). **Chưa kiểm:** tài khoản Meta thật, safeStorage trên Electron thật | typecheck 0; test 204/204; api 26/26; desktop 396 pass, 0 fail (2 lần); build 0; 4 ảnh tại `D:\hermes-wt\artifacts\T-004\` |
 | T-002c: lối ra cho cảnh kẹt "Cần đối soát" (G) + chặn job Muse cũ + nhãn tiếng Việt + bỏ polling + bảng Instagram 1366 + xét lại `follow_unknown` | `ab94531` (G, boss phụ), `d1b57b1` (siết CTA, boss phụ), `adf48c9` (Codex, 2 vòng). Tag lùi `before-T-002c` / `before-T-004-cta` / `before-T-002c2`; lùi từng commit bằng `git revert` | **Đạt** (xem `REVIEW-T-002c.md`). Nhỏ còn lại: màn Tạo video lặp dòng "Muse đang tạm dừng…" 3 lần | Cây sạch: typecheck 0; test 204/204; api 26/26; desktop 418 pass, 1 skip, 0 fail; `local:build` thật 0 lúc **17:23:59** từ `adf48c9`. 10 ảnh tại `D:\hermes-wt\artifacts\T-002c\` |
+| T-005 tự tạo hồ sơ + Triển khai N sản phẩm | Commit `04732a4` (chưa push). Tag lùi `before-T-005` | **Đạt** sau 2 vòng; boss phụ duyệt code ĐẠT. Sản phẩm đã có dự án video thì nút mở dự án cũ nhất, không tạo mới. **Chưa kiểm:** 3 ứng viên thật của đợt 17:49:44 | typecheck 0; test 208/208; api 28/28; desktop 420 pass, 0 fail; `local:build` thật lúc **18:42:29**; 6 ảnh tại `D:\hermes-wt\artifacts\T-005\` |
+| T-006 tự nén file mới | Commit `85fbc66` (boss phụ chạy Codex và commit). Tag lùi `before-T-006` = `0028c88` | **Đạt**: boss phụ và boss chính duyệt độc lập. Ảnh Muse tải về giờ lưu WebP. **Chưa kiểm:** Flow/Gemini thật, Thùng rác Windows thật, Electron thật | Boss chính tự chạy: typecheck 0; test 208/208; api 28/28; desktop 447 pass, 0 fail; `local:build` 22:40:54 (boss phụ); 4 ảnh tại `D:/hermes-wt/artifacts/T-006/` |
+| T-007 khung kịch bản v2 | Commit `2c2e876`. Tag lùi `before-T-007` = `85fbc66` | **Đạt** sau 3 vòng; boss phụ duyệt ĐẠT. 6 công thức v2 với nhịp riêng 8–13 shot, 11,8–16,1 giây; không mặc định LINK; không có nhãn AI. **Chưa kiểm:** tạo video thật trên Flow/Veo từ prompt mới | typecheck 0; test 213/213; api 28/28; desktop 449 pass, 0 fail; `local:build` thật 23:22:09; ảnh tại `D:/hermes-wt/artifacts/T-007/final/` |
+| T-008 rea-video phân tích mẫu | Commit `bd8aba9` (77 file, gồm 48 file fixture). Tag lùi `before-T-008` = `2c2e876` | **Đạt** sau 2 vòng; boss phụ duyệt độc lập ĐẠT (ACL được đặt trước khi ghi key, cờ `wx`, xoá trong `finally`, key không chèn được xuống dòng, không log key). Codex CLI mặc định; Gemini API phải xác nhận chi phí; nhập tay. **Chưa kiểm:** chạy rea-video trên MP4 thật (cần chạy `desktop/SETUP-INTEGRATIONS.ps1`, có thể tải khoảng 220 MB model), đọc ảnh bằng Codex hay Gemini thật | typecheck 0; test 213/213; api 28/28; desktop 463 pass, 0 fail; bridge Python 2/2; `local:build` thật **23:59:15**; ảnh tại `D:/hermes-wt/artifacts/T-008/final/` |
 | Dựng văn phòng (repo này) | nhánh `claude/multi-agent-office-setup-b4o3x9` | Đạt phần cấu hình. Chưa kiểm Codex thật trên máy người dùng | Ảnh chụp office chạy bản `v0.1.211` trong `docs/screenshots/` |
 
 ## ⛔ Bị chặn / cần người dùng
+- (Đã gỡ, 12/11 khoảng 20:20) 31 file WIP từ Codex Desktop của người dùng: người dùng chọn TRỰC TIẾP với boss chính "commit giúp rồi chạy". Boss phụ đã commit nguyên văn thành `0028c88` (tag lùi `before-user-wip-20261112` = `04732a4`). Boss chính đóng êm Hermes Clip, rồi chạy full suite trên cây sạch: typecheck 0; test 208/208; api 28/28; desktop 429 pass / 1 skip / 0 fail; build 0.
 - Office trên Windows báo `spawn EINVAL` ở phần đọc hạn mức Claude. Lỗi này **vô hại**, chỉ mất thanh hạn mức. Xem `docs/SETUP-WINDOWS.md`.
 - Codex trong office: lần đầu phải mở terminal của worker để duyệt `/hooks`. Xem `docs/SETUP-WINDOWS.md`.
 - **Màn hình theo dõi NosytLabs (12/11 14:11):** đã chạy `START-OFFICE.ps1 -Setup`. Python có sẵn (3.15.2) nên không cài. Hook đã nối cho Claude (12 event) và Codex (10 event). Server `http://127.0.0.1:8113` trả 200. Ảnh `docs/screenshots/office-live.png`: **thấy phiên Claude boss** (`agent dbcb16`); **KHÔNG thấy Codex T-002**. Lý do:
@@ -199,6 +241,7 @@ Phạm vi: `git diff before-T-002..before-T-003` (T-002, 42 file +935/−59) và
 **Chứng minh chỉ đọc:** app chính trước và sau khi duyệt đều là HEAD `56e9842`, nhánh `main`, `git stash list` rỗng, tag `before-T-002/002b/003` không đổi. Boss phụ không chạy Codex, không build, không mở app. `D:\agent-office\tools` chỉ có `nosyt-agent-office` ở `df6551d`, sạch, không liên quan T-002/T-003.
 
 ## ✅ Xong
+- 12/11 17:45: mở Hermes Clip cho người dùng (Electron PID 34736, bản `adf48c9`; không có trình duyệt Muse hay Instagram nào tự bật). Tạo shortcut `C:\Users\ADMIN\Desktop\Hermes Clip.lnk` trỏ tới `START-HERMES-CLIP.cmd`: cửa sổ cmd chạy thu nhỏ, icon tạm của Electron vì app chưa có `.ico`.
 - 12/11 khoảng 17:40, **push và merge** theo lời người dùng nói trực tiếp với boss chính:
   - **App:** `git push origin main` lên `ihaveabigcoke-a11y/hermes-clip`, `0e15716..adf48c9` (64 commit, gồm night T-001 `86ecdc0` tới T-002c). Fast-forward, không force. Không push tag hay nhánh phụ (`merge-night-20261111`, `codex/T-002-media-manual` vẫn chỉ ở máy). Trước khi push đã quét diff tìm key/token: không có.
   - **Văn phòng:** merge `claude/boss-phu-review-t002-t003-b4fdf6` (11 commit: `.claude/agents/boss-phu.md`, mục "Hai boss song song" trong CLAUDE.md, STATUS) vào `main`, không xung đột. Rồi push `main` văn phòng.
