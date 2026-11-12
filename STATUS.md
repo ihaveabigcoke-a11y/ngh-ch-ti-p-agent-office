@@ -144,6 +144,16 @@ Phạm vi: `git diff before-T-002..before-T-003` (T-002, 42 file +935/−59) và
 - **Người dùng đã quyết (12/11):** **giữ** "chỉ gửi khi đã follow" ("Giữ, an toàn hơn"). Polling không kiểm được follow, nên hiện **không DM nào được gửi**, cho tới khi có cách kiểm follow. Người dùng cũng trả lời trực tiếp boss chính: **có xét lại** các comment `follow_unknown` còn trong hạn 7 ngày khi đổi quy tắc, mỗi comment tối đa 1 DM. Việc này giao cho T-002c vòng 2 (file `instagram-comments.mjs` và test đã vào khoá Codex).
 - **Chưa kiểm:** full suite, `local:build` (boss chính chạy sau T-002c), tài khoản Meta thật, ảnh 1366/1920.
 
+### Boss phụ vòng 4 (12/11, khoảng 17:30): T-002c `adf48c9`: **ĐẠT**
+- **Chặn job Muse cũ đã bỏ qua đối soát:** `worker.assertJobNotSkipped` được gọi trước run, resume, recheck và retry, khớp mốc `museReconciledAt`, thiếu dữ liệu thì chặn (fail closed).
+- **Comment `follow_unknown`:** được xét lại theo `rule.revision`, mỗi comment tối đa 1 DM.
+- **TextExchange:** bỏ polling 1,5 giây; nhãn tiếng Việt.
+- **Bằng chứng (của boss chính):** test 204/204, api 26/26, desktop 418/1/0; `local:build` lúc 17:23:59 từ cây sạch.
+- **Ghi chú nhỏ (vòng sau):**
+  - job Muse của cảnh đã xoá, hoặc chạy chế độ `--hosted`, sẽ không resume được (fail closed); thông báo lỗi nên có hướng dẫn;
+  - "Muse đang tạm dừng…" lặp 3 lần ở màn Tạo video.
+- **Từ giờ app đã build đúng HEAD, nên người dùng mở app được.** Boss phụ tạm ngừng sửa app, chỉ đọc.
+
 ### Push và merge: chờ người dùng xác nhận trực tiếp với boss chính
 - Người dùng nhắn boss phụ "Xong thì push và merge nhé", nhưng trước đó đã nói trực tiếp với boss chính "Hỏi tôi trước khi push hoặc merge" và "cấm push". Boss chính giữ lời nói trực tiếp, nên **chưa push, chưa merge**. Boss phụ cũng không làm thay.
 - **Việc của người dùng khi về:** nhắn thẳng vào phiên boss chính câu "push và merge". Boss chính đã chuẩn bị sẵn (cây sạch, test và build đạt, danh sách sha).
