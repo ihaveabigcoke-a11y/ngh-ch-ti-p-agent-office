@@ -32,8 +32,9 @@ Người dùng đã quyết (12/11, trả lời trực tiếp):
 1. **Module nén dùng chung** `desktop/src/compress.mjs` (không shell, dùng `ffmpeg`/`ffprobe` sẵn có, có timeout):
    - **Video** (mp4/webm/mov) → MP4 H.264 + AAC, `-movflags +faststart`, giữ tỉ lệ khung và thời lượng. Cạnh dài tối đa 1280 (9:16 là 720×1280). **Mục tiêu < 6 MB** (`VIDEO_MAX_BYTES = 6*1024*1024`, có thể chỉnh trong Cài đặt nhưng không vượt 6 MB):
      - lượt 1: `-crf 26 -preset slow`, kèm `-maxrate`/`-bufsize` tính từ thời lượng (`ngân sách ≈ 0,92 × 6 MB × 8 / thời lượng`, trừ audio 96 kb/s);
-     - còn ≥ 6 MB thì lượt 2 nén theo bitrate mục tiêu (2-pass), rồi tối đa 1 lượt giảm độ phân giải;
-     - vẫn không đạt thì **báo lỗi rõ ràng**, không nhập và không xoá gốc;
+     - còn ≥ 6 MB thì lượt 2 nén theo bitrate mục tiêu (2-pass), **không** hạ dưới 720×1280 (cạnh dài 1280 chỉ là trần khi nguồn lớn hơn, ví dụ 1080×1920 → 720×1280);
+     - clip **≤ 15 giây** mà vẫn không đạt < 6 MB thì **báo lỗi rõ ràng**, không nhập và không xoá gốc;
+     - clip **> 15 giây**: nhập bản ở sàn khoảng 2 Mbps (720×1280) dù vượt 6 MB, ghi trên take "Vượt 6 MB để giữ chất lượng (xx,x MB)", rồi đưa gốc vào Thùng rác như bình thường;
      - video gốc đã < 6 MB và đã là H.264/AAC/faststart thì vẫn remux với faststart, không nén lại.
    - **Ảnh** (png/jpg/webp) → WebP chất lượng 82, cạnh dài tối đa 2048. Bản nén không nhỏ hơn bản gốc thì giữ bản gốc.
    - **Văn bản lưu trữ** (raw research source, `reference-analysis.json`, `youtube-*.json`, log đã xoay vòng) → gzip (`.json.gz`/`.txt.gz`) khi ghi **mới**; mọi chỗ đọc phải đọc được cả bản gzip lẫn bản thường cũ.
@@ -61,8 +62,8 @@ Người dùng đã quyết (12/11, trả lời trực tiếp):
 
 ## Tiêu chí đạt
 - [ ] Test có MP4 thật tạo bằng FFmpeg:
-  - 1080×1920, 20 giây, khoảng 25 MB → bản nhập < 6 MB, 9:16, thời lượng ±0,2 giây, giải mã được;
-  - 60 giây: đạt **sàn chất lượng** (xem mục *Quyết định của người dùng*), tức video ≥ 720×1280 và bitrate video ≥ khoảng 2 Mbps. Được phép > 6 MB; take ghi rõ "Giữ chất lượng: X MB";
+  - 1080×1920, 12 giây, nặng (khoảng 15–25 MB) → bản nhập < 6 MB, 720×1280, 9:16, thời lượng ±0,2 giây, giải mã được;
+  - 60 giây: bản nhập ở 720×1280, bitrate video ≥ khoảng 2 Mbps, take có ghi chú vượt 6 MB; đạt **sàn chất lượng** (xem mục *Quyết định của người dùng*), tức video ≥ 720×1280 và bitrate video ≥ khoảng 2 Mbps. Được phép > 6 MB; take ghi rõ "Giữ chất lượng: X MB";
   - 15 giây trở xuống thì luôn < 6 MB;
   - video không nén nổi thì báo lỗi, không nhập, gốc vẫn còn.
 - [ ] Test Hộp nhận: nhập xong thì gốc được gọi `trashItem` đúng 1 lần (mock); thả lại cùng gốc thì không nhập lại; lỗi nén thì không gọi `trashItem`.
