@@ -12,6 +12,15 @@ Người dùng đã quyết (12/11, trả lời trực tiếp):
 
 > Luật `AGENTS.md` ghi "giữ nguyên media gốc". Riêng file gốc trong Hộp nhận media, người dùng đã cho phép **chuyển vào Thùng rác** sau khi nhập xong. Mọi media khác **trong app** (`workspace/media`, `outputs`, receipt, job) vẫn **giữ nguyên**.
 
+## Quyết định của người dùng (trả lời TRỰC TIẾP boss chính, 12/11 khoảng 18:30)
+1. **File gốc trong Hộp nhận media:** đồng ý chuyển vào **Thùng rác Windows** (`shell.trashItem`) sau khi nhập và nén thành công. Chỉ áp cho file **mới**. Nén lỗi thì giữ gốc.
+2. **Video dài:** "< 6 MB nhưng giữ sàn chất lượng".
+   - Clip ≤ 15 giây (loại Flow/Gemini tạo ra) thì **luôn < 6 MB**.
+   - Video dài hơn thì giữ tối thiểu khoảng **2 Mbps ở 720×1280**, có thể vượt 6 MB, và app ghi rõ trên take.
+   - **Không** hạ dưới 720×1280 cho 9:16.
+3. **Bản render tạm** `renders/<id>`: đồng ý **xoá** (không qua Thùng rác) **chỉ bản render mới**, sau khi đã nhập vào `media` và kiểm sha256 khớp. Render cũ không đụng.
+4. (Đã quyết với boss phụ) File cũ: chỉ nén file mới, không đổi byte hay sha256 của asset cũ.
+
 ## Hiện trạng (boss phụ đọc code ở `adf48c9`)
 - **Asset:** `/api/assets` (`app/api/assets/route.ts`) nhận video tối đa 25 MB và ảnh tối đa 8 MB. Lưu bất biến theo sha256 ở `workspace/media` qua `putImmutableMedia` (`desktop/src/storage-policy.mjs:35`, `desktop/local/server.mjs:55`). **Không nén.**
 - **Hộp nhận media** (`desktop/src/manual-media.mjs`): giữ nguyên file gốc trong thư mục Hộp nhận, rồi tải **toàn bộ byte gốc** lên `/api/assets`. Mỗi video vì thế nằm **2 lần** trên đĩa. Chống trùng theo sha256 của **bản gốc** (`manual_receipts`).
@@ -53,7 +62,8 @@ Người dùng đã quyết (12/11, trả lời trực tiếp):
 ## Tiêu chí đạt
 - [ ] Test có MP4 thật tạo bằng FFmpeg:
   - 1080×1920, 20 giây, khoảng 25 MB → bản nhập < 6 MB, 9:16, thời lượng ±0,2 giây, giải mã được;
-  - 60 giây vẫn < 6 MB (độ phân giải giảm nếu cần);
+  - 60 giây: đạt **sàn chất lượng** (xem mục *Quyết định của người dùng*), tức video ≥ 720×1280 và bitrate video ≥ khoảng 2 Mbps. Được phép > 6 MB; take ghi rõ "Giữ chất lượng: X MB";
+  - 15 giây trở xuống thì luôn < 6 MB;
   - video không nén nổi thì báo lỗi, không nhập, gốc vẫn còn.
 - [ ] Test Hộp nhận: nhập xong thì gốc được gọi `trashItem` đúng 1 lần (mock); thả lại cùng gốc thì không nhập lại; lỗi nén thì không gọi `trashItem`.
 - [ ] Test ảnh PNG 4000×4000 → WebP cạnh ≤ 2048, nhỏ hơn gốc; ảnh đã nhỏ thì giữ nguyên.
