@@ -55,6 +55,36 @@ _Cập nhật lần cuối: 12/11/2026 chiều, bởi boss Claude (trên máy ng
    - **Chưa kiểm:** mở Electron thật trên dữ liệu thật. Lưu ý: mở app là tự khởi động worker Instagram bằng trình duyệt. Boss **không mở** app lúc này vì Codex T-003 đang sửa `desktop/src/main.mjs` trong cùng thư mục; mở app sẽ chạy code dở dang trên dữ liệu thật. Sẽ mở và chụp sau khi T-003 được duyệt, commit và build lại.
    - Lưu ý cho boss sau: `D:\hermes-wt\evidence\node_modules` và `desktop\node_modules` là **junction** trỏ vào node_modules thật. Muốn gỡ thì dùng `cmd /c rmdir`, **không** dùng `rm -rf`.
 
+## 🗣️ Góp ý boss phụ (12/11/2026, duyệt CHỈ ĐỌC theo `hermes-night-review` Office mode)
+Phạm vi: `git diff before-T-002..before-T-003` (T-002, 42 file +935/−59) và `before-T-003..56e9842` (T-003, 25 file +821/−19) trong app chính. Chỉ duyệt phần **đã commit**. Cây làm việc đang có thay đổi chưa commit của T-002b (boss chính), boss phụ không đụng. Không chạy lại test: đang có Codex sửa cùng thư mục.
+
+| Việc | Boss phụ kết luận | Lý do chính |
+|---|---|---|
+| T-002 | **Cần sửa (đúng ra không nên ghi "Đạt" trọn vẹn)**. Phần manual media đạt; phần công tắc Muse chưa đạt đề | Xem mục 1–4 dưới. Đa số đã nằm trong đề T-002b, nhưng `REVIEW-T-002.md` nên ghi rõ là chưa đạt Phạm vi 1 |
+| T-003 | **Đạt có điều kiện**. Đường (A) nhập JSON đạt; đường (B) Codex CLI gần như chắc **không chạy được trên máy này** | Xem mục 5–9 |
+
+**T-002**
+1. **Công tắc Muse chưa đúng đề (Phạm vi 1).** Chỉ có **một** checkbox "Tạm dừng Muse" trong `ManualMediaSettings` (`components/lab/manual-media.tsx:26`, gắn ở Cài đặt qua `app.tsx:68`). Thiếu: nút ở đầu màn **Tài khoản Muse**; **hộp xác nhận** khi bật ("Muse chạy bằng trình duyệt tự động; tài khoản có thể bị khoá. Bật?"). Hiện bỏ tick là Muse bật ngay, **một cú bấm, không cảnh báo**. Với tài khoản vừa bị khoá, đây là rủi ro thật. T-002b có ghi việc này, đề nghị T-002b có test: bỏ tick, rồi bấm Huỷ trong hộp xác nhận, thì `setMusePaused` được gọi 0 lần.
+2. **Tạm dừng đang huỷ job chạy dở** (`desktop/src/worker.mjs`, `setMusePaused`): đóng mọi context. Thêm `checkpoint()` gọi `assertMuseAvailable`, và route `abort` mọi request. Job đang submit hoặc đang tải sẽ chết giữa chừng. Đề bài ghi rõ "Job đang chạy dở **không bị huỷ**". Boss chính đã thấy (T-002b). Khi sửa, nhớ kiểm cả 3 chỗ: đóng context, `checkpoint`, route `abort`. Sửa một chỗ thì job vẫn chết.
+3. **"Bật lại chạy y như trước" chưa chắc đúng.** Mỗi context Muse giờ luôn có `context.route('**/*', …)` và `serviceWorkers:'block'`, **kể cả khi Muse đang bật**. Playwright tắt HTTP cache khi bật route, nên trang Muse sẽ tải chậm hơn và tốn băng thông qua VPN/proxy hơn trước T-002. Test không phát hiện được vì fixture không có `route` (`if (context.route)`). Đề nghị T-002b: chỉ gắn route khi đang tạm dừng (hoặc gỡ route bằng `unroute` khi bật lại), và ghi rõ trong báo cáo.
+4. **Test chiều "bật lại".** `desktop/test/muse-pause.test.mjs` chỉ chứng minh bật lại thì context mở và route `continue`. Không có test nào đi Tạm dừng → Bật → gọi đúng `adapter.submit` / `chat.send` / research như cũ (tiêu chí 1 đòi "test cho cả hai chiều, fixture đếm số lần gọi"). Các test Muse cũ chỉ chạy với `store.set('muse_paused',false)` từ đầu, nên chỉ chứng minh **gián tiếp**. Nên thêm một test chuyển trạng thái thật.
+- Đã kiểm, ổn: không xoá file Muse nào (`--diff-filter=D` rỗng); không đụng `data/`, `evidence/`, lockfile, `package.json`; hộp nhận không xoá file gốc (chỉ `unlink` bản snapshot/tạm); chống trùng theo sha256 cả trong `applyProduction('manual_result')`.
+
+**T-003**
+
+5. **Codex CLI (B) ép `-c model_provider="openai"`** (`desktop/src/codex-cli.mjs:64`). `~/.codex/config.toml` của máy này dùng `model_provider = "session_gateway"`, nên lượt chạy thật nhiều khả năng lỗi đăng nhập hoặc định tuyến. Test fixture lại **khẳng định đúng tham số này** (`desktop/test/codex-cli.test.mjs`), nên khi sửa phải đổi test. Đề nghị: không ép `model_provider` (để Codex dùng config của người dùng), giữ `--sandbox read-only` và `--ephemeral`. Tên provider không phải bí mật, nhưng đừng chép khối `[model_providers.session_gateway]` vào app.
+6. **Sự kiện `type:"error"` bị coi là thất bại cả lượt** (`codex-cli.mjs:51`). Nếu `codex exec --json` phát `error` tạm thời (ví dụ khi kết nối lại stream) rồi vẫn hoàn tất, app sẽ báo lỗi và bỏ kết quả. **Chưa kiểm** với Codex thật; cần kiểm khi chạy thật lần đầu. Nếu đúng vậy, chỉ nên coi `turn.failed`, hoặc `error` không có `agent_message` cuối, là thất bại.
+7. **Landing nhập vào không ghi nguồn.** Content có `notes:'Nguồn: import:'+tool`, còn landing thì không (`components/lab/operations.tsx`, `landingForm(parseTextExchange('landing',…))`). Quy tắc "mỗi tác vụ ghi rõ nhà cung cấp" chưa đủ cho landing. Lỗi nhỏ, có thể gộp vào T-002b.
+8. **Nhập trùng hết thì vẫn báo "Đã nhận kết quả research."** `mergeTextResearch` trả batch cũ khi mọi ứng viên trùng, và UI không nói là 0 ứng viên mới. Nên báo "Đã nhận N ứng viên mới, bỏ M trùng". Lỗi nhỏ.
+9. **Nới schema lõi.** `candidateSchema.supplierUrl` đổi từ `sourceLink` sang `optionalLink` (`lib/lab/operations.ts:60`). Ràng buộc chỉ còn ở `researchBatchSchema.superRefine`. Hiện an toàn vì mọi đường lưu đều qua batch, nhưng chỗ nào dùng `candidateSchema` riêng (form sửa ứng viên, `productFromCandidate`) giờ nhận được URL rỗng. Nên có test: sửa tay một ứng viên `single` mà xoá URL thì bị chặn.
+- Đã kiểm, ổn: `null` giữ nguyên (cờ logistics không có thì là `null`, không phải `false`); `listingStatus≠single` thì `cost` và `shipping` phải `null` (chặn ở cả parse lẫn batch); không quy đổi tiền tệ (CNY giữ nguyên); payload không giả mạo được `source`, `listingCheck` hay receipt YouTube; Muse response bị gỡ `source` và `importMetadata`; không tự chọn 3/10; không xoá hay nới test cũ (0 dòng `test(`/`assert` bị xoá); xoá `OPENAI_API_KEY`/`CODEX_API_KEY` khỏi env con; không shell, timeout 180 giây, giới hạn 2 MB. Báo cáo Codex trong commit khớp diff. Codex tự ghi trung thực rằng nó chạy test **không đạt** trong sandbox, boss chạy lại bên ngoài.
+
+**Rủi ro khi người dùng mở app** (bản build 15:43 từ `56e9842`): công tắc Muse bật được bằng một cú bấm không xác nhận (mục 1); bật Muse rồi tạm dừng lại sẽ giết job đang chạy (mục 2); `instagram?.start()` vẫn tự chạy khi mở app (T-004 đã ghi).
+
+**Người dùng phải tự kiểm trên giao diện thật:** Codex CLI thật (sau khi sửa mục 5); nhập một JSON thật từ skill `hermes-product-check`; xuất gói prompt rồi thả file thật từ Flow vào hộp nhận.
+
+**Chứng minh chỉ đọc:** app chính trước và sau khi duyệt đều là HEAD `56e9842`, nhánh `main`, `git stash list` rỗng, tag `before-T-002/002b/003` không đổi. Boss phụ không chạy Codex, không build, không mở app. `D:\agent-office\tools` chỉ có `nosyt-agent-office` ở `df6551d`, sạch, không liên quan T-002/T-003.
+
 ## ✅ Xong
 - 12/11: pull luật mới (sửa thẳng trên app, kèm tag lùi lại). Chép 3 skill Hermes bản mới (có *Office mode*) vào app chính, commit `2661a5a`. Repo app có danh tính git local, chép từ clone night.
 - 12/11: sửa `C:\Users\ADMIN\.claude\settings.json`: thêm dấu phẩy thiếu ở dòng 8, bản sao lưu là `settings.json.bak-20261112`. Cài FFmpeg 9.0.2 bằng winget.
