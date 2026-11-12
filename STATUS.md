@@ -83,6 +83,15 @@ Phạm vi: `git diff before-T-002..before-T-003` (T-002, 42 file +935/−59) và
 
 **Người dùng phải tự kiểm trên giao diện thật:** Codex CLI thật (sau khi sửa mục 5); nhập một JSON thật từ skill `hermes-product-check`; xuất gói prompt rồi thả file thật từ Flow vào hộp nhận.
 
+**Tự soi lại và đối chiếu bản T-002b đang sửa (chưa commit, đọc bằng `git diff` lúc khoảng 17:00):**
+- Mục 1 (hộp xác nhận): đang được sửa. Có `components/lab/muse-switch.tsx`, dùng ở `desktop-console.tsx` và `manual-media.tsx`, có câu "tài khoản có thể bị khoá. Bật?".
+- Mục 2 và 3 (huỷ job, route, `serviceWorkers`): đã gỡ. Giờ dùng `runMuseTask` (AsyncLocalStorage) để job đã nhận trước khi tạm dừng chạy được đến hết. Research tạm dừng thì chuyển `partial`, không kẹt `running`.
+- Mục 5 (`model_provider="openai"`): **chưa sửa** trong T-002b. Commit `05747f9` xếp việc này vào T-004.
+- **Lỗi mới trong T-002b** (gửi boss chính):
+  - **A.** `CodexTextService.execute` (`desktop/src/codex-cli.mjs`) coi **mọi** `research_runs` là Muse chưa đối soát. Không lọc theo đợt hay scope, không có cờ `reconciled`, và điều kiện lọc `filter(row=>kind==='research')` không lọc gì cả. Nếu còn một lượt research cũ ở `needs_attention` (rất có thể, từ hôm tài khoản bị khoá), Codex research sẽ bị chặn **vĩnh viễn** ("Cần đối soát"). Mà muốn đối soát thì `resume()` lại đòi Muse đang bật, nên bị kẹt vòng tròn. **Chưa kiểm** trên dữ liệu thật, vì boss phụ không đọc SQLite người dùng.
+  - **B.** `setMusePaused({paused:false})` gọi `this.tick()`, mà tạm dừng không còn xoá `approvedIds`. Nên **bật lại Muse là tự gửi ngay** các job đã duyệt từ trước khi tạm dừng, người dùng không bấm Chạy lần nữa. Với rủi ro khoá tài khoản, đây là quyết định của người dùng, cần hỏi.
+  - **C.** AsyncLocalStorage truyền sang cả timer và listener được tạo trong job đã nhận. Callback nào chạy sau khi tạm dừng mà chỉ gọi `assertMuseAvailable` sẽ lọt qua chốt chặn. Cần một test: tạm dừng giữa job, rồi gọi `context()` hoặc `measureQuota()` từ một `setTimeout` tạo bên trong job, thì phải ra `MUSE_PAUSED`.
+
 **Chứng minh chỉ đọc:** app chính trước và sau khi duyệt đều là HEAD `56e9842`, nhánh `main`, `git stash list` rỗng, tag `before-T-002/002b/003` không đổi. Boss phụ không chạy Codex, không build, không mở app. `D:\agent-office\tools` chỉ có `nosyt-agent-office` ở `df6551d`, sạch, không liên quan T-002/T-003.
 
 ## ✅ Xong
