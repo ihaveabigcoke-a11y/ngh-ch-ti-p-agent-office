@@ -47,14 +47,14 @@ _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy ngư
 4. [x] **T-004** (đạt, commit `3e653a0` trong app chính) Instagram qua API chính thức, kèm comment → DM. Giao Codex. `tasks/T-004-instagram-api.md`
 5. [x] **T-005** (đạt, commit `04732a4`, build 18:42:29) Chọn 3 sản phẩm xong thì tự tạo hồ sơ và triển khai sang Tạo video (boss phụ viết đề và tìm ra nguyên nhân lỗi 422 ở `productFromCandidate`). Đang làm. `tasks/T-005-trien-khai-3-san-pham.md`
 6. [x] **T-006** (đạt, `85fbc66`) Tự nén file mới, video < 6 MB (boss phụ viết đề, c915857). Làm SAU T-005. Chờ người dùng xác nhận trực tiếp với boss chính việc chuyển file gốc vào Thùng rác và xoá bản render tạm. `tasks/T-006-nen-file-va-video.md`
-7. [~] **T-007** (đang làm) Khung kịch bản v2: nhịp khoảng 1,5 giây/shot, chữ đè, CTA đè cảnh kết quả (số đo 12 mẫu rea-video). Làm sau T-006. `tasks/T-007-khung-kich-ban-v2.md`
-8. [ ] **T-008** rea-video thay bước phân tích mẫu tay; 3 đường đọc ảnh (Codex CLI mặc định, Gemini API, nhập tay). Làm sau T-007. Cần đường dẫn `rea-video-12-mau.zip`. `tasks/T-008-rea-video-phan-tich-mau.md`
+7. [x] **T-007** (đạt, `2c2e876`) Khung kịch bản v2: nhịp khoảng 1,5 giây/shot, chữ đè, CTA đè cảnh kết quả (số đo 12 mẫu rea-video). Làm sau T-006. `tasks/T-007-khung-kich-ban-v2.md`
+8. [~] **T-008** (đang làm) rea-video thay bước phân tích mẫu tay; 3 đường đọc ảnh (Codex CLI mặc định, Gemini API, nhập tay). Làm sau T-007. Cần đường dẫn `rea-video-12-mau.zip`. `tasks/T-008-rea-video-phan-tich-mau.md`
 9. [ ] Kế hoạch boss dự phòng sau khi Claude Pro hết hạn (khoảng 19/11).
 
 ## 🔨 Đang làm
 | Việc | Worker | Nhánh / PR | Ghi chú |
 |---|---|---|---|
-| T-007 khung kịch bản v2 | Codex **vòng 2** (resume `01a1d06b`) | sửa thẳng trong app, tag `before-T-007` = `85fbc66`, khoá `codex-T-007.txt` | Vòng 1 logic ĐẠT: typecheck 0; test 212/212; api 28/28; desktop 449 pass, 0 fail; build 0; không có nhãn "AI"; seed v1 giữ nguyên, thêm v2 cho 6 công thức. Vòng 2 chỉ sửa bảng shot: giờ bị bẻ dòng, id thô `beat_2`, hộp thoại hẹp. Lúc khoảng 22:50 lệnh nền bị Claude Code dừng vì máy thiếu RAM (Codex vẫn chạy tiếp và xong lúc 23:02). **Đừng mở app** |
+| T-008 rea-video phân tích mẫu | Codex (`codex exec`, effort high), boss chính thuê | sửa thẳng trong app, tag `before-T-008` = `2c2e876`, khoá `codex-T-008.txt`; fixture 48 file ở `desktop/test/fixtures/rea-video/` | Bắt đầu khoảng 23:25. **Đừng mở app** |
 
 ## 👀 Chờ người dùng duyệt
 | Việc | PR | Boss đánh giá | Bằng chứng |
@@ -67,6 +67,7 @@ _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy ngư
 | T-002c: lối ra cho cảnh kẹt "Cần đối soát" (G) + chặn job Muse cũ + nhãn tiếng Việt + bỏ polling + bảng Instagram 1366 + xét lại `follow_unknown` | `ab94531` (G, boss phụ), `d1b57b1` (siết CTA, boss phụ), `adf48c9` (Codex, 2 vòng). Tag lùi `before-T-002c` / `before-T-004-cta` / `before-T-002c2`; lùi từng commit bằng `git revert` | **Đạt** (xem `REVIEW-T-002c.md`). Nhỏ còn lại: màn Tạo video lặp dòng "Muse đang tạm dừng…" 3 lần | Cây sạch: typecheck 0; test 204/204; api 26/26; desktop 418 pass, 1 skip, 0 fail; `local:build` thật 0 lúc **17:23:59** từ `adf48c9`. 10 ảnh tại `D:\hermes-wt\artifacts\T-002c\` |
 | T-005 tự tạo hồ sơ + Triển khai N sản phẩm | Commit `04732a4` (chưa push). Tag lùi `before-T-005` | **Đạt** sau 2 vòng; boss phụ duyệt code ĐẠT. Sản phẩm đã có dự án video thì nút mở dự án cũ nhất, không tạo mới. **Chưa kiểm:** 3 ứng viên thật của đợt 17:49:44 | typecheck 0; test 208/208; api 28/28; desktop 420 pass, 0 fail; `local:build` thật lúc **18:42:29**; 6 ảnh tại `D:\hermes-wt\artifacts\T-005\` |
 | T-006 tự nén file mới | Commit `85fbc66` (boss phụ chạy Codex và commit). Tag lùi `before-T-006` = `0028c88` | **Đạt**: boss phụ và boss chính duyệt độc lập. Ảnh Muse tải về giờ lưu WebP. **Chưa kiểm:** Flow/Gemini thật, Thùng rác Windows thật, Electron thật | Boss chính tự chạy: typecheck 0; test 208/208; api 28/28; desktop 447 pass, 0 fail; `local:build` 22:40:54 (boss phụ); 4 ảnh tại `D:/hermes-wt/artifacts/T-006/` |
+| T-007 khung kịch bản v2 | Commit `2c2e876`. Tag lùi `before-T-007` = `85fbc66` | **Đạt** sau 3 vòng; boss phụ duyệt ĐẠT. 6 công thức v2 với nhịp riêng 8–13 shot, 11,8–16,1 giây; không mặc định LINK; không có nhãn AI. **Chưa kiểm:** tạo video thật trên Flow/Veo từ prompt mới | typecheck 0; test 213/213; api 28/28; desktop 449 pass, 0 fail; `local:build` thật 23:22:09; ảnh tại `D:/hermes-wt/artifacts/T-007/final/` |
 | Dựng văn phòng (repo này) | nhánh `claude/multi-agent-office-setup-b4o3x9` | Đạt phần cấu hình. Chưa kiểm Codex thật trên máy người dùng | Ảnh chụp office chạy bản `v0.1.211` trong `docs/screenshots/` |
 
 ## ⛔ Bị chặn / cần người dùng
