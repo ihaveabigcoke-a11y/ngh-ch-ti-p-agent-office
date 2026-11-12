@@ -32,6 +32,20 @@ Lần đầu boss gọi `hire_worker` hoặc `tell_worker`, terminal của boss 
 ## 5. Lần đầu Codex ngồi bàn
 Codex cần bạn **duyệt hook một lần**. Đi tới bàn Codex, bấm **E** để mở terminal, gõ `/hooks` và chấp nhận các lệnh Office. Nếu không duyệt, office sẽ báo worker luôn ở trạng thái "cần input".
 
+## 5b. Màn hình theo dõi dễ nhìn (NosytLabs)
+Mở PowerShell **trong thư mục repo này** rồi chạy:
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\START-OFFICE.ps1 -Setup
+```
+Script sẽ:
+1. clone NosytLabs vào `D:\agent-office\tools\` (ghim commit);
+2. nối hook của Codex và Claude vào nó (nếu `~/.claude/settings.json` lỗi JSON thì chỉ báo và bỏ qua Claude, không ghi đè);
+3. mở cả hai office.
+
+Từ lần sau, chạy lại lệnh trên nhưng bỏ `-Setup`.
+
+Cần có Python 3.10+: `winget install --id Python.Python.3.12 -e`.
+
 ## 6. Theo dõi
 - 🔴 Đèn đỏ trên bàn: worker đang chờ bạn. Bấm **N** để tới thẳng chỗ nó.
 - 🟢 Worker nhảy lên kèm tiếng "ding": worker đã xong việc.

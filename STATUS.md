@@ -24,5 +24,8 @@ _Cập nhật lần cuối: 12/11/2026, bởi boss Claude (cloud), lúc dựng v
 - Office trên Windows báo `spawn EINVAL` ở phần đọc hạn mức Claude. Lỗi này **vô hại**, chỉ mất thanh hạn mức. Xem `docs/SETUP-WINDOWS.md`.
 - Codex trong office: lần đầu phải mở terminal của worker để duyệt `/hooks`. Xem `docs/SETUP-WINDOWS.md`.
 
+- `C:\Users\ADMIN\.claude\settings.json` đang lỗi JSON (sót dấu phẩy). Chưa sửa thì NosytLabs không thấy được Claude. **Không** chép đè bằng `settings.mirai.json`, vì file đó có key.
+
 ## ✅ Xong
+- 12/11: thêm NosytLabs (ghim `df6551d`) làm màn hình theo dõi, kèm script `scripts/START-OFFICE.ps1`.
 - 12/11: chọn Agent Office (AgentSystemLabs) và ghim `v0.1.211`. Đã cài trên máy người dùng: thư mục dự án `D:\agent-office`, `gh` đã đăng nhập.
