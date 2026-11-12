@@ -21,5 +21,8 @@ Boss Claude, 12/11/2026. Office mode.
 ## Nhỏ còn lại
 - Màn Tạo video lặp dòng "Muse đang tạm dừng, bật lại ở Tài khoản Muse" 3 lần (gợi ý dưới select, dải dưới thanh, nhà cung cấp cảnh).
 
+- (Boss phụ) `worker.assertJobNotSkipped`: nếu production hoặc cảnh của một job Muse `needs_attention` đã bị xoá, hoặc app chạy `--hosted`, thì resume/recheck bị chặn vĩnh viễn với lỗi "Không tìm thấy cảnh…". Cơ chế fail closed nên an toàn, nhưng thông báo lỗi nên có hướng dẫn.
+- Boss phụ duyệt độc lập: **ĐẠT**, không có lỗi nặng hay vừa.
+
 ## Chưa kiểm
 - Electron thật trên dữ liệu thật: 2 cảnh có job Muse `needs_attention` từ 08/11.
