@@ -1,23 +1,17 @@
-# Luật chung cho mọi agent trong văn phòng
+# Luật văn phòng — một main agent (13/11/2026)
 
-Codex đọc file này. Claude đọc nó qua `CLAUDE.md`. Boss khác (ChatGPT…) cũng theo file này.
+Yêu cầu trực tiếp mới nhất: Codex tự làm boss và tự hoàn tất các job, **chỉ một main agent**. Quy tắc này thay toàn bộ hướng dẫn thuê worker, boss phụ hoặc hai boss của ngày 12/11.
 
-## Nếu bạn là WORKER (Codex)
-- Bạn được boss thuê cho **một** việc. Đề bài nằm trong prompt. Chỉ làm đúng phạm vi đó.
-- Làm trong worktree và nhánh office đã tạo cho bạn. Không chuyển sang nhánh khác, không push lên `main`.
-- **Riêng hermes-clip:** bạn sửa **thẳng trong thư mục app chính**. Boss đã đặt tag `before-T-xxx`. Chỉ commit vào nhánh hiện tại; không push, không tạo nhánh, không mở PR, không đụng AppData, SQLite, media hay profile. Cuối commit message ghi báo cáo theo mục *Báo cáo* của đề bài.
-- Thiếu thông tin hoặc gặp quyết định kinh doanh (tiền, tài khoản, đăng bài, mua công cụ): **dừng và hỏi** trong terminal. Đừng tự đoán.
-- Xong việc:
-  1. chạy đủ các lệnh kiểm trong mục *Cách kiểm* của đề bài;
-  2. commit với message rõ ràng;
-  3. `git push -u origin <nhánh của bạn>`;
-  4. `gh pr create` với mô tả theo mục *Báo cáo* của đề bài.
-- Báo cáo phải tách rõ **đã kiểm (kèm bằng chứng)** và **chưa kiểm**. Không báo "chạy được" chỉ vì thấy URL, cookie hay nút trên giao diện.
+- Đọc HANDOVER.md, STATUS hiện hành, README/context và AGENTS của app. Làm việc tuần tự; không spawn, không gọi codex exec/office-workers/runner để giao việc, không orchestrator.
+- App ở C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local. Sửa source trực tiếp trên nhánh hiện tại, không worktree/đổi nhánh. Xác định app đang chạy trước khi sửa/build.
+- Kiểm WIP/khóa .git/office-locks; không đụng file phiên khác. App tắt, cây sạch, tạo tag before-T-xxx nếu chưa có, khóa file chính phiên trước khi sửa.
+- Main agent tự phân tích, sửa, kiểm và review theo skill hermes-night-review Office mode. Không bịa reviewer độc lập. Chạy test phù hợp; full suite và local:build chỉ khi không có WIP phiên khác.
+- Commit cục bộ theo đúng path; cấm add -A, stash, checkout/reset/clean. Lùi bằng revert đúng phạm vi, bảo toàn WIP. Không push/merge khi người dùng chưa yêu cầu rõ trực tiếp trong phiên.
+- Không đọc/ghi AppData, worker.sqlite, profile hay phiên thật trong các tác vụ kiểm. Giữ media/receipt/phiên bản cũ. Ngoại lệ T-006 chỉ áp trong chức năng app với file Hộp nhận mới sau khi nhập/nén/kiểm thành công; không cho agent xóa media thật để thử.
+- Không in/commit key, token, cookie, mật khẩu proxy, email hay cấu hình tài khoản. Public snapshot cũ không cho phép công khai dữ liệu nhạy cảm mới.
+- Muse tạm dừng, không tự động hóa web app tiêu dùng. Không gọi API trả phí, gửi tin, đăng bài hoặc thao tác tiền/tài khoản ngoài phạm vi được duyệt cụ thể.
+- Unknown giữ null, ghi nguồn/kỳ đo/SKU. Giao diện tiếng Việt có dấu, prompt tiếng Anh; giữ theme/font và workflow ngoài phạm vi.
+- Tách fixture, CLI local thật và dịch vụ/tài khoản thật. Không coi URL/cookie, báo cáo cũ hoặc checkbox là bằng chứng hoàn tất. Không hạ assertion.
+- Ghi checkpoint/blocker, tiếp tục phần độc lập. Cập nhật STATUS với SHA, giờ build, đã kiểm/chưa kiểm rồi nhả khóa chính phiên.
 
-## Luật cho tất cả
-- **Giữ nguyên dữ liệu người dùng:** SQLite, phiên đăng nhập, proxy, media gốc, phiên bản, file đã xuất. Không xoá cache, profile hay AppData.
-- **Chưa biết là `null`, không phải `0`.**
-- **Không tự động hoá web app tiêu dùng** (Muse, Gemini web, Flow, Instagram web…) bằng trình duyệt. Chỉ dùng CLI hoặc API chính thức. Tài khoản Muse đã bị khoá ngày 12/11/2026, và Meta có thể khoá dây chuyền sang các tài khoản Instagram.
-- **Bí mật:** không in, không commit key, token, mật khẩu hay email người dùng.
-- **Giao diện app:** nhãn tiếng Việt có dấu, không đổi font hay theme ngoài phạm vi việc được giao. Prompt gửi cho model AI thì viết tiếng Anh.
-- **Ngân sách gần 0:** không tự dùng dịch vụ trả tiền. Có chi phí thì phải báo giá và chờ người dùng đồng ý.
+Không tự chạy script cũ có hành động bên ngoài. Quyền approve all trong phiên không phải yêu cầu tự bật dịch vụ trả phí, gửi DM hoặc public dữ liệu mới.
