@@ -26,6 +26,21 @@ Muse (của Meta) đã khoá tài khoản. App hiện đăng bài và đọc s�
    - Mỗi comment chỉ gửi **1 lần** (idempotent theo comment ID). Có giới hạn tốc độ. Có nút tắt khẩn cấp.
    - Ghi nhật ký: comment, từ khoá, DM đã gửi hay lỗi. Không lưu nội dung DM của khách ngoài phạm vi cần đo.
 5. **Bảng theo sản phẩm:** gộp số liệu của 3 tài khoản cùng trỏ về 1 sản phẩm: comment CTA, DM đã gửi, share, click UTM. Không cộng trùng.
+6. **Mở app KHÔNG tự khởi động Instagram bằng trình duyệt** (người dùng yêu cầu 12/11).
+   - Hiện `desktop/src/main.mjs` gọi `instagram?.start()` ngay khi mở app. Bỏ việc tự khởi động này.
+   - Worker Instagram trình duyệt **tắt mặc định**, giá trị lưu bền. Cài đặt cũ chưa có giá trị cũng tính là **tắt** (fail closed).
+   - Chỉ bật được **bằng tay** trong Cài đặt → Instagram, qua hộp xác nhận có cảnh báo: "Instagram trình duyệt tự động có thể khiến Meta khoá tài khoản (kể cả dây chuyền). Nên dùng API chính thức. Bật?"
+   - Khi tắt: không mở profile hay trình duyệt Instagram, không lên lịch đọc số liệu bằng trình duyệt. Dữ liệu, profile, job và số liệu cũ **giữ nguyên**.
+   - Đường API (mục 1–5) không phụ thuộc công tắc này.
+   - Có test: khởi động app (main/boot) với cài đặt mặc định thì **0 lần** mở trình duyệt Instagram; bật tay thì chạy như cũ.
+7. **Sửa đường Codex CLI của T-003 cho kiểu đăng nhập trên máy người dùng.**
+   - `desktop/src/codex-cli.mjs` đang ép `-c model_provider="openai"` và `-c forced_login_method="chatgpt"`, trong khi Codex trên máy người dùng dùng `model_provider = "session_gateway"` khai báo trong `~/.codex/config.toml`.
+   - **Bỏ các cờ ép provider và đăng nhập.** `codex exec` phải dùng đúng cấu hình và đăng nhập của người dùng (config.toml, profile mặc định).
+   - Giữ nguyên các thứ còn lại: không shell, prompt qua stdin, `--sandbox read-only`, `--ephemeral`, timeout, giới hạn byte.
+   - Không xoá biến môi trường mà provider tuỳ biến có thể cần. Nếu vẫn cần bỏ `OPENAI_API_KEY`/`CODEX_API_KEY` thì ghi lý do và test.
+   - Tuỳ chọn: ô "Codex profile" trong Cài đặt (rỗng = mặc định), truyền `--profile` khi có giá trị.
+   - Có test bằng `codex` giả: (a) args **không** chứa `model_provider` hay `forced_login_method`; (b) `CODEX_HOME` và `HOME`/`USERPROFILE` được truyền nguyên; (c) có profile thì truyền `--profile <tên>`.
+   - **Không** chạy `codex` thật trong test.
 
 ## Không làm
 - Không tự động hoá web Instagram.
@@ -37,6 +52,8 @@ Muse (của Meta) đã khoá tài khoản. App hiện đăng bài và đọc s�
 - [ ] Toàn bộ gọi API đi qua một module có test bằng fixture: container, publish, insights, private reply, lỗi token hết hạn, lỗi rate limit.
 - [ ] Gửi DM idempotent: cùng một comment xử lý 2 lần chỉ ra 1 DM. Có test.
 - [ ] Token không xuất hiện trong SQLite hay log. Có test quét.
+- [ ] Mở app với cài đặt mặc định thì 0 lần mở trình duyệt Instagram. Bật tay thì phải qua hộp cảnh báo. Có test.
+- [ ] `codex exec` không còn bị ép `model_provider` hay `forced_login_method`. Có test bằng `codex` giả.
 - [ ] Toàn bộ lệnh kiểm đạt: `pnpm typecheck`, `pnpm test`, `pnpm test:api`, `pnpm test:desktop`, `pnpm local:build` (cần `ffmpeg` trong PATH). Có ảnh Cài đặt → Instagram và bảng sản phẩm ở 1366 px và 1920 px.
 
 ## Báo cáo (trong mô tả PR)
