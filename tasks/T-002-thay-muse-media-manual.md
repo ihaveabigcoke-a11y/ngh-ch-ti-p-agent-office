@@ -43,7 +43,7 @@ Tài khoản Muse đã bị khoá ngày 12/11/2026. App phải tiếp tục làm
 - [ ] Muse tạm dừng thì không có request nào tới Muse. Có test bằng fixture đếm số lần gọi.
 - [ ] Gói prompt có đúng cấu trúc thư mục trên. Có test.
 - [ ] Thả file `<MÃ-CẢNH>-x.mp4` vào hộp thì file vào đúng cảnh. Thả lại đúng file đó thì không nhập trùng. File sai mã thì vào "Chưa gắn cảnh". Có test với MP4 thật tạo bằng FFmpeg.
-- [ ] `pnpm typecheck`, `pnpm test`, `pnpm test:api`, `pnpm test:desktop`, `pnpm build` đều đạt.
+- [ ] `pnpm typecheck`, `pnpm test`, `pnpm test:api`, `pnpm test:desktop`, `pnpm local:build` đều đạt.
 - [ ] Ảnh chụp màn **Tạo video** ở 1366 px và 1920 px, đính vào PR.
 
 ## Báo cáo (trong mô tả PR)

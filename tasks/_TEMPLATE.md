@@ -22,6 +22,8 @@
 ## Cách kiểm
 ```
 <lệnh test / build / typecheck cụ thể của repo>
+# hermes-clip: pnpm typecheck; pnpm test; pnpm test:api; pnpm test:desktop; pnpm local:build
+# (KHÔNG dùng pnpm build; các test cần ffmpeg trong PATH)
 ```
 
 ## Báo cáo (worker điền vào mô tả PR)

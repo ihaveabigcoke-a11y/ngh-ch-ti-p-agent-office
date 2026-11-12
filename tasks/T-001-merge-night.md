@@ -12,7 +12,7 @@
   1. **Sao lưu** (chỉ copy, không di chuyển) `C:\Users\ADMIN\AppData\Roaming\product-lab-desktop` sang `D:\backup\hermes-<yyyyMMdd-HHmm>\`. Ghi tổng số file và tổng dung lượng của nguồn và bản sao, hai bên phải khớp.
   2. Trong app chính (`C:\Users\ADMIN\Downloads\Product-Lab-Local\Product-Lab-Local`, hoặc đường dẫn mới hơn nếu `MORNING.md` ghi khác): `git status` phải sạch. Nếu không sạch thì **dừng và hỏi**.
   3. `git fetch C:\HermesNight\hermes-clip night-20261111` rồi `git merge --no-ff FETCH_HEAD`. Có xung đột thì **dừng**, ghi danh sách file xung đột và hỏi người dùng.
-  4. Chạy: `pnpm install`, `pnpm typecheck`, `pnpm test`, `pnpm test:api`, `pnpm test:desktop`, `pnpm build`.
+  4. Chạy: `pnpm install`, `pnpm typecheck`, `pnpm test`, `pnpm test:api`, `pnpm test:desktop`, `pnpm local:build`.
   5. Quyết định còn treo F03 (`productGate` chặt hơn): đề xuất **giữ**. Hỏi người dùng một câu trước khi push.
   6. Người dùng tự kiểm theo danh sách trong `E:\Hermes Night\hermes-night3\boss\MORNING.md`.
   7. **Chỉ khi người dùng nói "push":** `git push origin <nhánh chính>`.

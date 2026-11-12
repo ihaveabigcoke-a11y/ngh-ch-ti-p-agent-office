@@ -38,7 +38,7 @@ Trước đây research sản phẩm và viết hook/kịch bản đi qua Muse. 
 ## Tiêu chí đạt
 - [ ] Nhập JSON hợp lệ thì ra đúng số ứng viên, `null` giữ nguyên. JSON sai thì báo lỗi theo trường. Có test.
 - [ ] Đường (B) có test với một file `codex` giả (fixture) và test timeout.
-- [ ] Toàn bộ lệnh kiểm đạt. Có ảnh màn **Nghiên cứu** ở 1366 px và 1920 px.
+- [ ] Toàn bộ lệnh kiểm đạt: `pnpm typecheck`, `pnpm test`, `pnpm test:api`, `pnpm test:desktop`, `pnpm local:build` (cần `ffmpeg` trong PATH). Có ảnh màn **Nghiên cứu** ở 1366 px và 1920 px.
 
 ## Báo cáo (trong mô tả PR)
 Như mẫu: tách rõ đã kiểm và chưa kiểm. Ghi rõ đã chạy `codex exec` thật hay chưa.

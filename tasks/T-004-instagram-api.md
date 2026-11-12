@@ -37,7 +37,7 @@ Muse (của Meta) đã khoá tài khoản. App hiện đăng bài và đọc s�
 - [ ] Toàn bộ gọi API đi qua một module có test bằng fixture: container, publish, insights, private reply, lỗi token hết hạn, lỗi rate limit.
 - [ ] Gửi DM idempotent: cùng một comment xử lý 2 lần chỉ ra 1 DM. Có test.
 - [ ] Token không xuất hiện trong SQLite hay log. Có test quét.
-- [ ] Toàn bộ lệnh kiểm đạt. Có ảnh Cài đặt → Instagram và bảng sản phẩm ở 1366 px và 1920 px.
+- [ ] Toàn bộ lệnh kiểm đạt: `pnpm typecheck`, `pnpm test`, `pnpm test:api`, `pnpm test:desktop`, `pnpm local:build` (cần `ffmpeg` trong PATH). Có ảnh Cài đặt → Instagram và bảng sản phẩm ở 1366 px và 1920 px.
 
 ## Báo cáo (trong mô tả PR)
 Ghi rõ: **chưa kiểm với tài khoản thật**, cho tới khi người dùng tạo Meta App và cấp quyền. Liệt kê các quyền cần xin: `instagram_business_basic`, `instagram_business_content_publish`, `instagram_business_manage_comments`, `instagram_business_manage_messages`, và các bước người dùng cần làm trên Meta Developer.
