@@ -16,6 +16,7 @@ _Cập nhật lần cuối: 12/11/2026 chiều, bởi boss Claude (trên máy ng
 | Việc | Worker | Nhánh / PR | Ghi chú |
 |---|---|---|---|
 | T-003 research không Muse | Codex (`codex exec`, effort high) | sửa thẳng trong app chính, nhánh `main` cục bộ, tag `before-T-003` | Không push |
+| T-002b: đề T-002 cập nhật (`2bd900a`, `ad9c73f`) | Codex, chạy **sau khi T-003 xong** (mỗi lúc 1 Codex trong app) | sửa thẳng trong app chính, tag `before-T-002b` | Gồm: công tắc Muse Bật/Tạm dừng ở Tài khoản Muse và Cài đặt, có hộp xác nhận; tạm dừng **không huỷ job đang chạy** (code T-002 hiện đang đóng context, phải sửa); bật lại thì luồng Muse như trước; quy tắc tự chuyển Muse ↔ manual/Codex/JSON cho cả media lẫn research và nội dung. Đề: `D:\hermes-wt\prompts\T-002b-head.md` + toàn văn T-002 |
 
 ## 👀 Chờ người dùng duyệt
 | Việc | PR | Boss đánh giá | Bằng chứng |
