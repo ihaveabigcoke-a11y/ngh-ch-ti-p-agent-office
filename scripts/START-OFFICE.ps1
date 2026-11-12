@@ -1,4 +1,5 @@
-﻿# Mở văn phòng: Agent Office (máy chạy agent) + NosytLabs (màn hình pixel để xem).
+﻿# Mở màn hình theo dõi văn phòng (NosytLabs, pixel 2D). Boss Claude và Codex (codex exec) hiện lên qua hook.
+# Thêm -WithAgentOffice nếu muốn mở thêm Agent Office 3D (AgentSystemLabs); không bắt buộc.
 #
 # Lần đầu (cài NosytLabs và nối hook Claude/Codex vào nó):
 #   powershell -ExecutionPolicy Bypass -File scripts\START-OFFICE.ps1 -Setup
@@ -8,7 +9,7 @@
 # Script không xoá và không ghi đè cấu hình của bạn. Nếu ~/.claude/settings.json đang lỗi JSON,
 # script chỉ báo, bỏ qua Claude và vẫn nối Codex.
 
-param([switch]$Setup)
+param([switch]$Setup, [switch]$WithAgentOffice)
 $ErrorActionPreference = 'Stop'
 
 $Tools  = 'D:\agent-office\tools'
@@ -20,7 +21,7 @@ function Need($cmd, $hint) {
 }
 Need git 'Cài Git: winget install --id Git.Git -e'
 Need py 'Cài Python 3.10+: winget install --id Python.Python.3.12 -e'
-Need agent-office 'Cài Agent Office theo docs/SETUP-WINDOWS.md'
+if ($WithAgentOffice) { Need agent-office 'Cài Agent Office theo docs/SETUP-WINDOWS.md' }
 
 if ($Setup -or -not (Test-Path $Nosyt)) {
   New-Item -ItemType Directory -Force -Path $Tools | Out-Null
@@ -55,8 +56,9 @@ if ($Setup -or -not (Test-Path $Nosyt)) {
   Write-Host '!! Claude Code: tắt và mở lại các phiên đang chạy để nhận hook mới.'
 }
 
-# Máy chạy agent: boss Claude thuê worker Codex ở đây. Không cần nhìn, có thể thu nhỏ cửa sổ.
-Start-Process powershell -ArgumentList '-NoExit', '-Command', 'agent-office --no-open' -WindowStyle Minimized
+if ($WithAgentOffice) {
+  Start-Process powershell -ArgumentList '-NoExit', '-Command', 'agent-office --no-open' -WindowStyle Minimized
+}
 
 # Màn hình theo dõi.
 Start-Process powershell -ArgumentList '-NoExit', '-Command', "Set-Location '$Nosyt'; py -3 run.py" -WindowStyle Minimized
@@ -65,4 +67,4 @@ Start-Process 'http://127.0.0.1:8113'
 
 Write-Host ''
 Write-Host 'Màn hình theo dõi (NosytLabs): http://127.0.0.1:8113'
-Write-Host 'Nơi giao việc cho boss (Agent Office): http://localhost:4600   (điện thoại: /lite)'
+if ($WithAgentOffice) { Write-Host 'Agent Office 3D: http://localhost:4600   (điện thoại: /lite)' }
