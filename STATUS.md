@@ -51,7 +51,7 @@ _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy ngư
 ## 🔨 Đang làm
 | Việc | Worker | Nhánh / PR | Ghi chú |
 |---|---|---|---|
-| _(trống: không có Codex nào đang chạy)_ | | | |
+| T-005 tự tạo hồ sơ + Triển khai N sản phẩm | Codex (`codex exec`, effort high) | sửa thẳng trong app, tag `before-T-005` = `adf48c9`, khoá `codex-T-005.txt` | Bắt đầu khoảng 18:25. App đã tắt. **Đừng mở app** cho tới khi boss báo build xong |
 
 ## 👀 Chờ người dùng duyệt
 | Việc | PR | Boss đánh giá | Bằng chứng |
