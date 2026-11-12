@@ -54,7 +54,7 @@ _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy ngư
 ## 🔨 Đang làm
 | Việc | Worker | Nhánh / PR | Ghi chú |
 |---|---|---|---|
-| _(trống: không có Codex nào đang chạy)_ | | | |
+| T-006 nén file mới, video < 6 MB | Codex do **boss phụ** chạy (người dùng thúc: "phải cho codex làm worker") | sửa thẳng trong app, tag `before-T-006` = `0028c88`, khoá `codex-T-006.txt` | Boss chính không chạy Codex song song; duyệt độc lập trước khi commit. T-007, T-008 boss chính chạy sau |
 
 ## 👀 Chờ người dùng duyệt
 | Việc | PR | Boss đánh giá | Bằng chứng |
@@ -69,7 +69,7 @@ _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy ngư
 | Dựng văn phòng (repo này) | nhánh `claude/multi-agent-office-setup-b4o3x9` | Đạt phần cấu hình. Chưa kiểm Codex thật trên máy người dùng | Ảnh chụp office chạy bản `v0.1.211` trong `docs/screenshots/` |
 
 ## ⛔ Bị chặn / cần người dùng
-- **T-006, T-007, T-008 đang chờ** (từ 12/11 khoảng 19:45). Trong app có **khoảng 13–31 file sửa dở** (gồm `desktop/src/main.mjs`, `preload.cjs`, `worker.mjs`; file mới `product-deployment.*`, `product-image.mjs`, `profile-removal.mjs`) mà **không** phải của boss chính hay Codex boss thuê. Rất có thể đó là phiên **app Codex Desktop** người dùng tự mở (chạy từ 18:44; có Electron Hermes Clip chạy lúc 19:40 với `--inspect`). Hai boss **không đụng** các file đó. Cần người dùng **commit** phần đó, hoặc nói rõ cách xử lý, rồi boss mới chạy T-006 → T-007 → T-008. Đường dẫn T-008 đã có: `C:\Users\ADMIN\Downloads\rea-video-12-mau.zip` (3,4 MB, 367 file, không có MP4 hay file chạy được; 12 mẫu V01–V12, tổng 116 shot; boss phụ đã kiểm, chỉ đọc). Khi giao T-008 chỉ chép `breakdown.json`, `review_answers.json`, `packaging/timeline.json`, `overlays.ass` vào fixture.
+- (Đã gỡ, 12/11 khoảng 20:20) 31 file WIP từ Codex Desktop của người dùng: người dùng chọn TRỰC TIẾP với boss chính "commit giúp rồi chạy". Boss phụ đã commit nguyên văn thành `0028c88` (tag lùi `before-user-wip-20261112` = `04732a4`). Boss chính đóng êm Hermes Clip, rồi chạy full suite trên cây sạch: typecheck 0; test 208/208; api 28/28; desktop 429 pass / 1 skip / 0 fail; build 0.
 - Office trên Windows báo `spawn EINVAL` ở phần đọc hạn mức Claude. Lỗi này **vô hại**, chỉ mất thanh hạn mức. Xem `docs/SETUP-WINDOWS.md`.
 - Codex trong office: lần đầu phải mở terminal của worker để duyệt `/hooks`. Xem `docs/SETUP-WINDOWS.md`.
 - **Màn hình theo dõi NosytLabs (12/11 14:11):** đã chạy `START-OFFICE.ps1 -Setup`. Python có sẵn (3.15.2) nên không cài. Hook đã nối cho Claude (12 event) và Codex (10 event). Server `http://127.0.0.1:8113` trả 200. Ảnh `docs/screenshots/office-live.png`: **thấy phiên Claude boss** (`agent dbcb16`); **KHÔNG thấy Codex T-002**. Lý do:
