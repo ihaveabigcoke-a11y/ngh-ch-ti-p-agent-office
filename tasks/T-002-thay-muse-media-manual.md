@@ -11,9 +11,12 @@ Tài khoản Muse đã bị khoá ngày 12/11/2026. App phải tiếp tục làm
 - Đọc `ops/night/out/CHANGES*.md` trước để không làm trùng việc T01–T27.
 
 ## Phạm vi
-1. **Công tắc "Tạm dừng Muse"**, mặc định **BẬT tạm dừng**. Lưu trong cài đặt của desktop.
-   - Khi tạm dừng: worker không mở profile Muse, không gửi chat, research hay media; nút liên quan hiện trạng thái "Muse đang tạm dừng".
-   - **Không** xoá profile, phiên đăng nhập, job hay receipt cũ của Muse.
+1. **Công tắc "Muse: Bật / Tạm dừng"**, mặc định **Tạm dừng**. Lưu trong cài đặt của desktop, giữ nguyên sau khi khởi động lại.
+   - **GIỮ NGUYÊN TOÀN BỘ MUSE** (yêu cầu của người dùng): không xoá hay vô hiệu hoá vĩnh viễn code Muse, màn Chat Muse, quản lý tài khoản, quota, VPN, profile, phiên đăng nhập, job hay receipt. Công tắc chỉ chặn việc **gửi tác vụ mới**.
+   - **Vị trí nút:** một nút gạt dễ thấy ở đầu màn **Tài khoản Muse**, kèm một nút gạt giống hệt ở **Cài đặt**. Hai nút luôn đồng bộ. Trên thanh trạng thái hoặc thẻ kết nối Muse (`lib/lab/muse-connection.ts`) hiện rõ "Muse: đang tạm dừng" hoặc "Muse: đang bật".
+   - **Tạm dừng:** worker không mở profile Muse, không gửi chat, research hay media. Nút liên quan bị mờ, kèm chú thích "Muse đang tạm dừng, bật lại ở Tài khoản Muse". Job đang chạy dở **không bị huỷ**, chỉ không nhận job mới.
+   - **Bật lại:** mọi luồng Muse cũ chạy lại y như trước T-002. Có test chứng minh: bật lại thì đúng luồng gửi Muse cũ được gọi (dùng fixture, không gọi Muse thật). Nhà cung cấp `muse` trong mục 2 mở khoá.
+   - Khi người dùng bật, hiện một dòng nhắc trong hộp xác nhận: "Muse chạy bằng trình duyệt tự động; tài khoản có thể bị khoá. Bật?"
 2. **Tầng nhà cung cấp media:** chọn nhà cung cấp cho từng cảnh hoặc cho cả dự án. Có 4 lựa chọn:
    - `manual` (mặc định);
    - `muse` (bị khoá khi đang tạm dừng);
@@ -40,7 +43,8 @@ Tài khoản Muse đã bị khoá ngày 12/11/2026. App phải tiếp tục làm
 - Không xoá dữ liệu Muse.
 
 ## Tiêu chí đạt
-- [ ] Muse tạm dừng thì không có request nào tới Muse. Có test bằng fixture đếm số lần gọi.
+- [ ] Muse tạm dừng thì không có request nào tới Muse; bật lại thì luồng Muse cũ chạy như trước. Có test cho cả hai chiều, dùng fixture đếm số lần gọi.
+- [ ] Không file, bảng hay màn hình Muse nào bị xoá. `git diff --stat` không có file Muse nào bị xoá.
 - [ ] Gói prompt có đúng cấu trúc thư mục trên. Có test.
 - [ ] Thả file `<MÃ-CẢNH>-x.mp4` vào hộp thì file vào đúng cảnh. Thả lại đúng file đó thì không nhập trùng. File sai mã thì vào "Chưa gắn cảnh". Có test với MP4 thật tạo bằng FFmpeg.
 - [ ] `pnpm typecheck`, `pnpm test`, `pnpm test:api`, `pnpm test:desktop`, `pnpm local:build` đều đạt.
