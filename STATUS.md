@@ -1,6 +1,33 @@
 # Bảng tiến độ
 
-## Trạng thái hiện hành — 01:13:47 13/11/2026 (Asia/Saigon)
+## Trạng thái hiện hành — 02:40 13/11/2026 (Asia/Saigon)
+
+Chế độ: CODEX-BOSS
+
+**Đạt mốc nghiệm thu 1 của T-010/T-011 trong Hermes Clip; dừng trước T-012.** Một main agent làm và tự review, không spawn/worker phụ. Không push/merge.
+
+- App nhánh hiện tại main, HEAD **a473b72** (báo cáo/context); code T-010 **4f759c3**, T-011 **7007d08**. Cây sạch, Electron tắt, khóa T-011 chính phiên đã nhả. Build pnpm local:build exit 0 lúc **2026-11-13T02:39:54.3315458+07:00**, đúng HEAD a473b72. Có thể mở START-HERMES-CLIP.cmd.
+- Đã áp patch chế độ văn phòng bằng git am: **564ccc6**; đã đọc CHE-DO-VAN-PHONG và BACKLOG, giữ CODEX-BOSS. Cài brief app bằng **cce6b4e**, đúng hai file AGENTS.md và CLAUDE.md. CLAUDE.md đã cập nhật hướng mới trong T-010/T-011.
+- Chỉ đạo mới nhất được áp dụng: hai màn nằm trong app; buildOfficeView thuần qua route local đã xác thực. Không dùng/clone production-office, không áp patch phòng ban vào repo nào; patch chỉ tham khảo bố cục. Không ghi live/snapshot.json.
+- **Fixture:** 3 sản phẩm hôm nay + 1 khác hôm qua còn việc → **Hôm nay 3/3 · Đang triển khai 4**. Bộ đếm sidebar, mã/hạng tự nhập, lọc ngày/tên/mã, lọc lượt theo sản phẩm + trạng thái, lịch sử và nhãn kết nối đạt. Giữ theme/font.
+- **Pipeline local thật:** MP4 kỹ thuật mới 720×1280, 1 giây qua ManualMedia trên DB/profile kiểm riêng: unmatched → received; màn Tín hiệu tự đổi attention → library sau **4937 ms**. Giữ ID/hash lượt và SHA-256 nguồn, có asset/take, giờ sự kiện cuối. Không dịch vụ hay tài khoản thật; không gọi Thùng rác.
+- **Đã kiểm:** typecheck exit 0; domain **213/213**, API **28/28**, desktop **477 pass / 1 skip OpenMontage / 0 fail** trên cây sạch 7007d08. Sau đó chỉ thêm báo cáo/context rồi build đúng HEAD cuối. T-010 UI kiểm lại 4 PNG; T-011 13 PNG ở 1366/1920, 0 lỗi trang/request ngoài; main agent đã đọc ảnh. Không cộng dồn các bộ test có phần trùng.
+- **Chưa kiểm:** Electron với dữ liệu/AppData/phiên thật; Muse, Codex/Gemini VLM, Meta/DM thật; file Flow/Gemini mới; Thùng rác Windows thật. OpenMontage thật thiếu cấu hình. MP4 kiểm là file kỹ thuật mới sinh bằng FFmpeg, không phải media sản phẩm thật.
+
+| Việc | Kết luận | Phạm vi còn lại |
+| --- | --- | --- |
+| T-010 | Đạt — ngày VN, mã/hạng, n/3, giao dịch chọn, view thuần | Không mở dữ liệu thật để kiểm |
+| T-011 | Đạt — hai màn, bộ lọc, lịch sử, dữ liệu cũ/mất kết nối/mô phỏng; MP4 local đổi nhóm | Các kiểm thật nêu trên chưa làm |
+| T-012 trở đi | Chưa bắt đầu | Đã dừng tại mốc 1 theo yêu cầu |
+
+Báo cáo: [REVIEW-T-010](REVIEW-T-010.md), [REVIEW-T-011](REVIEW-T-011.md), [đề T-010](tasks/T-010-dot-chon-va-office-snapshot.md), [đề T-011](tasks/T-011-tin-hieu-phong-san-xuat-trong-app.md).
+Bằng chứng app: [T-011 report](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-011.md), [result.json](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/T-011-acceptance/result.json), [build-result.json](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/T-011-acceptance/build-result.json), [ảnh Phòng sản xuất](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/T-011-acceptance/production-today-1366.png).
+
+Các trạng thái dưới đây giữ làm lịch sử; không dùng quy trình/SHA/build cũ để ghi đè trạng thái hiện hành.
+
+---
+
+## Lịch sử T-009 — 01:13:47 13/11/2026 (Asia/Saigon)
 
 Chế độ: CODEX-BOSS  <!-- người dùng đổi thành CLAUDE-BOSS khi muốn Claude làm boss; xem CHE-DO-VAN-PHONG.md -->
 
