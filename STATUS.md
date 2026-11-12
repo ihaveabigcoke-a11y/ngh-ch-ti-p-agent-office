@@ -52,7 +52,7 @@ _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy ngư
 ## 🔨 Đang làm
 | Việc | Worker | Nhánh / PR | Ghi chú |
 |---|---|---|---|
-| T-005 tự tạo hồ sơ + Triển khai N sản phẩm | Codex (`codex exec`, effort high) | sửa thẳng trong app, tag `before-T-005` = `adf48c9`, khoá `codex-T-005.txt` | Bắt đầu khoảng 18:25. App đã tắt. **Đừng mở app** cho tới khi boss báo build xong |
+| T-005 tự tạo hồ sơ + Triển khai N sản phẩm | Codex **vòng 2** (resume `01a1cf7d`) | sửa thẳng trong app, tag `before-T-005` = `adf48c9`, khoá `codex-T-005.txt` | Vòng 1 logic ĐẠT: typecheck 0; test 208/208; api 28/28; desktop 420 pass, 0 fail; build 0; rút gọn ghi chú kèm đánh dấu, không mất dữ liệu ứng viên. Ảnh 'sẵn sàng' và 'Tạo video' ổn. **Lỗi:** ở 1366 trạng thái 'thiếu hồ sơ' bị một vùng đen che, không thấy nút 'Hoàn tất tạo hồ sơ' (1920 thì đúng). Vòng 2 chỉ sửa bố cục. **Đừng mở app** |
 
 ## 👀 Chờ người dùng duyệt
 | Việc | PR | Boss đánh giá | Bằng chứng |
