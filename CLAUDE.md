@@ -49,8 +49,21 @@ Người dùng không muốn clone hay worktree. Codex sửa **thẳng trong th�
    - ghi thời gian build vào `STATUS.md`, rồi mới sang việc sau.
 
    Người dùng **không bao giờ** được mở ra một bản Hermes Clip cũ hơn code đã merge.
-6. Mỗi lúc chỉ **một** bên sửa app. Không có worktree, nên không chạy hai Codex song song.
+6. Không có worktree, nên **không chạy hai Codex song song**. Nhưng **hai boss được sửa song song** theo mục *Hai boss song song* bên dưới: mỗi bên chỉ sửa file mình đã khoá.
 7. Commit `STATUS.md` của repo văn phòng sau mỗi bước, để người dùng xem được trên điện thoại.
+
+## Hai boss song song (người dùng yêu cầu 12/11/2026: "muốn nhanh nhẹn")
+- **Boss chính** (bạn, nếu bạn là phiên nhận việc từ người dùng) lo đề bài, thuê Codex làm việc lớn, build và báo cáo.
+- **Boss phụ** (subagent hoặc phiên `boss-phu`, xem `.claude/agents/boss-phu.md`) duyệt mọi commit ngay khi có, **tự sửa** lỗi nhỏ và vừa, và đẩy việc lớn về boss chính kèm prompt Codex.
+- **Khoá file** nằm ở `<app>\.git\office-locks\`, gồm `boss-chinh.txt`, `boss-phu.txt` và `codex-T-xxx.txt`. Mỗi dòng là một đường dẫn tương đối.
+  - Trước khi sửa: đọc khoá của bên kia và `git status --short`. Gặp file đang bị giữ hoặc đang có WIP của người khác thì không đụng.
+  - Khi thuê Codex: boss chính ghi danh sách file dự kiến vào `codex-T-xxx.txt`, rồi xoá file khoá khi đã commit.
+- **Commit** bằng `git commit -m ... -- <paths>`. Cấm `add -A`, `stash`, `checkout`, `reset`, `clean`. Lùi lại bằng `git revert`, **không bao giờ** `reset --hard`.
+- **Test và build:**
+  - khi cây còn WIP của bên kia, mỗi bên chỉ chạy **riêng** test của mình;
+  - full suite và `pnpm local:build` chỉ chạy khi `git status` sạch, và do boss chính chạy.
+- **Liên lạc** bằng `SendMessage` giữa hai phiên. Dòng đầu là câu tóm tắt. Quyết định kinh doanh luôn chuyển về người dùng.
+- **Điểm nóng** `desktop/src/main.mjs` và `desktop/src/preload.cjs`: bên đang giữ thì bên kia chọn cách sửa không cần IPC mới.
 
 ## Skill có sẵn (`.claude/skills/`)
 - **`hermes-night-review`**: duyệt việc Codex làm (đêm, hoặc T-xxx ở *Office mode*). Dùng trước khi báo "đạt".
@@ -60,8 +73,8 @@ Người dùng không muốn clone hay worktree. Codex sửa **thẳng trong th�
 Boss **tự dùng** các skill này khi gặp đúng loại việc, không cần người dùng nhắc.
 
 ## Giới hạn
-- **Số Codex cùng lúc:** tối đa **1** trên tầng `hermes-clip` (luật cũ của dự án: mỗi lúc chỉ một bên sửa repo). Tầng khác tối đa **2**.
-- Boss chỉ sửa trực tiếp những việc nhỏ (tài liệu, `STATUS.md`, đề bài). Việc code thì giao Codex.
+- **Số Codex cùng lúc:** tối đa **1** trên tầng `hermes-clip`; tầng khác tối đa **2**. Boss phụ sửa tay song song được, theo khoá file.
+- Boss chính chỉ sửa trực tiếp những việc nhỏ (tài liệu, `STATUS.md`, đề bài); việc code lớn thì giao Codex. Boss phụ được tự sửa lỗi nhỏ và vừa trong app, theo `.claude/agents/boss-phu.md`.
 - Không push lên `main`, không merge, không xoá nhánh hay worktree khi người dùng chưa đồng ý.
 - Không bao giờ in hoặc commit key, token, mật khẩu office, email người dùng.
 - Kết quả không chắc chắn (dịch vụ ngoài, tài khoản, đăng bài) thì ghi **chưa kiểm**, không ghi *đạt*.
