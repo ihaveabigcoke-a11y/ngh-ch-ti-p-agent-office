@@ -5,10 +5,12 @@ Boss cập nhật file này sau mỗi bước. Người dùng xem nó, hoặc xe
 _Cập nhật lần cuối: 12/11/2026, bởi boss Claude (cloud), lúc dựng văn phòng._
 
 ## 📥 Hộp thư (người dùng ghi việc mới vào đây)
-- [ ] **Merge nhánh `night-20261111` vào app chính Hermes Clip.** Sao lưu dữ liệu trước, không xoá gì. Làm trên máy người dùng, vì nhánh chưa push lên GitHub.
-- [ ] **Thay Muse.** Công tắc tạm dừng Muse, cộng tầng nhà cung cấp media `manual` (gói prompt cho Flow/Gemini, 9:16, 8 giây; thư mục tự nhập file theo mã cảnh), cộng nhập JSON research theo schema `hermes-product-check`.
-- [ ] **Chuyển Instagram sang API chính thức** (bật adapter T18), kèm comment theo từ khoá → tự trả lời DM.
-- [ ] **Kế hoạch boss dự phòng** sau khi Claude Pro hết hạn (khoảng 19/11).
+Đề bài đã viết sẵn trong `tasks/`. Boss làm theo đúng thứ tự, mỗi lúc chỉ 1 Codex chạy trên hermes-clip.
+1. [ ] **T-001** Merge nhánh `night-20261111` vào app chính. Boss tự làm trên máy, sao lưu trước. `tasks/T-001-merge-night.md`
+2. [ ] **T-002** Tạm dừng Muse, thêm nhà cung cấp media `manual` (gói prompt + hộp nhận file). Giao Codex. `tasks/T-002-thay-muse-media-manual.md`
+3. [ ] **T-003** Research và viết nội dung không cần Muse (nhập JSON, Codex CLI). Giao Codex. `tasks/T-003-research-khong-muse.md`
+4. [ ] **T-004** Instagram qua API chính thức, kèm comment → DM. Giao Codex. `tasks/T-004-instagram-api.md`
+5. [ ] Kế hoạch boss dự phòng sau khi Claude Pro hết hạn (khoảng 19/11).
 
 ## 🔨 Đang làm
 | Việc | Worker | Nhánh / PR | Ghi chú |
