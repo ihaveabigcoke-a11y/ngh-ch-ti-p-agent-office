@@ -46,15 +46,15 @@ _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy ngư
 3. [x] **T-003** (đạt, commit `56e9842` trong app chính, tag lùi `before-T-003`) Research và viết nội dung không cần Muse (nhập JSON, Codex CLI). Giao Codex. `tasks/T-003-research-khong-muse.md`
 4. [x] **T-004** (đạt, commit `3e653a0` trong app chính) Instagram qua API chính thức, kèm comment → DM. Giao Codex. `tasks/T-004-instagram-api.md`
 5. [x] **T-005** (đạt, commit `04732a4`, build 18:42:29) Chọn 3 sản phẩm xong thì tự tạo hồ sơ và triển khai sang Tạo video (boss phụ viết đề và tìm ra nguyên nhân lỗi 422 ở `productFromCandidate`). Đang làm. `tasks/T-005-trien-khai-3-san-pham.md`
-6. [ ] **T-006** Tự nén file mới, video < 6 MB (boss phụ viết đề, c915857). Làm SAU T-005. Chờ người dùng xác nhận trực tiếp với boss chính việc chuyển file gốc vào Thùng rác và xoá bản render tạm. `tasks/T-006-nen-file-va-video.md`
-7. [ ] **T-007** Khung kịch bản v2: nhịp khoảng 1,5 giây/shot, chữ đè, CTA đè cảnh kết quả (số đo 12 mẫu rea-video). Làm sau T-006. `tasks/T-007-khung-kich-ban-v2.md`
+6. [x] **T-006** (đạt, `85fbc66`) Tự nén file mới, video < 6 MB (boss phụ viết đề, c915857). Làm SAU T-005. Chờ người dùng xác nhận trực tiếp với boss chính việc chuyển file gốc vào Thùng rác và xoá bản render tạm. `tasks/T-006-nen-file-va-video.md`
+7. [~] **T-007** (đang làm) Khung kịch bản v2: nhịp khoảng 1,5 giây/shot, chữ đè, CTA đè cảnh kết quả (số đo 12 mẫu rea-video). Làm sau T-006. `tasks/T-007-khung-kich-ban-v2.md`
 8. [ ] **T-008** rea-video thay bước phân tích mẫu tay; 3 đường đọc ảnh (Codex CLI mặc định, Gemini API, nhập tay). Làm sau T-007. Cần đường dẫn `rea-video-12-mau.zip`. `tasks/T-008-rea-video-phan-tich-mau.md`
 9. [ ] Kế hoạch boss dự phòng sau khi Claude Pro hết hạn (khoảng 19/11).
 
 ## 🔨 Đang làm
 | Việc | Worker | Nhánh / PR | Ghi chú |
 |---|---|---|---|
-| T-006 nén file mới, video < 6 MB | Codex do **boss phụ** chạy (người dùng thúc: "phải cho codex làm worker") | sửa thẳng trong app, tag `before-T-006` = `0028c88`, khoá `codex-T-006.txt` | Boss chính không chạy Codex song song; duyệt độc lập trước khi commit. T-007, T-008 boss chính chạy sau |
+| T-007 khung kịch bản v2 | Codex (`codex exec`, effort high), boss chính thuê | sửa thẳng trong app, tag `before-T-007` = `85fbc66`, khoá `codex-T-007.txt` | Bắt đầu khoảng 22:45. **Đừng mở app** |
 
 ## 👀 Chờ người dùng duyệt
 | Việc | PR | Boss đánh giá | Bằng chứng |
@@ -66,6 +66,7 @@ _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy ngư
 | T-004 Instagram API + comment→DM + tắt Instagram trình duyệt + Codex CLI session_gateway | Commit `3e653a0`. Tag lùi `before-T-004` (= `4d5e672`, trước cả commit G `ab94531`, nên lùi riêng T-004 thì dùng `git revert 3e653a0`) | **Đạt** (xem `REVIEW-T-004.md`). **Chưa kiểm:** tài khoản Meta thật, safeStorage trên Electron thật | typecheck 0; test 204/204; api 26/26; desktop 396 pass, 0 fail (2 lần); build 0; 4 ảnh tại `D:\hermes-wt\artifacts\T-004\` |
 | T-002c: lối ra cho cảnh kẹt "Cần đối soát" (G) + chặn job Muse cũ + nhãn tiếng Việt + bỏ polling + bảng Instagram 1366 + xét lại `follow_unknown` | `ab94531` (G, boss phụ), `d1b57b1` (siết CTA, boss phụ), `adf48c9` (Codex, 2 vòng). Tag lùi `before-T-002c` / `before-T-004-cta` / `before-T-002c2`; lùi từng commit bằng `git revert` | **Đạt** (xem `REVIEW-T-002c.md`). Nhỏ còn lại: màn Tạo video lặp dòng "Muse đang tạm dừng…" 3 lần | Cây sạch: typecheck 0; test 204/204; api 26/26; desktop 418 pass, 1 skip, 0 fail; `local:build` thật 0 lúc **17:23:59** từ `adf48c9`. 10 ảnh tại `D:\hermes-wt\artifacts\T-002c\` |
 | T-005 tự tạo hồ sơ + Triển khai N sản phẩm | Commit `04732a4` (chưa push). Tag lùi `before-T-005` | **Đạt** sau 2 vòng; boss phụ duyệt code ĐẠT. Sản phẩm đã có dự án video thì nút mở dự án cũ nhất, không tạo mới. **Chưa kiểm:** 3 ứng viên thật của đợt 17:49:44 | typecheck 0; test 208/208; api 28/28; desktop 420 pass, 0 fail; `local:build` thật lúc **18:42:29**; 6 ảnh tại `D:\hermes-wt\artifacts\T-005\` |
+| T-006 tự nén file mới | Commit `85fbc66` (boss phụ chạy Codex và commit). Tag lùi `before-T-006` = `0028c88` | **Đạt**: boss phụ và boss chính duyệt độc lập. Ảnh Muse tải về giờ lưu WebP. **Chưa kiểm:** Flow/Gemini thật, Thùng rác Windows thật, Electron thật | Boss chính tự chạy: typecheck 0; test 208/208; api 28/28; desktop 447 pass, 0 fail; `local:build` 22:40:54 (boss phụ); 4 ảnh tại `D:/hermes-wt/artifacts/T-006/` |
 | Dựng văn phòng (repo này) | nhánh `claude/multi-agent-office-setup-b4o3x9` | Đạt phần cấu hình. Chưa kiểm Codex thật trên máy người dùng | Ảnh chụp office chạy bản `v0.1.211` trong `docs/screenshots/` |
 
 ## ⛔ Bị chặn / cần người dùng
