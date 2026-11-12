@@ -15,7 +15,7 @@ _Cập nhật lần cuối: 12/11/2026 chiều, bởi boss Claude (trên máy ng
 ## 🔨 Đang làm
 | Việc | Worker | Nhánh / PR | Ghi chú |
 |---|---|---|---|
-| T-002b: đề T-002 cập nhật (`2bd900a`, `ad9c73f`) | Codex, chạy **sau khi T-003 xong** (mỗi lúc 1 Codex trong app) | sửa thẳng trong app chính, tag `before-T-002b` | Gồm: công tắc Muse Bật/Tạm dừng ở Tài khoản Muse và Cài đặt, có hộp xác nhận; tạm dừng **không huỷ job đang chạy** (code T-002 hiện đang đóng context, phải sửa); bật lại thì luồng Muse như trước; quy tắc tự chuyển Muse ↔ manual/Codex/JSON cho cả media lẫn research và nội dung. Đề: `D:\hermes-wt\prompts\T-002b-head.md` + toàn văn T-002 |
+| T-002b: đề T-002 cập nhật + tự chuyển Muse | Codex, **vòng 2/3** (resume phiên `01a1ceee`) | sửa thẳng trong app chính, tag `before-T-002b` (= `56e9842`), chưa commit | Vòng 1: typecheck 0; test 202/202; api 26/26; desktop 367 pass, 1 fail (`instagram-ai-label`, chập chờn; chạy riêng đạt 3/3). Boss đã xác nhận trên code các lỗi boss phụ báo, giao sửa ở vòng 2: **A** Codex research bị chặn vĩnh viễn bởi run Muse cũ ở đợt khác (`codex-cli.mjs` khoảng dòng 113); **B** bật lại Muse thì app tự gửi job đã duyệt trước đó (chọn mặc định an toàn: không tự gửi, phải bấm Chạy; người dùng có thể đổi); **C** `AsyncLocalStorage` lan sang callback; **D** test chiều bật lại; **E** nguồn landing và thông báo khi nhập trùng; **F** test chập chờn. Dữ liệu thật (đọc chỉ đọc): `research_runs` = 1 (`done`); job Muse 25 (17 ready, 6 failed, 2 needs_attention). D (ép provider openai) đã xếp vào T-004 |
 
 ## 👀 Chờ người dùng duyệt
 | Việc | PR | Boss đánh giá | Bằng chứng |
