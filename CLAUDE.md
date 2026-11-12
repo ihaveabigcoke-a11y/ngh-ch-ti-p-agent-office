@@ -34,12 +34,25 @@ Không có MCP? Dùng lệnh `office-workers` (đã có trong PATH của bạn),
    - **Chưa đạt:** `tell_worker` kèm danh sách lỗi cụ thể (file, dòng, cách tái hiện).
 8. **Báo cáo** người dùng ngắn gọn bằng tiếng Việt: xong gì, bằng chứng gì, còn gì chưa kiểm.
 
-## Ngoại lệ cho hermes-clip (chạy local)
-Nhánh chính của hermes-clip chỉ nằm trên máy người dùng; bản trên GitHub đã cũ. Vì vậy với hermes-clip:
-- Codex chạy `codex exec` trong worktree riêng (`D:\hermes-wt\T-xxx`), mỗi việc một nhánh `codex/T-xxx-…`, **chỉ commit**: không push, không mở PR.
-- Boss duyệt bằng `git diff <nhánh chính>...codex/T-xxx`, rồi chạy lại các lệnh kiểm trong worktree.
-- Việc sau (T-003, T-004) phải cắt nhánh **sau khi** việc trước đã được người dùng merge vào nhánh chính, để tránh xung đột.
-- Commit `STATUS.md` của repo văn phòng sau mỗi bước, để người dùng xem được trên điện thoại.
+## hermes-clip: SỬA THẲNG TRÊN APP (người dùng yêu cầu 12/11/2026)
+Người dùng không muốn clone hay worktree. Codex sửa **thẳng trong thư mục app chính** (bản git đang chạy trên máy). Để vẫn lùi lại được:
+1. **Trước mỗi việc:**
+   - `git status` phải sạch, nếu không thì dừng;
+   - **tắt app Hermes Clip** đang chạy;
+   - đặt mốc `git tag before-T-xxx`.
+2. Codex chạy `codex exec` (effort high) **trong chính thư mục app**, chỉ commit vào nhánh chính hiện tại. Không push, không tạo nhánh mới, không đụng AppData/SQLite/media/profile.
+3. Boss duyệt bằng skill `hermes-night-review` (mục *Office mode*): `git diff before-T-xxx..HEAD`, chạy lại toàn bộ lệnh kiểm.
+4. **Hỏng** (kiểm không đạt sau 3 vòng sửa, hoặc build hỏng): `git reset --hard before-T-xxx` để trả app về như cũ, rồi ghi lý do vào `STATUS.md`.
+5. **Đạt:** giữ nguyên các commit, ghi vào `STATUS.md`, rồi mới sang việc sau.
+6. Mỗi lúc chỉ **một** bên sửa app. Không có worktree, nên không chạy hai Codex song song.
+7. Commit `STATUS.md` của repo văn phòng sau mỗi bước, để người dùng xem được trên điện thoại.
+
+## Skill có sẵn (`.claude/skills/`)
+- **`hermes-night-review`**: duyệt việc Codex làm (đêm, hoặc T-xxx ở *Office mode*). Dùng trước khi báo "đạt".
+- **`hermes-product-check`**: kiểm một sản phẩm hoặc link nhà cung cấp. Kết quả là JSON để nhập vào app (T-003).
+- **`viral-formula-analyzer`**: khi có video mẫu mới. Đo bằng ffmpeg rồi ra JSON công thức. Không ghi đè seed khi người dùng chưa duyệt.
+
+Boss **tự dùng** các skill này khi gặp đúng loại việc, không cần người dùng nhắc.
 
 ## Giới hạn
 - **Số Codex cùng lúc:** tối đa **1** trên tầng `hermes-clip` (luật cũ của dự án: mỗi lúc chỉ một bên sửa repo). Tầng khác tối đa **2**.

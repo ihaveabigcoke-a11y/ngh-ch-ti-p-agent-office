@@ -1,6 +1,6 @@
 # T-002: Tạm dừng Muse và thêm nhà cung cấp media `manual`
 
-- **Repo:** hermes-clip (bản đã merge T-001) · **Worker:** codex, effort high · **Ngày:** 12/11/2026
+- **Repo:** hermes-clip, **sửa thẳng trong thư mục app chính** (tag `before-T-xxx`), không clone, không worktree · **Worker:** codex, effort high · **Ngày:** 12/11/2026
 
 ## Mục tiêu
 Tài khoản Muse đã bị khoá ngày 12/11/2026. App phải tiếp tục làm video mà **không gửi gì tới Muse**. Ảnh và video sẽ do người dùng tự tạo trên Google Flow/Gemini (hoặc Grok), app lo phần còn lại: gói prompt và tự nhập file vào đúng cảnh.

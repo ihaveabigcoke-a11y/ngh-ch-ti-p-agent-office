@@ -1,6 +1,6 @@
 # T-003: Research và viết nội dung không cần Muse
 
-- **Repo:** hermes-clip (bản đã merge T-001) · **Worker:** codex, effort high · **Ngày:** 12/11/2026
+- **Repo:** hermes-clip, **sửa thẳng trong thư mục app chính** (tag `before-T-xxx`), không clone, không worktree · **Worker:** codex, effort high · **Ngày:** 12/11/2026
 
 ## Mục tiêu
 Trước đây research sản phẩm và viết hook/kịch bản đi qua Muse. Giờ cần hai đường thay thế, đều **miễn phí**:
@@ -22,6 +22,12 @@ Trước đây research sản phẩm và viết hook/kịch bản đi qua Muse. 
    - Bật trong Cài đặt thì app chạy `codex exec` với prompt trên, có giới hạn thời gian và kích thước đầu ra, không dùng shell.
    - Lấy JSON cuối cùng, kiểm schema, rồi nhập như (A).
    - Không tìm thấy `codex` thì báo hướng dẫn.
+3b. **Nhận kết quả của skill `hermes-product-check`.**
+   - Nút "Nhập kết quả research" phải nhận được cả JSON một sản phẩm mà skill này xuất ra, với các trường: `name, supplierUrl, supplierCountry, listingStatus, cost, costCurrency, shipping, shippingCurrency, price, currency, minimumOrder, matchType, usRetail{low,high,currency,sources[]}, maxLandedForMarkup, visualPayoff, aiFidelityRisks, logisticsFlags, competition{…}, verdict, verdictReason, evidenceNotes`.
+   - Ánh xạ các trường sang ứng viên. Trường app chưa có thì lưu nguyên trong phần ghi chú hoặc metadata, không bỏ.
+   - `listingStatus` khác `single` thì `cost` và `shipping` bắt buộc là `null`.
+   - Không quy đổi tiền tệ.
+   - Hiện `verdict` (try / hold / reject) và `logisticsFlags` thành nhãn trên thẻ ứng viên.
 4. **Content và landing:** làm tương tự (A) và (B) cho `contentResponse` và `landingResponse`, gắn vào đúng sản phẩm hoặc cảnh.
 
 ## Không làm

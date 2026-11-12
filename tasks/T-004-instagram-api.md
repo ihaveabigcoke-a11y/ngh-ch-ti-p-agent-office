@@ -1,6 +1,6 @@
 # T-004: Chuyển Instagram sang API chính thức, kèm comment → DM
 
-- **Repo:** hermes-clip (bản đã merge T-001) · **Worker:** codex, effort high · **Ngày:** 12/11/2026
+- **Repo:** hermes-clip, **sửa thẳng trong thư mục app chính** (tag `before-T-xxx`), không clone, không worktree · **Worker:** codex, effort high · **Ngày:** 12/11/2026
 - **Làm sau T-002.** Chỉ 1 Codex chạy trên hermes-clip mỗi lúc.
 
 ## Mục tiêu

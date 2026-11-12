@@ -5,6 +5,7 @@ Codex đọc file này. Claude đọc nó qua `CLAUDE.md`. Boss khác (ChatGPT�
 ## Nếu bạn là WORKER (Codex)
 - Bạn được boss thuê cho **một** việc. Đề bài nằm trong prompt. Chỉ làm đúng phạm vi đó.
 - Làm trong worktree và nhánh office đã tạo cho bạn. Không chuyển sang nhánh khác, không push lên `main`.
+- **Riêng hermes-clip:** bạn sửa **thẳng trong thư mục app chính**. Boss đã đặt tag `before-T-xxx`. Chỉ commit vào nhánh hiện tại; không push, không tạo nhánh, không mở PR, không đụng AppData, SQLite, media hay profile. Cuối commit message ghi báo cáo theo mục *Báo cáo* của đề bài.
 - Thiếu thông tin hoặc gặp quyết định kinh doanh (tiền, tài khoản, đăng bài, mua công cụ): **dừng và hỏi** trong terminal. Đừng tự đoán.
 - Xong việc:
   1. chạy đủ các lệnh kiểm trong mục *Cách kiểm* của đề bài;
