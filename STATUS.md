@@ -119,6 +119,20 @@ Phạm vi: `git diff before-T-002..before-T-003` (T-002, 42 file +935/−59) và
   - Đã bỏ nghi vấn "auto → manual lệch giữa `production.ts` và resolver", vì guard ở `route.ts` chạy trước và chặn đúng.
   - Đã bỏ nghi vấn "MUSE_STATUS không có", vì `desktop/local/server.mjs:33` có cung cấp kèm `jobs`.
 
+### Boss phụ sửa lỗi G (12/11, khoảng 17:00): commit `ab94531` trong app chính, tag lùi `before-T-002c` (= `4d5e672`)
+- **Ai làm và vì sao:** người dùng yêu cầu tốc độ, bảo boss phụ tự sửa G. Boss chính đồng ý, kèm điều kiện: chỉ đụng file không nằm trong WIP T-004 (Codex T-004 đang chạy cùng thư mục), commit bằng `git commit -- <paths>`, chạy riêng test của mình.
+- **Cách sửa:**
+  - action production `skip_reconciliation {sceneId}` lưu `scene.museReconciledAt` (mốc chỉ tiến lên);
+  - `mediaProviderReceipts()` trong `desktop/src/provider-routing.mjs` được dùng chung ở `manual-media.mjs`, `route.ts`, `production-desk.tsx`, `manual-media.tsx`;
+  - `route.ts` trả 422 khi job Muse của cảnh đang chạy, hoặc khi không có gì chưa rõ;
+  - màn Tạo video có nút "Bỏ qua, không đối soát" kèm hộp xác nhận. Job, attempt, take, receipt đều giữ nguyên.
+- **Đã kiểm (chạy RIÊNG):** `tests/production.test.mjs` 32/32; desktop `provider-routing` + `manual-media` + `manual-media-ui` 37/37 (3 test G mới, tái hiện đúng dữ liệu thật: job `needs_attention`, không providerId); api `production-api` 5/5; `tsc --noEmit` 0 lỗi. Không xoá hay nới test cũ.
+- **Chưa kiểm:** full suite, `local:build`, Electron thật, 2 job thật từ 08/11.
+- **Còn lại:**
+  - H và I để Codex làm sau T-004;
+  - chặn hẳn `worker.resume` với job **có** providerId sau khi bỏ qua: để boss chính quyết (worker.mjs).
+- **Lùi lại:** `git revert ab94531`. **Không** `reset --hard`, vì sẽ xoá WIP T-004.
+
 **Chứng minh chỉ đọc:** app chính trước và sau khi duyệt đều là HEAD `56e9842`, nhánh `main`, `git stash list` rỗng, tag `before-T-002/002b/003` không đổi. Boss phụ không chạy Codex, không build, không mở app. `D:\agent-office\tools` chỉ có `nosyt-agent-office` ở `df6551d`, sạch, không liên quan T-002/T-003.
 
 ## ✅ Xong
