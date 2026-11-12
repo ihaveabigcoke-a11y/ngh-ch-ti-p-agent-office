@@ -47,7 +47,9 @@ _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy ngư
 4. [x] **T-004** (đạt, commit `3e653a0` trong app chính) Instagram qua API chính thức, kèm comment → DM. Giao Codex. `tasks/T-004-instagram-api.md`
 5. [x] **T-005** (đạt, commit `04732a4`, build 18:42:29) Chọn 3 sản phẩm xong thì tự tạo hồ sơ và triển khai sang Tạo video (boss phụ viết đề và tìm ra nguyên nhân lỗi 422 ở `productFromCandidate`). Đang làm. `tasks/T-005-trien-khai-3-san-pham.md`
 6. [ ] **T-006** Tự nén file mới, video < 6 MB (boss phụ viết đề, c915857). Làm SAU T-005. Chờ người dùng xác nhận trực tiếp với boss chính việc chuyển file gốc vào Thùng rác và xoá bản render tạm. `tasks/T-006-nen-file-va-video.md`
-7. [ ] Kế hoạch boss dự phòng sau khi Claude Pro hết hạn (khoảng 19/11).
+7. [ ] **T-007** Khung kịch bản v2: nhịp khoảng 1,5 giây/shot, chữ đè, CTA đè cảnh kết quả (số đo 12 mẫu rea-video). Làm sau T-006. `tasks/T-007-khung-kich-ban-v2.md`
+8. [ ] **T-008** rea-video thay bước phân tích mẫu tay; 3 đường đọc ảnh (Codex CLI mặc định, Gemini API, nhập tay). Làm sau T-007. Cần đường dẫn `rea-video-12-mau.zip`. `tasks/T-008-rea-video-phan-tich-mau.md`
+9. [ ] Kế hoạch boss dự phòng sau khi Claude Pro hết hạn (khoảng 19/11).
 
 ## 🔨 Đang làm
 | Việc | Worker | Nhánh / PR | Ghi chú |
@@ -67,6 +69,7 @@ _Cập nhật lần cuối: 12/11/2026 17:30, bởi boss Claude (trên máy ngư
 | Dựng văn phòng (repo này) | nhánh `claude/multi-agent-office-setup-b4o3x9` | Đạt phần cấu hình. Chưa kiểm Codex thật trên máy người dùng | Ảnh chụp office chạy bản `v0.1.211` trong `docs/screenshots/` |
 
 ## ⛔ Bị chặn / cần người dùng
+- **T-006, T-007, T-008 đang chờ** (từ 12/11 khoảng 19:45). Trong app có **khoảng 13–31 file sửa dở** (gồm `desktop/src/main.mjs`, `preload.cjs`, `worker.mjs`; file mới `product-deployment.*`, `product-image.mjs`, `profile-removal.mjs`) mà **không** phải của boss chính hay Codex boss thuê. Rất có thể đó là phiên **app Codex Desktop** người dùng tự mở (chạy từ 18:44; có Electron Hermes Clip chạy lúc 19:40 với `--inspect`). Hai boss **không đụng** các file đó. Cần người dùng **commit** phần đó, hoặc nói rõ cách xử lý, rồi boss mới chạy T-006 → T-007 → T-008. T-008 còn cần đường dẫn `rea-video-12-mau.zip`.
 - Office trên Windows báo `spawn EINVAL` ở phần đọc hạn mức Claude. Lỗi này **vô hại**, chỉ mất thanh hạn mức. Xem `docs/SETUP-WINDOWS.md`.
 - Codex trong office: lần đầu phải mở terminal của worker để duyệt `/hooks`. Xem `docs/SETUP-WINDOWS.md`.
 - **Màn hình theo dõi NosytLabs (12/11 14:11):** đã chạy `START-OFFICE.ps1 -Setup`. Python có sẵn (3.15.2) nên không cài. Hook đã nối cho Claude (12 event) và Codex (10 event). Server `http://127.0.0.1:8113` trả 200. Ảnh `docs/screenshots/office-live.png`: **thấy phiên Claude boss** (`agent dbcb16`); **KHÔNG thấy Codex T-002**. Lý do:
