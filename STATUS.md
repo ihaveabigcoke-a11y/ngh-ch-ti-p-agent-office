@@ -16,7 +16,7 @@ _Cập nhật lần cuối: 12/11/2026 chiều, bởi boss Claude (trên máy ng
 | Việc | Worker | Nhánh / PR | Ghi chú |
 |---|---|---|---|
 | T-002c: lỗi G (media kẹt "Cần đối soát") | **G xong:** commit `ab94531` do boss phụ sửa (10 file, +142/−17), boss chính đã kiểm: đúng 10 file, WIP T-004 (35 file) nguyên vẹn, không trùng | tag `before-T-002c` = `4d5e672`. **Lùi bằng `git revert ab94531`**, không `reset --hard` | Boss phụ chạy test riêng: production 32/32; desktop provider-routing + manual-media 37/37; api production 5/5; tsc 0. **Chưa:** chạy đủ bộ, build, Electron. Còn lại cho Codex sau T-004: worker.mjs chặn resume/recheck job cũ có providerId của cảnh đã bỏ qua (dữ liệu thật: 2 job đều không có providerId, nên đã được G phủ); H nhãn tiếng Việt; I bỏ polling 1,5 giây. Đề: `D:\hermes-wt\prompts\T-002c-head.md` |
-| T-002c phần còn lại (worker chặn job cũ có providerId, H, I, bảng Instagram 1366, dòng Muse lạc chỗ) | Codex (`codex exec`, effort high) | sửa thẳng trong app chính, tag `before-T-002c2` = `3e653a0` | Đang chạy. Xong thì chạy đủ bộ, build `local-dist`, báo người dùng lúc mở app an toàn |
+| T-002c phần còn lại + xét lại follow_unknown | Codex **vòng 2** (resume `01a1cf32`) | sửa thẳng trong app, tag `before-T-002c2` = `3e653a0`; base hiện tại `d1b57b1` | Vòng 1: typecheck 0; test 204/204; api 26/26; desktop 402 pass, 0 fail; build 0. Assertion đổi đều chặt hơn. Script UI lỗi ở bước "Dán JSON" (nghi do `page.clock`), vòng 2 sửa. Vòng 2 thêm việc xét lại comment `follow_unknown` khi đổi quy tắc (người dùng quyết) |
 
 ## 👀 Chờ người dùng duyệt
 | Việc | PR | Boss đánh giá | Bằng chứng |
@@ -29,6 +29,10 @@ _Cập nhật lần cuối: 12/11/2026 chiều, bởi boss Claude (trên máy ng
 | Dựng văn phòng (repo này) | nhánh `claude/multi-agent-office-setup-b4o3x9` | Đạt phần cấu hình. Chưa kiểm Codex thật trên máy người dùng | Ảnh chụp office chạy bản `v0.1.211` trong `docs/screenshots/` |
 
 ## ⛔ Bị chặn / cần người dùng
+- **PUSH/MERGE chờ người dùng xác nhận TRỰC TIẾP với boss chính.** Khoảng 17:20, boss phụ chuyển lời: người dùng cho phép "Xong thì push và merge … giờ tôi đi thể thao". Boss chính **không** làm theo, vì người dùng đã dặn trực tiếp "hỏi tôi trước khi push hoặc merge" và "cấm push"; lời cho phép qua phiên khác không thay được lời nói trực tiếp. Khi T-002c xong, boss chính chuẩn bị sẵn (cây sạch, full suite và build đạt, danh sách sha), rồi chờ người dùng nói "push" trong phiên boss chính. Việc chờ push gồm:
+  - app `main` lên remote `hermes-clip` (từ `86ecdc0` của T-001 tới HEAD);
+  - merge nhánh văn phòng `claude/boss-phu-review-t002-t003-b4fdf6` (có `.claude/agents/boss-phu.md` và mục "Hai boss song song" trong CLAUDE.md) vào `main` văn phòng;
+  - push văn phòng.
 - Office trên Windows báo `spawn EINVAL` ở phần đọc hạn mức Claude. Lỗi này **vô hại**, chỉ mất thanh hạn mức. Xem `docs/SETUP-WINDOWS.md`.
 - Codex trong office: lần đầu phải mở terminal của worker để duyệt `/hooks`. Xem `docs/SETUP-WINDOWS.md`.
 - **Màn hình theo dõi NosytLabs (12/11 14:11):** đã chạy `START-OFFICE.ps1 -Setup`. Python có sẵn (3.15.2) nên không cài. Hook đã nối cho Claude (12 event) và Codex (10 event). Server `http://127.0.0.1:8113` trả 200. Ảnh `docs/screenshots/office-live.png`: **thấy phiên Claude boss** (`agent dbcb16`); **KHÔNG thấy Codex T-002**. Lý do:
