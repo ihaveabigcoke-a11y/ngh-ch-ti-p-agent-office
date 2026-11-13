@@ -1,3 +1,9 @@
+# M-20261114-toggle — sửa thông báo bật Muse, 14/11/2026
+
+App main 02d509e, local chưa push; build 01:58:14 +07 đạt trên cây sạch/app tắt. 791 kiểm/0 lỗi/0 skip; UI và Electron launcher QA đạt bật/tắt, không tự dispatch. Lỗi hiển thị trong modal, lý do dừng cạnh công tắc; giữ phanh/receipt, không reset. Không gửi Muse thật trong đợt sửa này. Đã đóng app QA và nhả khóa; ảnh 1366/1920, SHA và giới hạn ở đầu STATUS/REVIEW-M-20261114-toggle.md.
+
+---
+
 # M-20261114 — kiểm Muse thật, 14/11/2026
 
 CODEX-BOSS một main. Người dùng cho phép test Muse thật sâu, thay hạn chế Muse giả riêng đợt này. Gửi 1 lượt mới, 0 clip; Muse trả lời video không khả dụng theo tài khoản/khu vực. Đã tạm dừng, không gửi lại/reset/lách vùng. Giữ 2 receipt cũ/mới cần đối soát, ledger 2 lượt gồm 1 cũ.

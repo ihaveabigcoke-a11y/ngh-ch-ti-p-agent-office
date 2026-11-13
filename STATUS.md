@@ -1,4 +1,14 @@
 Chế độ: CODEX-BOSS
+# M-20261114-toggle — đã sửa hộp Bật Muse
+
+- App main **02d509e**, commit local/chưa push; tag before-M-20261114-toggle. Sửa mã lỗi dừng phiên thành thông báo rõ, lỗi nằm trong modal, lý do dừng cạnh công tắc + link đối soát. Thay cảnh báo khóa tài khoản chung bằng mô tả hành vi bật Muse.
+- Đã kiểm: 17/17 riêng; typecheck + **267 domain + 29 API + 495 desktop = 791 đạt / 0 lỗi / 0 skip**. UI Worker fixture bật/tạm dừng, dừng trước/sau mở modal, giữ receipt, 0 gửi/0 browser; 6 PNG 1366/1920 tại outputs/M-20261114-toggle-ui.
+- Build **14/11/2026 01:58:14 +07**, cây sạch/app tắt, exit 0. Launcher Electron thật trên workspace QA riêng đạt bật/tắt qua IPC, 0 job/0 request ngoài/0 console error; 2 PNG outputs/M-20261114-toggle-desktop-ui. Đã đóng QA êm, source sạch, nhả khóa chính phiên.
+- Chưa kiểm: bật lại tài khoản Muse người dùng hoặc gửi video mới. Giữ phanh dừng, không reset hạn mức/receipt; sửa này không đổi quyền video/khu vực của dịch vụ. Không đọc dữ liệu thật, không push/merge.
+- Cần anh chốt: không có. Mở lại START-HERMES-CLIP.cmd để dùng bản mới. Review REVIEW-M-20261114-toggle.md; báo cáo app ops/office/reports/M-20261114-toggle.md.
+
+---
+
 # M-20261114 — kiểm Muse thật: kẹt quyền video theo vùng
 
 - Người dùng cho phép kiểm thật sâu; đã gửi 1 lượt mới, 0 clip mới. Ledger 2 lượt gồm 1 cũ; không cộng nhầm thành 2 lượt mới. Muse trả lời video không khả dụng cho tài khoản ở khu vực hiện tại; đã tạm dừng, không thử lại/reset/lách vùng.
