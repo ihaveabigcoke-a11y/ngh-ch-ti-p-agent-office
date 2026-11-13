@@ -1,4 +1,18 @@
 Chế độ: CODEX-BOSS
+# M-20261114 — kiểm Muse thật: kẹt quyền video theo vùng
+
+- Người dùng cho phép kiểm thật sâu; đã gửi 1 lượt mới, 0 clip mới. Ledger 2 lượt gồm 1 cũ; không cộng nhầm thành 2 lượt mới. Muse trả lời video không khả dụng cho tài khoản ở khu vực hiện tại; đã tạm dừng, không thử lại/reset/lách vùng.
+- Phát hiện thẻ gợi ý Muse bị nhận nhầm thành kết quả media. Đã sửa + tự review Office mode; app main **b05d591**, commit cục bộ, chưa push (quyền push T-026 không suy rộng sang đợt Muse/dữ liệu mới).
+- Đã kiểm thật: hàng chờ/receipt giữ qua restart; Tín hiệu phản ánh gửi/chờ; bấm lại không thêm job/lượt; 67 record cũ nguyên checksum. Ảnh 1366/1920 và phản hồi provider chỉ lưu outputs/M-20261114, không đưa Git.
+- Đã kiểm source: 52/52 Muse; typecheck, 267 domain + 29 API + 492 desktop đạt, 0 lỗi; 1 OpenMontage skip ban đầu đã chạy riêng 1/1 đạt. Tổng 789 đạt. Không hạ assertion.
+- Build **14/11/2026 01:20:19 +07**, cây sạch/app tắt, exit 0; Launcher sau build đạt: Muse tạm dừng, active 0, chặn gửi, receipt giữ nguyên, 67/67 record cũ nguyên hash; ảnh final-history/final-signals 1366/1920. Đã đóng app êm.
+- Chưa kiểm/không đạt: clip Muse mới, hash/decode/phát/ba MP4 từ clip mới; bản sửa chưa gửi lại dịch vụ sau từ chối. Thumbnail một số lượt lịch sử bị hỏng; giữ media cũ. Instagram/Meta/DM/Insights, nội dung/SKU không thuộc đợt này.
+- Cần anh chốt: không có cho phần sửa/local. Clip mới vẫn kẹt quyền tạo video của tài khoản theo phản hồi Muse; không tự đổi tài khoản, mua gói hay đổi vùng.
+- Ledger lỗi 1 là số có sẵn trước kiểm; phản hồi từ chối mới được ghi bằng chứng riêng, không sửa giả lịch sử. Lượt mới hiện Cần đối soát sau restart, chưa được phân loại lại bằng dịch vụ; không khẳng định bản sửa đã nghiệm thu live.
+- Đề tasks/M-20261114-muse-that-kiem-sau.md; review REVIEW-M-20261114.md; báo cáo app ops/office/reports/M-20261114.md.
+
+---
+
 # T-026 — đọc cái này trước
 
 App main **22e66a4**, đã push origin/main; build **14/11/2026 00:40:20 +07**, cây sạch/app tắt. T-024 xong; T-026 thay T-024b/T-025. Một main agent tự làm/review.
