@@ -1,3 +1,35 @@
+Chế độ: CODEX-BOSS
+# T-026 — đọc cái này trước
+
+App main **8142ff3**, đã push origin/main; build cuối **13/11/2026 16:25:10 +07**, cây sạch/app tắt. T-024 đã xong; T-026 thay T-024b/T-025. Một main agent tự làm và review.
+
+| Việc | Kết quả · số từ cố định toàn trang (gồm menu) | SHA đã push |
+| --- | --- | --- |
+| [x] T-026a · Menu | Xong; 7 mục + Cài đặt, 20 URL cũ | 3ba68eb |
+| [x] T-026b · Tín hiệu & Phòng chờ | Xong · 40 từ | 4542dbd |
+| [x] T-026c · Hôm nay | Xong · 28 từ | f8b013a |
+| [x] T-026d · Săn sản phẩm | Xong · 34 từ | 2f99eba |
+| [x] T-026e · Sản phẩm | Xong · 30 từ | ed92662 |
+| [x] T-026f · Video / Làm video | Xong · 38 từ | 9431fea |
+| [x] T-026g · Đăng | Xong · 33 từ | 13f043d |
+| [x] T-026h · Kết quả | Xong · 31 từ | 9180769 |
+| [x] T-026i · Luật UI / đo chữ và thumbnail | Xong; ≤40 từ, thumbnail tải được | 8142ff3 |
+
+Đã kiểm: typecheck; **786 đạt / 1 bỏ qua / 0 lỗi**; **1 bấm Làm video → 3 MP4** sau chọn sản phẩm (Muse giả + OpenMontage local), từ chối → tay. 28 ảnh 1366/1920: [rỗng](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/T-026i-empty-ui), [đầy](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/T-026i-full-ui). [Launcher Electron QA](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/T-026-desktop-ui): thêm 14 ảnh, đúng màn mặc định, 0 lỗi/request ngoài, đóng êm.
+Cần anh chốt: hai ngưỡng 48 giờ vẫn null; chưa đặt thì chỉ xếp hạng, không kết luận. Giá/link thiếu giữ null; nguồn dán cần xác minh SKU.
+Chưa kiểm: Muse/Instagram/Insights/Meta/DM thật, AppData/dữ liệu/phiên người dùng, chất lượng/SKU video thật, NVDA/200%/high contrast. Không còn blocker code; a/f đã revert phần dở và thử lại đạt. [Review](REVIEW-T-026i.md).
+
+---
+# T-024b — hoàn tất 13/11/2026, 14:05 +07
+Chế độ: CODEX-BOSS · một agent · app main **3c9b7486a8d0b2b0cf30dc67659d32d233317747** · `pnpm local:build` đạt **2026-11-13T14:05:09.5442409+07:00**, cây sạch/Electron tắt lúc build. Tag lùi `before-T-024b`. Không push/merge.
+- **Đã thay đổi:** studio năm trạm, phễu sáu nấc, đường 14 ngày; Sản phẩm Thẻ/Bảng nhớ lựa chọn/sắp xếp; mini-chart ba hook với ngưỡng người dùng và null; ma trận màu/chú giải. Tín hiệu bốn dịch vụ, dòng 50 sự kiện, từ chối/giới hạn tách lỗi, hàng chờ đối soát. Khung content/video mẫu/hồ sơ chỉnh theo mẫu được duyệt. Sửa form tràn, điều hướng nhập số, nháp khi Muse dừng, đối soát cùng mã, lựa chọn Instagram cũ, nhãn/mã thô, module build thiếu và deadlock Electron ready.
+- **Đã kiểm:** typecheck; **777 pass / 1 skip / 0 fail** (259 domain + 29 API + 489 desktop; skip OpenMontage live tùy chọn). **37/37 script UI**. Launcher `START-HERMES-CLIP.cmd` + Electron thật với workspace QA riêng: **20 menu, 0 lỗi console/pageerror, 0 request ngoài, không tràn ngang 1366**, lựa chọn Bảng còn sau reload; Muse luôn Tạm dừng. Guard kiểm bằng Electron nguyên main trong cây thiếu module: đúng hộp thoại tiếng Việt, exit 0, không lỗi module thô/deadlock; native dialog capture để tự đóng.
+- **Ảnh:** 33 PNG ở app `outputs/T-024b-ui/`, 2 PNG trống ở `outputs/T-024b-empty-ui/`, 20 ảnh menu ở `outputs/T-024b-desktop-ui/`. Hôm nay/Sản phẩm Bảng/Số liệu/Ma trận/Tín hiệu có 1366/1920; năm ảnh bản mẫu | app ở 1366 trong [báo cáo T-024b](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-024b.md). Khác biệt thị giác và lý do được nêu riêng.
+- **SHA:** `2aad19f` giao diện trực quan; `f0fafc9` guard; `41446e7`, `6200748`, `4d901fd` nhóm lỗi; `b105956` deadlock; `d7f08f2` kiểm Electron; `69f809b` nhãn cuối; `3c9b748` báo cáo/context và build cuối. [Review T-024b](REVIEW-T-024b.md).
+- **Bằng chứng cuối:** app `outputs/T-024b-final-verified-suite.json`, `outputs/T-024b-all-ui/results.json`, `outputs/T-024b-ui/result.json`, `outputs/T-024b-desktop-ui/result.json`, `outputs/T-024b-startup/result.json`, `outputs/T-024b-build-result.json`. Log cũ đỏ được giữ; kết quả này là mốc hiện hành. Snapshot test lịch sử khôi phục đúng byte; protected paths/data/evidence/dependencies không đổi.
+- **Chưa kiểm:** dữ liệu đầy đủ của bản cài trong AppData; Muse/Instagram/Meta/DM thật; hộp thoại native bằng tay; chất lượng nội dung/SKU và trình đọc màn hình. Fixture/QA không chứng nhận tài khoản thật. Không truy cập trực tiếp AppData/DB/profile. Menu và một số khối app chưa giống từng pixel mẫu, đã có giải thích/ảnh.
+- **Chạy tiếp:** `START-HERMES-CLIP.cmd` → Hôm nay, Sản phẩm → Bảng, Số liệu; Đăng bài → sản phẩm → Ma trận; Khác → Tín hiệu & Phòng chờ. Muse giữ **Tạm dừng**, ngưỡng do người dùng đặt. Khóa Codex T-024b được nhả sau nghiệm thu; khóa/WIP khác giữ nguyên.
+---
 # T-024 — hoàn tất 13/11/2026, 12:42 +07
 Chế độ: CODEX-BOSS · app main **d95f16e09e7634936988b1f4e4c50d4bf8d591bb** · `pnpm local:build` đạt **2026-11-13T12:42:32.8072866+07:00**, cây sạch/app tắt. Không push. Tag lùi `before-T-024` = b13fe266.
 - **Đã thay đổi:** Hôm nay mặc định cả Electron/React: 8 số từ record, việc theo 10 bước, kết quả gần nhất, trống 1 CTA. Số liệu có bảng 11 cột sortable/biểu đồ SVG, form thu gọn/datetime-local giờ Việt Nam và CSV trực tiếp. Thẻ 3 cột gọn, ảnh/chữ đầu tên và thiếu đúng dữ liệu. Modal video 4 ô có gợi ý → dự án/khung v2 → prompt. Menu chính 9, giữ 20 view cũ. Giữ theme/font/schema và dữ liệu cũ.

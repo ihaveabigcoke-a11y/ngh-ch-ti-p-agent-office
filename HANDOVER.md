@@ -1,3 +1,9 @@
+# T-026 hoàn tất — bàn giao hiện hành
+
+CODEX-BOSS, một main agent. App main `8142ff3` đã push origin/main theo quyền trực tiếp T-026; build cuối 13/11/2026 16:25:10 +07, cây sạch/app tắt. Đọc 20 dòng đầu STATUS.md và REVIEW-T-026i.md: a–i đều đạt, 786 pass/1 skip/0 fail, 28 ảnh fixture + 14 ảnh Electron QA. Launcher mở vào Tín hiệu. Muse thật không được gửi trong T-026; hai ngưỡng 48 giờ giữ null, chưa kiểm dữ liệu/tài khoản thật. T-024b/T-025 được thay bởi T-026; các giới hạn/quyền trong lịch sử bên dưới không ghi đè chỉ đạo T-026.
+
+---
+
 # Bàn giao sáng 13/11 — CODEX-BOSS
 
 Một main Codex, tự làm/test/review/commit; không spawn, không chờ boss khác. Chỉ đạo người dùng 04:00 đã thay mốc dừng T-010/T-011. App nguồn/launcher: C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local, main; HEAD/build cuối xem STATUS.md.
