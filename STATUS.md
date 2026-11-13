@@ -424,6 +424,7 @@ Phạm vi: `git diff before-T-002..before-T-003` (T-002, 42 file +935/−59) và
 
 
 ## T-026j — hoàn tất kiểm local ngày 14/11/2026
+- Văn phòng: mốc báo cáo `6dfd8d6db33b7c95af771720e8339c61f4da7b88` đã push origin/main và đối chiếu remote; bản ghi biên nhận này được commit/push tiếp cùng nhánh. Không đưa WIP cũ vào commit.
 - Code `7b8fd40` sửa tràn 200% và chọn đúng hook; `22e66a4` thêm màu hệ thống cho tương phản cao, sửa script chụp và báo cáo. Cả hai đã push app origin/main, không force/merge; tag `before-T-026j` = `8142ff3`.
 - Full suite cuối: `outputs/T-026j-release-verified-suite.json`, 267 domain + 29 API + 491 desktop = 787/0/0; typecheck đạt. Log cấu hình công cụ sai được giữ riêng, đã chạy desktop lại bằng executable Agent Reach đúng; không hạ assertion. `outputs/T-026j-release-build.json`: build trên cây sạch/Electron tắt, 00:40:20 +07.
 - Launcher `outputs/T-026j-release-launcher.json`: Electron thật, 14 ảnh/bảy màn, mặc định Tín hiệu, Muse Tạm dừng, 0 lỗi/request ngoài, đóng êm. Workspace QA riêng; không AppData/profile thật.
