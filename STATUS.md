@@ -1,9 +1,9 @@
 Chế độ: CODEX-BOSS
 # T-026 — đọc cái này trước
 
-App main **8142ff3**, đã push origin/main; build cuối **13/11/2026 16:25:10 +07**, cây sạch/app tắt. T-024 đã xong; T-026 thay T-024b/T-025. Một main agent tự làm và review.
+App main **22e66a4**, đã push origin/main; build **14/11/2026 00:40:20 +07**, cây sạch/app tắt. T-024 xong; T-026 thay T-024b/T-025. Một main agent tự làm/review.
 
-| Việc | Kết quả · số từ cố định toàn trang (gồm menu) | SHA đã push |
+| Việc | Kết quả · từ cố định toàn trang (gồm menu) | SHA đã push |
 | --- | --- | --- |
 | [x] T-026a · Menu | Xong; 7 mục + Cài đặt, 20 URL cũ | 3ba68eb |
 | [x] T-026b · Tín hiệu & Phòng chờ | Xong · 40 từ | 4542dbd |
@@ -14,10 +14,10 @@ App main **8142ff3**, đã push origin/main; build cuối **13/11/2026 16:25:10 
 | [x] T-026g · Đăng | Xong · 33 từ | 13f043d |
 | [x] T-026h · Kết quả | Xong · 31 từ | 9180769 |
 | [x] T-026i · Luật UI / đo chữ và thumbnail | Xong; ≤40 từ, thumbnail tải được | 8142ff3 |
-
-Đã kiểm: typecheck; **786 đạt / 1 bỏ qua / 0 lỗi**; **1 bấm Làm video → 3 MP4** sau chọn sản phẩm (Muse giả + OpenMontage local), từ chối → tay. 28 ảnh 1366/1920: [rỗng](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/T-026i-empty-ui), [đầy](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/T-026i-full-ui). [Launcher Electron QA](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/T-026-desktop-ui): thêm 14 ảnh, đúng màn mặc định, 0 lỗi/request ngoài, đóng êm.
-Cần anh chốt: hai ngưỡng 48 giờ vẫn null; chưa đặt thì chỉ xếp hạng, không kết luận. Giá/link thiếu giữ null; nguồn dán cần xác minh SKU.
-Chưa kiểm: Muse/Instagram/Insights/Meta/DM thật, AppData/dữ liệu/phiên người dùng, chất lượng/SKU video thật, NVDA/200%/high contrast. Không còn blocker code; a/f đã revert phần dở và thử lại đạt. [Review](REVIEW-T-026i.md).
+| [x] T-026j · Khép kiểm local | Xong; 28 axe/0 lỗi, 200%/tương phản cao, đổi hook | 7b8fd40 → 22e66a4 |
+Đã kiểm: typecheck, **787 đạt/0 bỏ qua/0 lỗi**; **1 bấm → 3 MP4** sau chọn sản phẩm, đổi hook thêm 1 bấm → 3 MP4 mới, giữ thân/lịch sử (Muse giả + OpenMontage local). Ảnh 1366/1920: [chuẩn](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/T-026i-full-ui), [200%](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/T-026j-full-ui), [tương phản](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/T-026j-contrast-full-ui), [launcher](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/T-026-desktop-ui).
+Cần anh chốt: **không có**. Hai ngưỡng 48 giờ giữ null; app vẫn làm video bình thường. Giá/link thiếu giữ null, SKU phải xác minh trước dùng thật.
+Chưa kiểm: Muse/Instagram/Insights/Meta/DM thật, AppData/dữ liệu/phiên người dùng, chất lượng/SKU thật, người dùng NVDA và chế độ tương phản Windows. Đã kiểm phóng to/tương phản trên Chrome QA; không chứng nhận WCAG. [Review T-026j](REVIEW-T-026j.md).
 
 ---
 # T-024b — hoàn tất 13/11/2026, 14:05 +07
@@ -422,3 +422,12 @@ Phạm vi: `git diff before-T-002..before-T-003` (T-002, 42 file +935/−59) và
 
 - T-022c **8ec2aa5**: sửa vùng cuộn/role danh sách lỗi; axe 6 trạng thái/0 violation, 18 focus, 8 PNG; 764 pass/1 skip/0 fail, typecheck. Chưa NVDA; chi tiết REVIEW-T-022c.md. Nhả khóa và chốt báo cáo/build cuối.
 
+
+## T-026j — hoàn tất kiểm local ngày 14/11/2026
+- Code `7b8fd40` sửa tràn 200% và chọn đúng hook; `22e66a4` thêm màu hệ thống cho tương phản cao, sửa script chụp và báo cáo. Cả hai đã push app origin/main, không force/merge; tag `before-T-026j` = `8142ff3`.
+- Full suite cuối: `outputs/T-026j-release-verified-suite.json`, 267 domain + 29 API + 491 desktop = 787/0/0; typecheck đạt. Log cấu hình công cụ sai được giữ riêng, đã chạy desktop lại bằng executable Agent Reach đúng; không hạ assertion. `outputs/T-026j-release-build.json`: build trên cây sạch/Electron tắt, 00:40:20 +07.
+- Launcher `outputs/T-026j-release-launcher.json`: Electron thật, 14 ảnh/bảy màn, mặc định Tín hiệu, Muse Tạm dừng, 0 lỗi/request ngoài, đóng êm. Workspace QA riêng; không AppData/profile thật.
+- 28 ảnh thường rỗng/đầy: `outputs/T-026i-{empty,full}-ui`; 14 ảnh 200%: `outputs/T-026j-full-ui`; 28 ảnh tương phản: `outputs/T-026j-contrast-{empty,full}-ui`; 4 ảnh đổi hook: `outputs/T-026j-flow-ui`. Mọi ảnh có hai khổ 1366/1920. 28 axe/0 violation; incomplete còn color-contrast vùng ảnh/video và video-caption, không chứng nhận WCAG/NVDA.
+- Đổi hook tạo ba MP4 mới giữ các đoạn thân và bản xuất cũ; kiểm hash/tên khi tải, clipboard caption/UTM và records không đổi. `outputs/T-026j-flow-media/refresh-proof.json`; Muse giả, OpenMontage local thật.
+- Review đã thấy ảnh contrast cũ không đúng màu dù emulation báo đúng. Bằng chứng cuối dùng Chrome process riêng với `--force-high-contrast`, không đổi Windows. Ảnh contrast cũ trong T-026j-full-ui giữ lịch sử, không dùng nghiệm thu.
+- Hai ngưỡng giữ null, không có việc chờ người dùng chốt. Các giới hạn dịch vụ/dữ liệu thật và NVDA giữ nguyên. Nhả riêng khóa codex-T-026j; giữ khóa khác và WIP văn phòng có từ trước. Review/đề: REVIEW-T-026j.md, tasks/T-026j-khep-kiem-tra-local.md.

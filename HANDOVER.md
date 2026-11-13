@@ -1,6 +1,8 @@
-# T-026 hoàn tất — bàn giao hiện hành
+# T-026 hoàn tất — bàn giao hiện hành, 14/11/2026
 
-CODEX-BOSS, một main agent. App main `8142ff3` đã push origin/main theo quyền trực tiếp T-026; build cuối 13/11/2026 16:25:10 +07, cây sạch/app tắt. Đọc 20 dòng đầu STATUS.md và REVIEW-T-026i.md: a–i đều đạt, 786 pass/1 skip/0 fail, 28 ảnh fixture + 14 ảnh Electron QA. Launcher mở vào Tín hiệu. Muse thật không được gửi trong T-026; hai ngưỡng 48 giờ giữ null, chưa kiểm dữ liệu/tài khoản thật. T-024b/T-025 được thay bởi T-026; các giới hạn/quyền trong lịch sử bên dưới không ghi đè chỉ đạo T-026.
+CODEX-BOSS, một main agent. App main `22e66a4` đã push origin/main; build 14/11/2026 00:40:20 +07 trên cây sạch/app tắt. T-026a–i đã xong; T-026j khép các kiểm local: sửa tràn 200%, H1/H2/H3 sau đổi hook, màu hệ thống khi tương phản cao. Full suite 787 đạt/0 skip/0 lỗi, 28 axe/0 violation; ảnh chuẩn/200%/tương phản 1366/1920, tải hash/caption và đổi hook tới ba MP4 đều đạt. Launcher Electron QA mở đúng Tín hiệu, 0 lỗi/request ngoài và đóng êm.
+
+Đọc 20 dòng đầu STATUS.md và REVIEW-T-026j.md. Không còn việc code/kiểm local dang dở; không có quyết định cần hỏi ngay. Hai ngưỡng 48 giờ giữ null. Muse thật/dịch vụ/phiên/dữ liệu người dùng, SKU/chất lượng thật và NVDA vẫn chưa kiểm theo giới hạn quyền; không lấy fixture làm chứng nhận. T-024b/T-025 được thay bởi T-026. WIP văn phòng có từ trước giữ nguyên; không tự commit hoặc xóa chúng.
 
 ---
 
