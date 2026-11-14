@@ -6,6 +6,12 @@
 ## Mục tiêu
 Tìm ra **vì sao** worker Muse của app chỉ gửi prompt chữ mà không kích hoạt tạo video, và sửa cho đúng. Có bằng chứng bằng một lượt thật.
 
+## Thông tin từ người dùng (15/11, trả lời câu "bấm gì để tạo video")
+Người dùng nói: **chỉ cần ghi trong ô chat "tạo cho tôi 5 video" là Muse tạo.** Không cần chọn nút hay model riêng. Vậy Muse nhận **câu lệnh ra lệnh tạo video** trong chính tin nhắn. **Giả thuyết chính:** prompt app gửi chỉ là *mô tả cảnh* (không có lời yêu cầu "tạo video"), nên Muse trả lời chữ và báo "PROMPT ONLY". Kiểm giả thuyết này **đầu tiên**:
+- Đọc prompt thật app gửi (`museTaskPrompt`/hàm dựng prompt video trong `lib/lab/muse-workflows.ts`, `auto-video.ts`, `muse.mjs`, `muse-chat.mjs`): có câu ra lệnh tạo video ở **đầu** không? Prompt kết thúc bằng gì?
+- Nếu thiếu: thêm câu mở đầu ra lệnh rõ, tiếng Anh, ví dụ `Create 1 video (9:16, about 8 seconds) from the following scene. Output a generated video, not text.` rồi mới tới mô tả cảnh. Không đổi nội dung mô tả cảnh đã duyệt, không nhãn "AI".
+- **Bước thử thật (mục 5 bên dưới):** gửi **1 video cho cảnh 1** theo kiểu "tạo 1 video". **Chưa** thử "tạo 5 video trong một tin" ở việc này; nếu lượt 1 ra clip, ghi vào STATUS "đề xuất thử 1 tin yêu cầu nhiều video để giảm số lượt" cho việc sau.
+
 ## Cách làm
 1. **Chạy sau T-028b lần 2** (không còn Codex khác, không còn khoá `codex-*.txt`, cây sạch). Tag `before-T-031`, ghi khoá `codex-T-031.txt` và **tự xoá khoá khi xong** (hoặc ghi vào STATUS nếu bị chặn).
 2. **Đọc code, không đọc dữ liệu thật:** `desktop/src/muse.mjs` (adapter: chọn chế độ, gắn tham chiếu, bấm gửi, nhận file), `muse-chat.mjs`, `worker.mjs`, cấu hình `adapter` (đường dẫn/URL bắt đầu, các bộ chọn giao diện). Trả lời bằng chứng bằng chữ, kèm số dòng:
