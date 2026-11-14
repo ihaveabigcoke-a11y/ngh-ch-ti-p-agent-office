@@ -1,3 +1,25 @@
+# T-032 — 3 MP4 dự phòng đã kiểm; chưa đủ 5 cảnh (15/11/2026, +07)
+
+| Lượt | Cảnh | Gửi (+07) | Kết quả/dừng (+07) | Trả về và kiểm |
+| --- | --- | --- | --- | --- |
+| 1 | 2+3 | 03:16:04.421 | 03:17:03.307; kiểm lỗi 03:17:11.087 | 2 video riêng: cảnh 2 720×1280/10s, sai yêu cầu 8s; cảnh 3 720×1280/8s đạt. Cả hai giải mã/hash đạt; không clip lẫn. |
+| 2 | 4+5 | 03:20:19.118 | 03:22:00.779 | 2 thẻ video trong ảnh chẩn đoán, 0 file đã tải/ffprobe; needs_attention, chưa rõ kết quả. |
+- **Dừng nguyên văn:** “Hai lượt lỗi Muse liên tiếp. Kiểm tra Muse trước khi bật lại.” Receipt lượt 1: “File không đạt tỷ lệ/thời lượng hoặc không giải mã được. Giữ file trên máy để xem lại.” Lượt 2: “Tác vụ dừng. Xem bước cuối và ảnh lỗi trên máy; chưa tự gửi lại.” Không suy thành bị ban/hạn chế vùng.
+- **Phanh:** 2/4 lượt, giãn 254,697s; Cho tạm ngưng riêng lúc 03:22:08, Chi không dùng, Muse vẫn bật, worker paused/active=0. Không gửi lại, không đổi hồ sơ, không đăng/DM/paid API.
+- **Kết luận lô:** Muse hiển thị 2 video/tin, nhưng chưa hiệu quả trọn luồng app: lô đầu có mã kết quả sau 58,886s so với gửi lẻ T-031 52,889s (lẻ tới nhập 63,544s), lô sau dừng sau 101,661s; chưa đủ bằng chứng kết luận nhanh hơn cho MP4 hợp lệ.
+- **Nguồn/dựng:** chỉ cảnh 1 T-031 và 2–3 vừa tạo; thiếu file đã kiểm của 4–5. Cảnh 2 giữ raw10s + bản cắt 8,021s; nhập 2–3 qua upload/attach của app (chưa đạt tự nhập nhiều clip), tất cả take mới pending. Ba preview dùng hook 0–4s khác nhau, chung thân dự phòng 4+7s từ cảnh 3/2 và CTA; không dùng clip 12/11, không ghi đè exports cũ.
+
+| MP4 trong D:/hermes-wt/artifacts/T-032/ | SHA-256 | Byte | ffprobe |
+| --- | --- | ---: | --- |
+| 112_H1-problem_T032_partial_261115.mp4 | `7852b3db43de4cddbc1ef2cd8475f8b4643174b9d403c1c16bdd583e1391e857` | 4410594 | H.264/AAC; 720×1280; video 15s, container 15,033s |
+| 112_H2-absurd_T032_partial_261115.mp4 | `3cd6914559168dd0adcbc7ba18cecb70316c905725aa7231325ba3c1d7cc9799` | 4390019 | H.264/AAC; 720×1280; video 15s, container 15,033s |
+| 112_H3-curiosity_T032_partial_261115.mp4 | `246824e4e0d5c63b2d16b8bac1a71028faf382381f2418b1b0aca07f043b5326` | 5070969 | H.264/AAC; 720×1280; video 15s, container 15,033s |
+- **Kiểm/thời gian:** 9 phút 15,312s từ gửi cảnh 2 tới đủ ba MP4 (03:25:19.733); 3 hash khác, mỗi file <6.000.000 byte, giải mã toàn bộ, CTA “Comment GLOW” 12–15s đã xem; tiếng gốc đối chiếu 9 đoạn r=0,984–0,996, lệch hình ≤52ms. Typecheck + **831 test đạt/0 lỗi/0 skip**; fixture không thay kiểm dịch vụ thật.
+- **Chưa kiểm/cần anh chốt:** chưa lấy/đối soát 4–5, chưa xác minh đúng SKU/công dụng/độ hiệu quả hook. Ba file là preview chờ xem; app Library có ba asset, chưa duyệt take để thay bộ exports cũ. Muốn tiếp tục cần cho phép mở lại Cho để lấy kết quả cũ; chưa gửi mới. Bằng chứng/progress chỉ local; báo cáo app ops/office/reports/T-032.md, REVIEW-T-032.md. Không sửa source hành vi/build T-031.
+- **Git/khóa:** app origin/main ca4f74c đã push, remote khớp/cây sạch; tag before-T-032 tại 49467c6. Khóa codex-T-032.txt đã xóa lúc 03:32:58 +07 và kiểm không còn; chỉ commit phần T-032 của STATUS/REVIEW, giữ WIP văn phòng có trước.
+
+---
+
 # T-028b — ĐẠT, xóa ss qua UI, 15/11/2026 01:58 +07
 
 - Đã Xóa hồ sơ → nhập đúng ss → xác nhận; reload chỉ còn Cho/Chi, không lỗi dọn hồ sơ. Hai hồ sơ khác nguyên hash/trạng thái; không đóng phiên khác.
