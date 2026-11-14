@@ -1,4 +1,15 @@
-# M-20261114-muse-flow — đọc trước, 14/11/2026
+# M-20261114-video-type — đọc trước, 14/11/2026 23:33 +07
+
+- Người dùng cho phép kiểm phiên thật qua app; **cấm tắt Muse**. Một main CODEX-BOSS. App main **92307c6 đã push**, source sạch; giữ app mở ở Video. Không đọc DB/profile/cookie trực tiếp, không đóng Muse/đổi vùng/reset ledger.
+- Sửa job video nhận nhầm thumbnail tài liệu; submit/inspect/fetch chỉ nhận video. Tài liệu đã kết thúc/ổn định báo MUSE_NO_MEDIA, giữ phản hồi/receipt, không chờ nút tải. Image mode giữ nguyên.
+- Typecheck + **807 kiểm khác nhau đạt** (OpenMontage skip trong full đã chạy riêng), 8 PNG fixture 1366/1920, 1 click → 3 MP4 local/Muse giả. Build **23:29:59 +07** cây sạch, Electron không chạy; không tắt app để build trong lượt này.
+- Launcher/app thật đã kiểm lại hai receipt có trước qua IPC, **0 gửi mới**, hai MUSE_NO_MEDIA; phản hồi nhắc không tạo video và tài khoản/khu vực. 73 record ngoài dự án + 45 job cũ nguyên checksum. Công tắc Muse vẫn bật; hàng chờ đang chặn gửi thêm sau hai lỗi, ba nháp giữ nguyên.
+- **Chưa đạt:** clip Muse mới/3 MP4 mới và chất lượng SKU. Không coi ba MP4 fixture hoặc clip từ dự án cũ là clip mới. Bằng chứng thật chỉ local ở app outputs/M-20261114-video-type-live, 4 PNG + capture-result.json; không push ảnh/URL/hội thoại thật.
+- Xem STATUS, REVIEW-M-20261114-video-type.md và task tương ứng. Không có câu hỏi chờ người dùng. Không tự bật lại việc gửi nếu chưa giải quyết phản hồi dịch vụ. Nhãn Muse sẵn sàng trên Video còn phản ánh công tắc, cần xem lý do chặn tại Tài khoản. Khóa chính phiên nhả, WIP văn phòng khác giữ nguyên.
+
+---
+
+# M-20261114-muse-flow — lịch sử, 14/11/2026
 
 - Chỉ đạo người dùng mới nhất: **không tắt Muse**. Một main CODEX-BOSS. App main **5293561 đã push**, code **cec3004**, remote đã đối chiếu. Không force/merge; cây app sạch, khóa chính phiên đã nhả.
 - Làm video thoát manual và tiếp tục đúng dự án/nháp; không tự xuất gói nhập tay khi lỗi. Chờ media tới timeout thay vì 15 giây. Có kiểm tra kết quả cũ, chống gửi trùng. Lỗi lượt không tự tắt công tắc Muse; giữ chặn quota/phiên/receipt và nút tiếp tục sau kiểm tra.

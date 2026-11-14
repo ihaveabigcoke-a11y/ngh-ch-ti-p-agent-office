@@ -1,5 +1,21 @@
 Chế độ: CODEX-BOSS
-# M-20261114-muse-flow — đã sửa/push, chờ quyền kiểm phiên thật
+# M-20261114-video-type — đã sửa và kiểm phiên thật, đọc trước
+
+- **Giữ Muse bật.** App đang mở ở Video; musePaused=false, generationReady=true. Không thao tác tắt công tắc hoặc đóng Muse trong lượt tiếp tục này.
+- App main **92307c6 đã push origin/main**, remote đã đối chiếu đúng. Tag before-M-20261114-video-type = 5293561. Cây app sạch; khóa phiên đã nhả sau bàn giao. Không force-push/merge.
+- Sửa nhận thumbnail Markdown/PDF thành video ở submit/inspect/fetch. Phản hồi tài liệu ổn định/kết thúc báo MUSE_NO_MEDIA; không chờ nút tải video không tồn tại. Clip tới muộn vẫn nhận, không gửi lặp.
+- **Đã kiểm:** typecheck, 272 domain + 29 API + 505 desktop; 1 OpenMontage skip do thiếu env chạy riêng 1/1 đạt = **807 kiểm khác nhau đạt**, không lỗi còn lại. Không hạ assertion.
+- UI fixture: 8 PNG 1366/1920, Muse giả + OpenMontage local, 1 click → 3 MP4; bấm lại không nhân đôi, lỗi không tự chuyển manual hoặc tắt Muse. Ảnh `outputs/M-20261114-video-type-ui` trong app.
+- Build **14/11/2026 23:29:59 +07**, exit 0, cây sạch và không có Electron trước build. Sau đó mở launcher với phiên thật đã được người dùng cho phép qua app/IPC; không đọc trực tiếp DB/profile/cookie.
+- **Đã kiểm thật:** đối soát hai receipt có sẵn; cả hai trả MUSE_NO_MEDIA, phản hồi có nói không tạo được video và nhắc tài khoản/khu vực. **0 gửi mới trong đối soát**, tổng lượt kiểm trước đó vẫn 2; giữ receipt. 73 record ngoài dự án và 45 job có trước lượt kiểm giữ checksum.
+- **Kẹt ở dịch vụ:** dự án mới vẫn 0 clip/0 MP4. Công tắc Muse bật nhưng bộ điều tiết đang chặn gửi thêm sau hai lỗi; ba nháp còn trong hàng chờ. Không đặt lại ledger/quota, không đổi vùng/tài khoản, không coi công tắc bật là đã tạo video.
+- 4 ảnh app thật ở `outputs/M-20261114-video-type-live` (Video + riêng công tắc, 1366/1920); kết quả số đếm/hash ở `capture-result.json`. Bằng chứng phiên thật chỉ lưu local, không push. Để app mở; source/ảnh QA tách dữ liệu thật.
+- **Chưa kiểm/đạt:** Muse tạo clip mới, 3 MP4 từ clip mới, đúng SKU/chất lượng nội dung. Không hứa chạy đủ luồng ngày mai khi Muse chưa trả video. Nhãn “Muse sẵn sàng” trên Video hiện chỉ phản ánh công tắc; lý do chặn hàng chờ nằm trong Tài khoản Muse.
+- **Cần anh chốt:** không có quyết định để tiếp tục phần code này. Review: REVIEW-M-20261114-video-type.md. Giữ nguyên WIP văn phòng có trước.
+
+---
+
+# M-20261114-muse-flow — đã sửa/push, đang kiểm phiên thật
 
 - Chỉ đạo mới nhất: **không tắt Muse**. Không thao tác tắt công tắc, không đóng phiên Muse của người dùng. Lỗi một lượt không tự đổi công tắc toàn bộ Muse; giữ kiểm quota/phiên/receipt và chống gửi trùng.
 - App main **5293561 đã push origin/main**, remote đối chiếu đúng; code **cec3004**, tag before-M-20261114-muse-flow = 2b1a1cb. Source sạch, nhả khóa chính phiên; không spawn/force-push/merge.
@@ -7,8 +23,9 @@ Chế độ: CODEX-BOSS
 - Typecheck + **272 domain + 29 API + 504 desktop = 805 đạt, 0 lỗi/0 skip**. UI đạt 8 ảnh 1366/1920, fixture 1 click → 3 MP4 thật local, không nhân đôi.
 - Build **14/11/2026 23:02:01 +07**, cây sạch/app chưa chạy, exit 0. Đã tự review REVIEW-M-20261114-muse-flow.md. Không tắt app/Muse trong phiên tiếp tục này.
 - Launcher Electron thật/QA riêng đạt: IPC giữ Muse bật, receipt/submissions nguyên qua reload/đóng QA, 4 ảnh; 0 lỗi JS/console/request ngoài. Chỉ đóng QA, không đóng phiên thật. Tổng 12 PNG tại app outputs/M-20261114-muse-flow*-ui.
-- **Chưa kiểm:** Muse thật/clip mới/SKU thật. Auto-review từ chối launcher dùng AppData mặc định vì luật cấm AppData/phiên thật khi kiểm. Chưa mở app thật, không gửi mới hoặc lách chặn; không coi 3 MP4 fixture là nghiệm thu Muse thật.
-- **Cần anh chốt:** ngoại lệ cho app tự dùng AppData/phiên hiện có để kiểm Muse thật qua UI/IPC; câu hỏi đang chờ. Phần source/build/push đã xong; không cần chốt triển khai khác.
+- **Quyền mới:** người dùng đã trả lời “Cho phép dùng phiên thật qua app để kiểm Muse”, cấp ngoại lệ cho app tự dùng AppData/phiên hiện có qua UI/IPC. Tiếp tục kiểm thật, giữ Muse bật; không đọc trực tiếp DB/profile/cookie.
+- App thật đã mở bằng launcher; kiểm qua IPC thấy Muse bật, generationReady=true, hồ sơ đang dùng ready/quota available, limit=null. Đã bấm Làm video một lần cho đúng dự án 5 cảnh trong ảnh; đang theo dõi, không gửi lặp hoặc tắt Muse.
+- **Chưa kiểm tại checkpoint:** Muse thật/clip mới/SKU thật; không coi 3 MP4 fixture là nghiệm thu Muse thật. Cần anh chốt: không có, đang thực hiện theo xác nhận mới.
 
 ---
 
