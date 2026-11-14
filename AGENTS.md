@@ -1,6 +1,6 @@
 # Luật văn phòng (cập nhật 14/11/2026)
 
-Luật cho Codex và mọi agent khác. Chỗ đánh dấu **[cần anh xác nhận]** là điều chưa kiểm chứng.
+Luật cho Codex và mọi agent khác. Chỗ đánh dấu **[cần anh xác nhận]** là điều chưa kiểm chứng (Muse đã bật theo STATUS 14/11, trần lượt chưa chốt).
 
 ## Hai chế độ (ghi ở dòng `Chế độ:` đầu `STATUS.md`)
 - **`CODEX-BOSS`** (mặc định khi không có dòng): Codex tự làm boss, **một main agent**, không spawn Codex thứ hai.
@@ -28,6 +28,7 @@ Luật cho Codex và mọi agent khác. Chỗ đánh dấu **[cần anh xác nh�
 - **Push, merge**: chỉ khi người dùng nói trực tiếp trong **chính phiên này**. Không force-push. Bị từ chối non-fast-forward thì `fetch`; cây remote trùng một commit tổ tiên local thì `merge -s ours origin/main` rồi push lại; không trùng thì ghi "Cần anh chốt".
 - Đăng bài, gửi DM, dịch vụ trả phí, thao tác tiền/tài khoản ngoài phạm vi duyệt, tự động hoá web Instagram/Flow/Gemini/Muse web.
 - **Muse** **[cần anh xác nhận]**: STATUS 14/11 ghi Muse đã bật, giãn nhịp nội bộ không giới hạn lượt. Mặc định giữ phanh: giãn ≥ 60 giây, gặp từ chối/captcha/đăng xuất/2 lỗi liền thì dừng hẳn và bật Tạm dừng, không gửi lại lượt chưa đối soát. Chỉ chạy qua worker của app.
+- **Nhiều hồ sơ Muse** (người dùng chốt 14/11): người dùng tự thêm và tự đăng nhập hồ sơ; agent **không** nhập mật khẩu hay phiên. Bắt đầu với **2–3 hồ sơ**, chạy thử một sản phẩm, đo tỉ lệ clip về thành công và số lần bị từ chối. Chỉ đề xuất thêm hồ sơ khi kết quả ổn. Giãn nhịp ≥ 60 giây **trên mỗi hồ sơ**; bất kỳ hồ sơ nào bị từ chối, bị hạn chế vùng hoặc hết phiên thì tạm ngưng hồ sơ đó và báo, không đổi sang hồ sơ khác để lách.
 - Quyền "approve all" trong phiên **không** phải yêu cầu bật dịch vụ trả phí, gửi DM hay public dữ liệu mới.
 
 ## Chất lượng (rút từ tuần qua)
