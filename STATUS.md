@@ -24,7 +24,7 @@ Chế độ: CODEX-BOSS
 - **Vừa:** tự duyệt lại bị bỏ qua do khóa receipt không gồm revision (`lib/lab/auto-video.ts:49,57`), phải duyệt tay; clip10s không vào cảnh8s (`production.ts:218`); thiếu tài khoản/landing chặn nghiệm thu Đăng/Kết quả (`compact-publish.tsx`, `compact-results.tsx`). Có đường đi qua UI nên không sửa source.
 - **Nhẹ:** mở Chi tiết từ new_product bật thêm hộp tạo dự án (`components/lab/production.tsx:59`); thumbnail MP4 trả200 nhưng đen (`desktop/local/thumbnails.mjs`, chưa chốt nguyên nhân). Prompt gói còn lẫn tiếng Việt từ problem; thiếu ảnh chuẩn kiểm SKU.
 - **Đã kiểm/chưa kiểm:** UI/IPC thật, tải/ffprobe/hash/decode đạt; tài liệu được kiểm trước commit, không chạy full suite/build vì không sửa code. Chưa cold-start, Muse clip mới/latency, nghe toàn bộ audio, SKU, 3 hook khác nhau, cột tài khoản/tải-copy-UTM và thẻ số thật; không Instagram/DM/paid API. Ảnh/media/receipt mới chỉ local.
-- **Cần anh chốt/chạy tiếp:** quyền tạo video của hồ sơ hiện tại hoặc cung cấp clip tay đúng 5 cảnh; báo giá ship đúng SKU, link landing và tài khoản sẽ dùng. Tiếp tục qua gói tay trong app; MP4 T-029 chỉ thử kỹ thuật, chưa duyệt đăng. [Review](REVIEW-T-029.md); nhật ký local `progress.md` và báo cáo chi tiết `REPORT.md`.
+- **Cần anh chốt/chạy tiếp:** quyền tạo video của hồ sơ hiện tại hoặc cung cấp clip tay đúng 5 cảnh; báo giá ship đúng SKU, link landing và tài khoản sẽ dùng. Tiếp tục qua gói tay trong app; MP4 T-029 chỉ thử kỹ thuật, chưa duyệt đăng. [Review](REVIEW-T-029.md); nhật ký local `progress.md` và báo cáo chi tiết `REPORT.md`. Khóa `.git/office-locks/codex-T-029.txt` chưa nhả: công cụ chặn xóa (`blocked by policy`); cần người dùng xóa đúng khóa này sau khi worker kết thúc.
 
 ---
 
