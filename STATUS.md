@@ -1,3 +1,25 @@
+# T-028b — ĐẠT, xóa ss qua UI, 15/11/2026 01:58 +07
+
+- Đã Xóa hồ sơ → nhập đúng ss → xác nhận; reload chỉ còn Cho/Chi, không lỗi dọn hồ sơ. Hai hồ sơ khác nguyên hash/trạng thái; không đóng phiên khác.
+- fe1b4424-2493-4ec4-8b4a-d8efd276bb5c và 54df93df-1f89-4f2e-9b68-9ea018b25ee3: raw needs_attention/receipt giữ nguyên; app đã lưu dấu bỏ qua 15/11 00:17:59.214 / 00:18:30.448 +07 từ lần 1, sau checkpoint. Lần 2 không bấm lại/không thêm receipt. Lý do: **bỏ qua theo xác nhận người dùng: hồ sơ bị ban**. Không lượt nào khác đổi trạng thái.
+- Trước → sau: hồ sơ 3→2 (khác ss 2→2); record 77→77; asset/MP4 31/23→31/23; take/video 34/32→34/32; bản xuất 6→6; job/receipt 56→56; receipt lệnh 277→277; tích hợp/compose 13/7→13/7. Toàn bộ record/job/integration và hai hồ sơ khác khớp hash.
+- Muse luôn bật (musePaused=false), worker paused=true/active=0; ledger và bộ đếm nguyên hash; **0 gửi mới**. Không đọc AppData/DB/cookie/token trực tiếp, không đăng/DM/paid API.
+- Sửa guard xóa không xét dấu bỏ qua đã lưu: source e4cc292; chỉ reader đồng bộ/đúng cảnh, giữ chặn job mới/đang chạy/thiếu bằng chứng. Typecheck và **815 test đạt/0 lỗi/0 skip** (275 domain + 29 API + 511 desktop, có OpenMontage local). Không hạ assertion.
+- Build local 01:56:09 +07 cây sạch/app tắt; launcher chính mở lại đúng checkout; UI 1366/1920 + reload đạt, 0 console error/alert quan sát. Bằng chứng local: D:/hermes-wt/artifacts/T-028b/run2-*; [Review](REVIEW-T-028b.md).
+- **Chưa kiểm:** phiên/quota/quyền video Muse thật; byte/giải mã toàn bộ media. Đối chiếu dữ liệu qua app, không quét ổ. **Chạy tiếp:** T-028b đã xong; không cần quyết định thêm, không tự chạy T-031 hay tiếp tục Muse. App đã push origin/main 15b0f79 (code e4cc292), remote khớp; khóa codex-T-028b.txt đã xóa và kiểm không còn lúc 02:00:15 +07.
+
+---
+
+# T-028b — lần 2, checkpoint 15/11/2026 01:49 +07
+
+- Main d2b666b sạch, sau T-029/T-030; chỉ Codex exec 29864, không khóa Codex khác. Tag before-T-028b-run2; khóa codex-T-028b.txt thuộc phiên này. App đúng checkout, mở chế độ Muse-only để không boot hàng chờ ngoài phạm vi; Muse bật, worker paused=true/active=0, không gửi.
+- Đối chiếu mới qua app: ss a7338c4e-16f4-45e6-a741-629962e42a37. fe1b4424-2493-4ec4-8b4a-d8efd276bb5c và 54df93df-1f89-4f2e-9b68-9ea018b25ee3 vẫn needs_attention; mỗi cảnh chỉ có đúng một job ss.
+- Khác ghi chú lần 2: app đã có museReconciledAt tương ứng 15/11 00:17:59.214 và 00:18:30.448 +07 (sau checkpoint lần 1). Hai lượt đã được bỏ qua theo chính sách app; không bấm lại, không thêm receipt. Lý do giữ nguyên: **bỏ qua theo xác nhận người dùng: hồ sơ bị ban**.
+- Blocker source: profileRemovalBlocker chỉ xét raw state, không đọc dấu bỏ qua của cảnh nên Xóa hồ sơ còn mờ. Sẽ sửa đúng guard, giữ chặn job mới/đang chạy/khác cảnh/thiếu bằng chứng; không sửa DB hoặc job thật trực tiếp.
+- Baseline lần 2: 3 hồ sơ, 77 record, 31 asset/23 MP4, 34 take/32 video, 6 bản xuất, 56 job/receipt, 277 receipt lệnh, 13 receipt tích hợp/7 compose. Hash/metadata chỉ local tại D:/hermes-wt/artifacts/T-028b/run2-baseline.json. Chưa xóa ss.
+
+---
+
 # T-030 — Muse thật lại (15/11/2026, +07)
 
 - Main/tag trước chạy 92307c6, cây sạch/một worker theo checkpoint; T-028b hết worker nhưng chỉ có checkpoint. IPC: Muse bật; Chi/Cho ready, quota available (trạng thái lưu); nhịp 60s, timeout 900s.
