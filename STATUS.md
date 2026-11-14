@@ -1,3 +1,23 @@
+# T-035 — một tin đủ ba MP4; Chi giữ phanh (15/11/2026)
+
+- **Chi, nguyên văn IPC:** “Video generation still isn't available here, as a lasting restriction, so I can't make the 8-second video — no video was made.” Muse còn nêu “403 video_not_available” theo tài khoản/khu vực; chưa xác minh HTTP/entitlement. Prompt đúng command, cùng đường gửi với Cho/Duc, không tìm thấy nhánh riêng Chi. Hai lần đối soát báo nội dung đang thay đổi; receipt chưa khép, **0 gửi Chi**.
+- **Thật 2/4 lượt:** Duc/Cho gửi cách nhau 197 ms, mỗi hồ sơ cách lượt trước ≥1.874s; mỗi tin **3 thẻ → 3 clip → 3 MP4**, gắn thứ tự 1/2/3. Sáu nguồn 720×1280/8s và sáu MP4 720×1280/15s khác hash trong từng bộ, A/V/giải mã/hash tải lại đạt; thân chung có sẵn T-033.
+
+| Chặng (giây) | Duc | Cho |
+| --- | ---: | ---: |
+| Chờ Muse / tải mỗi clip / dựng mỗi hook | 62,001–62,003 / 0,735–0,919 / 7,219–7,455 | 73,863–73,865 / 0,586–0,752 / 7,511–8,113 |
+| Lệnh → đủ 3 thẻ / 3 clip đã kiểm / 3 MP4 | **64,953 / 68,541 / 76,123** | **76,979 / 79,502 / 87,636** |
+
+- **Mốc đo:** gọi đúng hàm Làm video qua IPC/API, chưa đo DOM click; có preflight trong tổng. T-034 150,052–155,191s. Ba tải mở cách nhau 3/8 ms, ba dựng cách nhau 160/154 ms; không cộng các chặng chồng nhau.
+- **Kết luận bắt buộc:** bấm→3 MP4 tối thiểu khả thi = chờ Muse + tải + dựng; theo clip chậm nhất đã đo: Duc **62,003+0,919+7,455=70,377s**, Cho **73,865+0,634+8,113=82,612s**, chưa preflight/kiểm/lưu. Đây là sàn theo mẫu, không sàn tuyệt đối; **mục tiêu <60 s phụ thuộc Muse**.
+- **Sửa:** 8d39bec đánh số Scene, nhận theo lần xuất hiện, tải blob song song, dựng sớm, kiểm đủ/khác hash trước nhập, từ chối bộ thiếu/trùng. Sau hai bộ đạt, auto một tin khi <3 hồ sơ gửi được; ≥3 giữ song song. Công tắc không tắt.
+- **Kiểm/build/push:** typecheck + **848 đạt**, không lỗi còn lại (OpenMontage local chạy riêng khép 1 skip); Muse giả/Chromium/FFmpeg thật trong suite. App **7625158** và tag đã push thường, remote khớp; build **05:30:19 +07**, launcher/restart đạt, cây sạch. UI 1366/1920, 0 pageerror.
+- **Bảo toàn:** 106 record/71 job cũ nguyên, 56 asset cũ khớp hash sau restart; cuối 120 record/77 job, limit=null/60s, worker paused/active=0, Muse/ba hồ sơ bật, Chi chỉ dừng gửi. Không cookie/token/DB trực tiếp, không đăng/DM.
+- **Chưa kiểm:** quyền video/HTTP 403 Chi; đối soát Chi; click auto thật sau bật mặc định; SKU/công dụng/chất lượng mọi frame. Contact sheet đúng nhóm hook nhưng có chữ tự sinh trên mũi tên dù brief cấm chữ. Chưa đạt <60s.
+- **Cần anh chốt:** xác minh quyền video hiện tại Chi và bước tiếp theo; chưa có cơ sở gửi thử trong app khi receipt chưa khép/phanh còn nguyên. Hai bộ MP4 xem ở Video/Thư viện; không cần quyết định để giữ bản sửa. [Progress](D:/hermes-wt/artifacts/T-035/progress.md) · [Review](REVIEW-T-035.md).
+
+---
+
 # T-034 — giảm overhead, hai bộ ba MP4; chưa đạt 60s (15/11/2026)
 
 | Chặng, giây | T-033 | T-034 lần 2 |
