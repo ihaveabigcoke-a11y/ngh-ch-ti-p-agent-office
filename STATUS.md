@@ -1,3 +1,21 @@
+# T-033 — công tắc giữ bật; 2/3 MP4, chưa đạt 60s (15/11/2026, +07)
+
+- **Hồ sơ:** 03:39 bật lại Cho/Chi qua IPC; Duc mới đã bật. Cả ba ready, VPN connected trước gửi. Quota weekly còn cuối phép đo Duc 98%, Chi 88%, Cho 85%; nguồn Muse Settings · Usage. ready là phiên, không bảo đảm quyền video.
+- **Luôn bật:** Cho/Chi/Duc enabled=true, Muse musePaused=false; Chi chỉ dispatch stopped=true sau từ chối. Không chạm ss, không tắt công tắc; worker paused/active=0 sau đo.
+- **Đo thật:** một click, gửi song song 3 hồ sơ/mỗi hồ sơ 1 lượt, cách nhau tổng 1,115s; **3/6 gửi**. Thân chuẩn bị trước từ T-032 cảnh 3 [4,8] + cảnh 2 [3,10]; chỉ tạo ba hook mới, không gọi năm cảnh mới.
+- **Click → MP4:** H3 **78,409s**, H1 **84,456s**; H2 không có clip. Tổng đủ ba MP4 **null/chưa đạt**. Phanh báo tại 94,998s. Đồng hồ từ trước lệnh click; event nội bộ flow bắt đầu sau 61ms.
+- **Muse vs phần còn lại:** Cho chờ Muse 53,463s + còn lại 24,946s; Duc 63,565s +20,891s. Preflight→gửi 2,172–3,286s; VPN trong click 0ms; tải 3,831–4,967s; kiểm/nhập 0,604–0,928s; chọn đoạn 0,526–1,003s; dựng 7,857–8,252s; nhập/lưu MP4 0,048–0,084s. Có thêm 4,731–7,691s chờ UI/nút tải. Dừng ở kết quả tốt nhất vì Muse >50s, không lần đo 2.
+- **Lý do nguyên văn Chi:** “Video generation still isn't available here, as a lasting restriction, so I can't make the 8-second video — no video was made.” Phản hồi còn ghi “Video generation is unavailable for this account in this country/region (lasting restriction, 403 video_not_available)”; đây là lời Muse, chưa kiểm HTTP backend. Không đổi hồ sơ để gửi lại H2.
+- **Đã sửa:** e956c66 pacing/phanh theo hồ sơ, warm, gói song song/một tin ba cảnh có nhãn, polling 2s, ghép sớm và đồng thời, giữ raw cause T-032; 2912210 giữ H1/H2/H3 khi clip tới đảo thứ tự. Không nới guard thời lượng/receipt.
+- **Bằng chứng:** D:/hermes-wt/artifacts/T-033/progress.md, timing-summary.json, measurement-1.json; 2 MP4/hash khác trong Thư viện đã ffprobe/giải mã/A-V đạt (720×1280, ~15,067s), contact sheet/CTA đã xem. Ba MP4 song song chỉ đạt ở Muse giả + FFmpeg thật, peakRenders=3.
+- **Kiểm:** typecheck + **840 test đạt/0 lỗi/0 skip** (278 domain/29 API/525 desktop/8 Codex); UI 1366/1920 đạt, retry không nhân output. Lần desktop giữa có 1 lỗi fixture phụ thuộc RAM thật, đã inject bộ nhớ vào test, giữ guard/assertion và chạy lại đủ xanh. Kiểm phụ cũ số chữ Video vẫn 42/40, không gọi đạt.
+- **Build/dữ liệu:** 2912210 build 04:18 +07 cây sạch/app đóng êm; kiểm launcher/restart ở after-build.json. 84 record cũ và trạng thái/lịch sử đã chụp của 59 job cũ nguyên vẹn; cấu hình limit trả null. Không đọc DB/cookie/credentials; không đăng/DM/paid API.
+- **Chưa kiểm:** một tin ba clip trên Muse thật, đủ ba MP4 thật, <60s, HTTP 403 backend, chất lượng/SKU/công dụng; chưa đối soát/lấy file cảnh 4–5 T-032.
+- **Cần anh chốt/chạy tiếp:** không cần để giữ bản sửa. H2 giữ cần đối soát; xem phản hồi Chi, chỉ tiếp sau kiểm quyền video hoặc chủ động chọn nhập tay. Lấy cảnh 4–5 cũ T-032/đợt gửi mới cần phạm vi riêng; không tự thử thêm.
+- **Git/khóa:** app origin/main b06e485 đã push, remote khớp/cây sạch; build hành vi 2912210, launcher/restart đã kiểm. Khóa codex-T-033.txt đã xóa và kiểm không còn lúc 04:20:05 15/11/2026 +07. [Review](REVIEW-T-033.md); source ops/office/reports/T-033.md.
+
+---
+
 # T-032 — 3 MP4 dự phòng đã kiểm; chưa đủ 5 cảnh (15/11/2026, +07)
 
 | Lượt | Cảnh | Gửi (+07) | Kết quả/dừng (+07) | Trả về và kiểm |
