@@ -1,4 +1,33 @@
 Chế độ: CODEX-BOSS
+
+# T-029 — chạy thử 1 sản phẩm (14/11/2026, +07)
+
+- Source/app thật `92307c6`, tag `before-T-029`; không sửa code/build (build có sẵn 23:29:59). Chọn TIZE TC213, mã 112: hạng 1 ngày 14/11. Bằng chứng local: `D:/hermes-wt/artifacts/T-029/`; review `REVIEW-T-029.md`.
+
+| Bước | Bắt đầu → xong (+07) | Thời gian | Bấm | Kết quả |
+|---|---|---:|---:|---|
+| 1. Tín hiệu | 23:49:11.576 → 11.660 | 0,084s | 2 | Có dữ liệu; đo chuyển màn ấm, lần đo đầu lỗi công cụ; chưa đo khởi động lạnh. |
+| 2. Chọn + hồ sơ | 23:49:27.032 → 23:50:35.023 | 67,991s | 4 | Vốn 2,55 USD/giá dự kiến 12,99 có sẵn; thiếu ship/link mua/ảnh; thêm CTA gợi ý GLOW, không bịa số. |
+| 3. Làm video | 23:50:35.024 → 53.988; ghép 23:55:45.330 → 23:56:02.189 | chặn 18,964s; ghép 16,859s | 4 | Không gửi Muse; 3 bấm chính với clip cũ: lỗi 10s/8s, lỗi duyệt lại, rồi 3 MP4 cùng nội dung. |
+| 4. Muse | 23:50:53.988 | không có lượt mới | 0 | 0 gửi/0 thành công/0 từ chối mới/0 lỗi mới; thời gian mỗi clip và trung bình: chưa có. |
+| 5. Đường tay | 23:50:53.989 → 23:55:45.330 | 291,341s | 57 | Gói 5 cảnh xuất sau 27,767s; dùng 1 clip cũ 12/11, sửa thời lượng/duyệt lại qua UI để kiểm ghép. |
+| 6. MP4 | 23:56:23.921 → 56.719 | 32,798s | 0 | 3 tên file, 1 nội dung/hash; ffprobe/giải mã đạt; chữ Comment GLOW đọc được. |
+| 7. Đăng | 23:56:56.719 → 56.869 | 0,150s | 1 | Khay 3 MP4; chưa tài khoản nên không cột/draft/nút tải-copy; thiếu landing nên chưa kiểm UTM. Không đăng. |
+| 8. Kết quả | 23:56:56.870 → 57.006 | 0,136s | 1 | Trống do chưa có draft; không 0 giả, chưa kiểm dấu — trên thẻ đúng sản phẩm. |
+
+- **Tổng:** chọn → kẹt Muse 86,956s; → 3 MP4 kỹ thuật 395,157s (6p35s), chưa đạt 3 hook khác nhau. Chậm nhất đã đo: đường tay/khắc phục 4p51s, có thời gian quan sát/công cụ; ghép mỗi file 5,44–5,60s. 70 bấm cả lần cuối về Video, 13 chọn danh sách, 11 lần điền ô. Năng suất/ngày: **chưa đủ dữ liệu**.
+- **Muse/phanh:** giữ bật, nhịp 60s, worker paused=true/active=0; không gửi mới/đổi hồ sơ/reset. Ledger nền 3 gửi/3 lỗi giữ nguyên; stopped=false khác bàn giao nên không thử dispatch sau phản hồi hạn chế video đã có. 50 job/receipt và 3 hồ sơ nguyên checksum; không coi health là xác minh phiên/quota mới.
+- **Hồ sơ cuối theo IPC:** ss tắt/connection_error/đóng; Chi bật/ready/đang mở nhưng không giao việc sau lỗi; Cho bật/ready/đóng, không dùng thay. Chưa tắt riêng Chi; phanh có hiệu lực trong lượt là worker đang dừng. Không đổi hồ sơ khác.
+- **3 MP4 thử:** `112_H1-problem_draft_261114.mp4`, `112_H2-absurd_draft_261114.mp4`, `112_H3-curiosity_draft_261114.mp4`; mỗi file 2.250.669 byte (<6 MB), H264 720×1280/video15,000s; AAC stereo48kHz/audio15,021s; container15,033s. Chỉ clip cũ, không ba kỹ thuật mới.
+- **SHA-256 cả ba:** `fe8bfc5c178b85656c40650dd38f37773315cf0c96ec153d0622997cab95b98c`. `ffprobe.json`, `decode.json`, `export-manifest.json` local; chỉ +CTA GLOW, +1 dự án, +1 asset; 73 record cũ khác giữ nguyên.
+- **Nặng:** tạo video mới còn kẹt quyền video/tài khoản theo receipt cũ; chưa thử lại dịch vụ. Không có căn cứ nhận 3 hook/đúng SKU; nhãn Muse sẵn sàng chưa phản ánh khả năng trả clip (`compact-video.tsx`, `worker.mjs`).
+- **Vừa:** tự duyệt lại bị bỏ qua do khóa receipt không gồm revision (`lib/lab/auto-video.ts:49,57`), phải duyệt tay; clip10s không vào cảnh8s (`production.ts:218`); thiếu tài khoản/landing chặn nghiệm thu Đăng/Kết quả (`compact-publish.tsx`, `compact-results.tsx`). Có đường đi qua UI nên không sửa source.
+- **Nhẹ:** mở Chi tiết từ new_product bật thêm hộp tạo dự án (`components/lab/production.tsx:59`); thumbnail MP4 trả200 nhưng đen (`desktop/local/thumbnails.mjs`, chưa chốt nguyên nhân). Prompt gói còn lẫn tiếng Việt từ problem; thiếu ảnh chuẩn kiểm SKU.
+- **Đã kiểm/chưa kiểm:** UI/IPC thật, tải/ffprobe/hash/decode đạt; tài liệu được kiểm trước commit, không chạy full suite/build vì không sửa code. Chưa cold-start, Muse clip mới/latency, nghe toàn bộ audio, SKU, 3 hook khác nhau, cột tài khoản/tải-copy-UTM và thẻ số thật; không Instagram/DM/paid API. Ảnh/media/receipt mới chỉ local.
+- **Cần anh chốt/chạy tiếp:** quyền tạo video của hồ sơ hiện tại hoặc cung cấp clip tay đúng 5 cảnh; báo giá ship đúng SKU, link landing và tài khoản sẽ dùng. Tiếp tục qua gói tay trong app; MP4 T-029 chỉ thử kỹ thuật, chưa duyệt đăng. [Review](REVIEW-T-029.md); nhật ký local `progress.md` và báo cáo chi tiết `REPORT.md`.
+
+---
+
 # M-20261114-video-type — đã sửa và kiểm phiên thật, đọc trước
 
 - **Giữ Muse bật.** App đang mở ở Video; musePaused=false, generationReady=true. Không thao tác tắt công tắc hoặc đóng Muse trong lượt tiếp tục này.
