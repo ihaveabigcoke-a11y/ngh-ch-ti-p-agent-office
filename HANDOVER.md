@@ -1,3 +1,13 @@
+# M-20261114-enable — Muse đã bật, 14/11/2026 09:48 +07
+
+Yêu cầu trực tiếp bật Muse và sửa giới hạn thay trạng thái tạm dừng lịch sử. App main 9d160c4 local/chưa push, sửa runtime ở 012bdc0; build 09:46:40 +07 đạt cây sạch/app tắt. Có xác nhận Bật lại Muse, ghi audit và giữ ledger/receipt; trần nội bộ null tùy chọn, giới hạn dịch vụ vẫn kiểm.
+
+Đã bật qua UI app thật: musePaused=false, generationReady=true, stopped=false, limit/remaining=null, intervalSeconds=60. 40 job/receipt cũ nguyên trạng, ledger 3 giữ nguyên, active 0, không gửi mới. App để mở ở Tài khoản Muse, PID 38952 tại bàn giao; phiên Muse-only không boot hàng chờ ngoài phạm vi, debugger chỉ loopback 9238. Không mở DB/profile/AppData trực tiếp. 796 kiểm khác nhau đạt (OpenMontage chạy riêng khép skip), UI 1366/1920 và launcher QA persistence đạt; source sạch, khóa phiên nhả. Script QA đúng là scripts/check-muse-resume-desktop.ps1, đóng bằng tối đa hai CloseMainWindow, không kill.
+
+Chưa tạo clip mới hay xác minh lại quyền video/khu vực dịch vụ. Không coi bật công tắc là nghiệm thu tạo video. Cần anh chốt: không có. STATUS và REVIEW-M-20261114-enable.md là trạng thái mới nhất; không áp các chỉ đạo tạm dừng/khóa hết đêm cũ cho yêu cầu bật này.
+
+---
+
 # M-20261114-toggle — sửa thông báo bật Muse, 14/11/2026
 
 App main 02d509e, local chưa push; build 01:58:14 +07 đạt trên cây sạch/app tắt. 791 kiểm/0 lỗi/0 skip; UI và Electron launcher QA đạt bật/tắt, không tự dispatch. Lỗi hiển thị trong modal, lý do dừng cạnh công tắc; giữ phanh/receipt, không reset. Không gửi Muse thật trong đợt sửa này. Đã đóng app QA và nhả khóa; ảnh 1366/1920, SHA và giới hạn ở đầu STATUS/REVIEW-M-20261114-toggle.md.

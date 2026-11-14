@@ -1,4 +1,17 @@
 Chế độ: CODEX-BOSS
+# M-20261114-enable — Muse đã bật, 14/11/2026 09:48 +07
+
+- Đã bật qua UI app người dùng: musePaused=false, generationReady=true, stopped=false; bỏ trần 12 lượt nội bộ (limit/remaining=null), giữ nhịp 60 giây. **40 job/receipt cũ nguyên trạng**, 3 lượt ledger giữ nguyên, 0 lượt gửi mới, active=0.
+- App main **9d160c4** (sửa Muse 012bdc0, các commit sau sửa harness QA), local/chưa push. Tag before-M-20261114-enable = 02d509e. Build **09:46:40 +07**, exit 0, cây sạch/app tắt trước build. Source sạch sau nghiệm thu.
+- Đã kiểm: 21 Muse riêng; typecheck + 268 domain + 29 API + 498 desktop đạt. Một OpenMontage skip đã chạy riêng 1/1 đạt; **796 kiểm khác nhau đạt, 0 lỗi còn lại**, không hạ assertion.
+- UI fixture: 10 PNG 1366/1920, bật/tắt, stop tới muộn, bật lại, null giữ qua reload, 0 gửi/browser. Electron launcher QA: IPC thật, 4 PNG, receipt giữ sau đóng/đọc lại, 0 lỗi console/request ngoài. Chạy bằng scripts/check-muse-resume-desktop.ps1.
+- Ảnh/bằng chứng trong app outputs/M-20261114-enable-ui, M-20261114-enable-desktop-ui và M-20261114-enable-live/result.json; ảnh thật chỉ chụp công tắc, không xuất thông tin tài khoản. Đã xem công tắc “Muse: Đang bật”.
+- Giữ audit bật lại/submissions/outcomes, chống trùng và kiểm quota/captcha/login của dịch vụ. App thật đang mở Tài khoản Muse (PID 38952 khi bàn giao), phiên Muse-only để không tự boot các hàng chờ ngoài phạm vi; CDP chỉ 127.0.0.1:9238.
+- Chưa kiểm: tạo clip Muse mới/quyền video theo vùng sau sửa; bật công tắc không chứng minh dịch vụ cấp quyền. Không gửi lại lượt cũ, không đổi vùng/tài khoản, không đọc trực tiếp DB/profile/AppData.
+- Cần anh chốt: **không có**. Review REVIEW-M-20261114-enable.md; nhả khóa chính phiên, giữ WIP văn phòng có trước. Không push/merge.
+
+---
+
 # M-20261114-toggle — đã sửa hộp Bật Muse
 
 - App main **02d509e**, commit local/chưa push; tag before-M-20261114-toggle. Sửa mã lỗi dừng phiên thành thông báo rõ, lỗi nằm trong modal, lý do dừng cạnh công tắc + link đối soát. Thay cảnh báo khóa tài khoản chung bằng mô tả hành vi bật Muse.
