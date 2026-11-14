@@ -1,3 +1,13 @@
+# M-20261114-muse-flow — đọc trước, 14/11/2026
+
+- Chỉ đạo người dùng mới nhất: **không tắt Muse**. Một main CODEX-BOSS. App main **5293561 đã push**, code **cec3004**, remote đã đối chiếu. Không force/merge; cây app sạch, khóa chính phiên đã nhả.
+- Làm video thoát manual và tiếp tục đúng dự án/nháp; không tự xuất gói nhập tay khi lỗi. Chờ media tới timeout thay vì 15 giây. Có kiểm tra kết quả cũ, chống gửi trùng. Lỗi lượt không tự tắt công tắc Muse; giữ chặn quota/phiên/receipt và nút tiếp tục sau kiểm tra.
+- Typecheck + 805 kiểm đạt/0 skip/0 lỗi; fixture 5 clip → 3 MP4, 1 click, giữ thân/receipt. 8 ảnh UI + 4 ảnh launcher 1366/1920. Build 23:02:01 +07 cây sạch/app chưa chạy. Electron QA/IPC/persistence đạt, không dịch vụ ngoài; chỉ đóng QA.
+- **Chưa kiểm Muse thật:** auto-review chặn launcher dùng AppData mặc định do luật cấm AppData/phiên thật trong kiểm thử. Đã hỏi ngoại lệ chỉ cho app tự dùng dữ liệu/phiên hiện có qua UI/IPC; đang chờ trả lời. Không lách, không mở trực tiếp DB/profile/cookie, không tự tắt Muse hoặc đóng phiên thật. Chỉ tiếp tục nhánh kiểm thật sau xác nhận rõ.
+- Bằng chứng và tự review: REVIEW-M-20261114-muse-flow.md, task cùng tên, app ops/office/reports/M-20261114-muse-flow.md; outputs/M-20261114-muse-flow*-ui. Giữ WIP văn phòng có trước, không commit scratch/live artifacts.
+
+---
+
 # M-20261114-video-recovery — đã sửa màn Video, 14/11/2026
 
 - App main **2b1a1cb** cục bộ, chưa push. Tag before-M-20261114-video-recovery = 9d160c4. Build **12:08:02 +07**, exit 0, app tắt/cây sạch; source sạch sau build.

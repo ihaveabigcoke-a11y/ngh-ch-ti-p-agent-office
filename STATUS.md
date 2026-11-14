@@ -1,4 +1,17 @@
 Chế độ: CODEX-BOSS
+# M-20261114-muse-flow — đã sửa/push, chờ quyền kiểm phiên thật
+
+- Chỉ đạo mới nhất: **không tắt Muse**. Không thao tác tắt công tắc, không đóng phiên Muse của người dùng. Lỗi một lượt không tự đổi công tắc toàn bộ Muse; giữ kiểm quota/phiên/receipt và chống gửi trùng.
+- App main **5293561 đã push origin/main**, remote đối chiếu đúng; code **cec3004**, tag before-M-20261114-muse-flow = 2b1a1cb. Source sạch, nhả khóa chính phiên; không spawn/force-push/merge.
+- Đã sửa: Làm video tiếp tục dự án/nháp cũ bằng Muse; không tự chuyển nhập tay; chờ media tới timeout cấu hình; nhận kết quả cũ không gửi mới. Lỗi giữ công tắc bật, có nút tiếp tục sau đối soát.
+- Typecheck + **272 domain + 29 API + 504 desktop = 805 đạt, 0 lỗi/0 skip**. UI đạt 8 ảnh 1366/1920, fixture 1 click → 3 MP4 thật local, không nhân đôi.
+- Build **14/11/2026 23:02:01 +07**, cây sạch/app chưa chạy, exit 0. Đã tự review REVIEW-M-20261114-muse-flow.md. Không tắt app/Muse trong phiên tiếp tục này.
+- Launcher Electron thật/QA riêng đạt: IPC giữ Muse bật, receipt/submissions nguyên qua reload/đóng QA, 4 ảnh; 0 lỗi JS/console/request ngoài. Chỉ đóng QA, không đóng phiên thật. Tổng 12 PNG tại app outputs/M-20261114-muse-flow*-ui.
+- **Chưa kiểm:** Muse thật/clip mới/SKU thật. Auto-review từ chối launcher dùng AppData mặc định vì luật cấm AppData/phiên thật khi kiểm. Chưa mở app thật, không gửi mới hoặc lách chặn; không coi 3 MP4 fixture là nghiệm thu Muse thật.
+- **Cần anh chốt:** ngoại lệ cho app tự dùng AppData/phiên hiện có để kiểm Muse thật qua UI/IPC; câu hỏi đang chờ. Phần source/build/push đã xong; không cần chốt triển khai khác.
+
+---
+
 # M-20261114-video-recovery — đã sửa màn Video, 14/11/2026
 
 - App main **2b1a1cb** cục bộ, chưa push. Tag before-M-20261114-video-recovery = 9d160c4. Build **12:08:02 +07**, exit 0, app tắt/cây sạch; source sạch sau build.
