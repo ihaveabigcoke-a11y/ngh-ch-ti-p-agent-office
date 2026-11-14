@@ -1,3 +1,26 @@
+# T-034 — giảm overhead, hai bộ ba MP4; chưa đạt 60s (15/11/2026)
+
+| Chặng, giây | T-033 | T-034 lần 2 |
+| --- | ---: | ---: |
+| Preflight → gửi | 2,172–3,286 | 2,223–2,636 |
+| Chờ Muse | 53,463–63,565 | 57,109–63,507 |
+| Có clip → bắt đầu tải | 4,731–7,691 | **1,199–3,002** |
+| Tải + chuẩn hóa | 3,831–4,967 | 3,997–7,076 |
+| Kiểm / nhập nguồn | 0,604–0,928 gộp | 0,310–0,597 / 0,086–0,367 |
+| Dựng (chồng nhập) | 7,857–8,252 | **4,504–6,470** |
+| Bấm → đủ ba MP4 | null (2/3) | **155,191**; lần 1 **150,052** |
+- **Ngoài Muse:** lần 2 bỏ riêng đợi hồ sơ còn 14,683–17,451s; vẫn có đợi trước preflight 6,101–6,956s ở hai hook đầu, 83,399s ở hook thứ ba. Không cộng các chặng chồng nhau; không gọi tổng lần 2 nhanh hơn lần 1.
+- **Thật 6+1/7 gửi:** Chi giữ phanh, Cho/Duc chạy 2+1 mỗi phép đo; nhỏ nhất 74,920s/profile. Hai bộ ba MP4 khác SHA, 720×1280, H.264/AAC 15s, 2,22–2,70MB, giữ tiếng/CTA; thân tái dùng T-033, không phải năm cảnh mới.
+- **Một tin:** Duc trả 3 thẻ video; clip đầu 56,701s, chốt đối soát 72,541s vì thiếu nhãn cảnh. Chưa tải/kiểm ba file; không gán theo DOM, không gửi lại, không bật bundle mặc định.
+- **Đã sửa:** `db8f2de` tải URL sớm + dựng cùng nhập + một lần encode; `b95ca63` bỏ chờ animation preview. Công tắc Muse/hồ sơ không tắt. App **d786a0b** đã push, tag đã push; build **05:01:05 +07**, restart đạt; cây sạch, khóa đã gỡ.
+- **Kiểm:** typecheck + **842 đạt/0 lỗi/skip**, desktop cuối 527/527; Muse giả + FFmpeg thật, UI 1366/1920, sáu MP4 thật hash/giải mã/A-V đạt. Không hạ assertion.
+- **Kết luận:** **mục tiêu <60 s phụ thuộc tốc độ Muse**; phần app đã giảm có số đo, chưa chứng minh tối thiểu tuyệt đối. Lần 1/2 Muse luôn ≥56,647s, chỉ hai hồ sơ được gửi.
+- **Dữ liệu:** 91 record/62 job cũ nguyên, 44 asset hash khớp. Sau restart 106 record/71 job giữ nguyên, 44 file cũ +6 MP4 khớp hash, 0 lỗi trang; worker paused/active=0, limit=null, Muse/ba profile bật, riêng Chi chặn gửi. [Progress](D:/hermes-wt/artifacts/T-034/progress.md), [Review](REVIEW-T-034.md).
+- **Chưa kiểm:** entitlement video Chi (không có đường đọc riêng qua app), ba file gói/ánh xạ, HTTP trực tiếp trên Muse thật (thật dùng blob), SKU/công dụng, <60s. Không DB/cookie/credentials, không đăng/DM.
+- **Cần anh chốt:** không có để giữ bản sửa; muốn dùng ba preview gói thì xem/duyệt H1/H2/H3 trong hội thoại cũ. Hai bộ ba MP4 đã xem được trong Video/Thư viện.
+
+---
+
 # T-033 — công tắc giữ bật; 2/3 MP4, chưa đạt 60s (15/11/2026, +07)
 
 - **Hồ sơ:** 03:39 bật lại Cho/Chi qua IPC; Duc mới đã bật. Cả ba ready, VPN connected trước gửi. Quota weekly còn cuối phép đo Duc 98%, Chi 88%, Cho 85%; nguồn Muse Settings · Usage. ready là phiên, không bảo đảm quyền video.
