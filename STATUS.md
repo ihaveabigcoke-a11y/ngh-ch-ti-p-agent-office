@@ -1,3 +1,26 @@
+# T-030 — Muse thật lại (15/11/2026, +07)
+
+- Main/tag trước chạy 92307c6, cây sạch/một worker theo checkpoint; T-028b hết worker nhưng chỉ có checkpoint. IPC: Muse bật; Chi/Cho ready, quota available (trạng thái lưu); nhịp 60s, timeout 900s.
+
+| Hồ sơ / lượt | Gửi → kết thúc (+07) | Thời gian chờ / clip | Gửi / thành công / từ chối / lỗi |
+|---|---|---|---|
+| Chi, TIZE 112, app tự chọn | 00:38:21.426 → 00:53:26.686 | 905,260s / không có clip | 1 / 0 / 1 qua UI / 0 khác; cùng lượt có mã MUSE_NO_MEDIA |
+| Chi, phát sinh sau restart, chưa rõ nguồn | 01:05:39.391 → 01:20:42.238 | 902,847s / không có clip | 1 / 0 / chưa xác định / 1 MUSE_NO_MEDIA |
+
+- Nguyên văn receipt T-030: “Want me to make a still image of that scene instead — the adult crouching and peering around in the fenced garden at dusk, with the dog plainly beside them?Yes, make the still image of the garden sceneNo, just the prompt is fine”; note: “Muse đã trả lời nhưng chưa tạo file. Mở hội thoại để xem phản hồi.”
+- Nguyên văn UI mới: “Status: PROMPT ONLY — no video was generated here. Video generation is unavailable for this account in this country/region (lasting restriction, 403 video_not_available)”. Đây là nội dung phản hồi, chưa xác minh một HTTP 403/công cụ video được gọi lại.
+- **Kết luận:** lượt Muse thật mới của TIZE 112 qua Chi không tạo được video; chưa đủ bằng chứng kết luận cho mọi hồ sơ Muse.
+- Dừng T-030 ở bước 2; không dựng MP4 từ clip cũ. Tổng quan sát sau baseline 2/6 gửi, 0 clip; bốn job mới còn queued. Một lượt sau phanh chưa rõ nguồn nên chưa nghiệm thu phanh xuyên suốt; không dùng Cho để lách/không thao tác ss.
+- Cuối 01:22:25 IPC: Muse vẫn bật, worker paused=true/active=0, ledger stopped=true; Chi đã tạm ngưng riêng (enabled=false), Cho/ss nguyên trạng. Jobs và hai hồ sơ khác nguyên checksum trong thao tác này.
+- **Đã sửa/push:** 20f572a nhãn theo receipt video, 5e160a7 duyệt theo revision, 6e561c0 báo rõ clip lệch thời lượng; mỗi lỗi một commit/test riêng 9/10/37 đạt; báo cáo app d2b666b.
+- **Đã kiểm:** typecheck (chạy lại exit 0), domain 275/API 29/desktop 505 + OpenMontage chạy riêng 1 = 810 kiểm khác nhau đạt. Full desktop có 1 skip đã kiểm riêng; provider tự động là fixture, không thay bằng chứng Muse thật.
+- Build source hoàn thành 00:58:27, cây sạch/app đóng êm; mở lại launcher đúng checkout. DOM nhãn “Chi: Muse chưa trả video”; ảnh sau restart timeout, chưa nghiệm thu UI 1366/1920. Không có MP4 mới để đo hash/ffprobe/dung lượng.
+- **Chưa kiểm:** SKU/3 hook/video mới, quyền video/HTTP 403 độc lập, bảo toàn toàn bộ dữ liệu sau restart. Trước build 75 record ngoài dự án + 50 job cũ nguyên hash; sau restart 77 record/56 job khác baseline, chưa quy nguồn. Không đọc trực tiếp DB/cookie/token.
+- **Cần anh chốt:** nguồn thao tác bật lại Chi/đối soát/tạo thêm job sau 01:04 (đã hỏi); giữ phanh và receipt, không tự gửi lại hay đổi hồ sơ trước khi xử lý nguyên nhân không trả video.
+- **Khóa đã nhả:** .git/office-locks/codex-T-030.txt đã xóa và kiểm không còn. Nhật ký append-only: D:/hermes-wt/artifacts/T-030/progress.md; bằng chứng mới chỉ local. [Review](REVIEW-T-030.md).
+
+---
+
 Chế độ: CODEX-BOSS
 
 # T-029 — chạy thử 1 sản phẩm (14/11/2026, +07)
