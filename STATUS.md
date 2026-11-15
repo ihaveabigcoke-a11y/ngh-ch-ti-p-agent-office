@@ -1,3 +1,23 @@
+# Bản build mới nhất 15/11/2026 22:29 +07 — mở Hermes được (boss)
+
+- **`pnpm local:build` xong 22:29:35 +07, exit 0**, cây app sạch, HEAD **460c387** (gồm T-043..T-051, T-052, T-057), app tắt khi build. Mở bằng `START-HERMES-CLIP.cmd`.
+- T-052 đạt review (full suite: test 285/285, api 29/29, codex 8/8, desktop 651/652 + 1 bỏ qua thiếu biến OpenMontage, long-video 13/13 x3). Mặc định TẮT: Video dài, Giữ nguyên nhân vật.
+- Lưu ý T-052: lượt Muse thật duy nhất nhận NHẦM clip cũ tải muộn (đã sửa, mới kiểm bằng Muse giả, chưa kiểm lại bằng Muse thật; receipt #94 cần đối soát tay); hộp 'Tiếp tục hội thoại' nhận tiếng Việt, Muse tự dịch ngầm (nên gõ tiếng Anh).
+
+---
+
+# T-052 — Đạt kiểm local; còn dịch trước gửi và nghiệm thu clip mới (15/11/2026)
+
+- **SHA/push:** app main `460c387` đã push thường; source/build `325427b`, tag `before-T-052=1761fe8` đã push; một Codex, cây app sạch.
+- **Đã làm:** nút/hộp Tiếp tục hội thoại, Ảnh/Video, ≤4 ảnh, đúng thread/hồ sơ, continueOf/retryRootId và chip ↳ #N; giữ luồng ba video/Video dài/Tạo lại.
+- **Phanh:** ≥60s/hồ sơ, quota/phiên/VPN/Chi/đối soát/SHA; không tự retry/đổi công tắc; đã sửa video cũ tải muộn và khóa receipt chưa rõ.
+- **Đã kiểm:** 974 ca khác nhau đạt + typecheck; full desktop cuối 651 pass/1 skip/0 fail, bù đúng ca OpenMontage 1/1; hồi quy 67/67, T-052 10/10; không hạ assertion.
+- **Build/UI:** outputs/T-052-package/build từ cây sạch 325427b lúc 22:19:00 +07, launcher QA/IPC đạt, 6 PNG 1366/1920; 67 file bản cài nguyên SHA, **chưa áp build chính** (nếu app mở không áp).
+- **Lượt thật:** đúng 1, Chim/VPN connected/active=0, #90→#94 cùng thread; Hermes chọn clip cũ tải muộn, dừng “Trùng clip cũ #90” sau 11,675s. MP4 cũ 8s 720×1280/ffprobe/decode đạt/SHA trùng; không gửi lại.
+- **Giữ dữ liệu:** 93 job cũ/cảnh cũ nguyên, dự án thêm 1 cảnh, không asset/take; công tắc nguyên. Bằng chứng thật chỉ local outputs/T-052-live; không DB/cookie/token/ảnh thật mới vào Git; app thử đã đóng êm.
+- **Chưa kiểm:** kết quả mới của lượt #94, bản sửa sau lượt thật trên dịch vụ, chất lượng/SKU; cần đối soát lượt đã gửi trước gửi tiếp. Chạy tiếp/chi tiết: [T-052](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-052.md) · [Review](REVIEW-T-052.md).
+- **Cần anh chốt:** cơ chế dịch mô tả Việt→Anh trước dispatch; hiện chỉ dẫn Anh kèm mô tả gốc để Muse chuyển ý trong cùng lượt, yêu cầu dịch trước gửi còn thiếu. Khóa codex-T-052.txt đã nhả.
+
 # Bản build cuối đêm 15/11/2026 — mở Hermes được (boss, 21:40 +07)
 
 - **Build chính `pnpm local:build` xong 21:39:42 +07, exit 0**, cây app sạch, HEAD **1761fe8** (gồm T-043..T-051 và T-057), app đã tắt khi build. Mở bằng `START-HERMES-CLIP.cmd`.
