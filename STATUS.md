@@ -1,3 +1,189 @@
+# Bản build cuối đêm 15/11/2026 — mở Hermes được (boss, 21:40 +07)
+
+- **Build chính `pnpm local:build` xong 21:39:42 +07, exit 0**, cây app sạch, HEAD **1761fe8** (gồm T-043..T-051 và T-057), app đã tắt khi build. Mở bằng `START-HERMES-CLIP.cmd`.
+- Mặc định TẮT: Video dài, Giữ nguyên nhân vật. Chi đã bị xoá/không gửi video; Cho/Duc/Chim gửi video. 3 video/1 sản phẩm ~85–112 s (chờ Muse 54–99 s).
+- Chờ đại ca chốt T-052 (Tiếp tục hội thoại): 4 câu hỏi trong tin nhắn; nhãn lỗi 24 giờ cần mã lỗi riêng, thử với lỗi thật.
+
+---
+
+# T-057 — ĐẠT source, test, build riêng và launcher QA (15/11/2026)
+
+- **Đã push thường:** main `1761fe8`, source/runtime `6f8f62a`, tag `before-T-057=2fb0b97`; một Codex, app sạch; khóa codex-T-057.txt đã nhả.
+- **Đã sửa:** tick bỏ qua worker/Store đóng, chờ runner trước đóng DB; băm clip nguồn bằng stream; cache hash thất bại theo job/file; nút X nền tối rõ và icon cùng dòng Ảnh (1–3).
+- **Video dài:** 10/10 tiến trình nối tiếp, mỗi lần 13/13, tổng 130 pass, 0 fail/skip/cancel; mọi dòng assertion cũ giữ nguyên; logs outputs/T-057-checks/long-video-final-*.log.
+- **Full suite:** 964/964 (285 domain, 29 API, 642 desktop, 8 runner), 0 fail/skip; typecheck, 4/4 lifecycle/cache và diff check đạt.
+- **UI/dọn:** 2 PNG Nhân vật 1366/1920 đã xem, X 32×32/tương phản 15,54:1, bàn phím/lưu/reload/giữ asset đạt; xóa đúng 4 failure.png/failure.txt trong T-043-ui/T-045-ui sau kiểm đường dẫn.
+- **Build/launcher:** outputs/T-057-package/build, cây sạch 6f8f62a lúc 21:28:13 +07; launcher/IPC/userData QA riêng đạt, 4 PNG thêm; **chưa áp build chính vì app mở**, 67 file local-dist giữ nguyên SHA.
+- **Phạm vi/chạy tiếp:** 0 Muse thật/đăng/DM, không AppData/DB/profile/cookie/token thật; chưa kiểm dịch vụ/VPN/dữ liệu cài. Khi app đóng: bỏ HERMES_LOCAL_BUILD_DIR → pnpm local:build → START-HERMES-CLIP.cmd. [Báo cáo T-057](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-057.md) · [Review](REVIEW-T-057.md).
+- **Cần anh chốt: cần mã lỗi 24 giờ đặt ở đâu / thử lỗi thật**; chỉ ghi nhận, không sửa museFailureKind hay thử lỗi Muse trong T-057.
+
+# T-051 — ĐẠT source, build riêng và launcher QA; chờ áp build chính (15/11/2026)
+
+- **Source:** main `2fb0b97`, runtime `b23bdb9`, tag `before-T-051=cc26e90`, push thường; một Codex, cây app sạch.
+- **Ghép:** chọn ≥2 clip cùng dự án, ↑/↓/Bỏ, tên file; khung clip đầu, giữ tiếng/chèn im lặng; media mới có nhãn Bản ghép và nguồn SHA, bản gốc giữ nguyên.
+- **So sánh:** hai video gốc–kết quả theo retryOf/attempt, gồm biến thể; thiếu gốc báo rõ, không đoán clip.
+- **Đã kiểm:** typecheck + 960/960 khác nhau (285 domain, 29 API, 638 desktop, 8 runner), 0 fail/skip; focused T-051 cuối 6/6.
+- **Media:** 1,08+1,32=2,400s, 720×1280, full decode exit 0; hash nguồn nguyên; PCM im lặng/thứ tự màu, khung đổi theo clip đầu, replay/CAS đạt.
+- **UI/launcher:** 10 PNG 1366/1920 tại outputs/T-051-ui và T-051-launcher, đã xem; thao tác/lưu/phát/tải qua API/reload đạt, 0 lỗi trang/request ngoài.
+- **Build:** outputs/T-051-build từ cây sạch b23bdb9 đạt 20:51:38 +07; START-HERMES-CLIP.cmd + IPC trên mirror source/build và userData QA riêng đạt, đóng êm, receipt/công tắc nguyên.
+- **Phạm vi:** 0 Muse thật/đăng/DM; không AppData/DB/profile/cookie/token thật; giữ công tắc, command, theme/font/luồng ba hook. Chỉ fixture + công cụ local.
+- **Còn lại:** áp build chính chờ app thật đóng (đang mở Quyết định, chưa có trả lời async), không tự dừng tác vụ; chưa kiểm dịch vụ/dữ liệu/VPN thật. Khóa codex-T-051.txt đã nhả.
+- **Báo cáo:** [T-051](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-051.md) · [Review](REVIEW-T-051.md). Khi app đóng: pnpm local:build, kiểm launcher QA rồi mở START-HERMES-CLIP.cmd.
+# T-050 — ĐẠT source, build riêng và launcher QA; chờ áp build chính (15/11/2026)
+
+- **Đã push:** main `cc26e90`, runtime `4cb808c`, tag `before-T-050=f3e3573`; push thường, cây app sạch.
+- **Khảo sát: CÓ thiếu sót.** Header đếm runner còn thẻ đếm job; chưa watchdog/đối chiếu SHA lúc mở lại. Chặn retry chưa đối soát đã có, không khẳng định từng gửi trùng thật.
+- **Đã sửa:** header/thẻ cùng snapshot store; heartbeat và timeout cấu hình → Lỗi: mất dấu, khóa Tạo lại; output có báo cáo kiểm + byte đúng SHA → ready/Xong, nội dung vẫn chờ duyệt.
+- **Bảo toàn:** output/ready transaction; cả ba gói appearance cùng commit, thiếu/sai hash/clip cũ không vượt guard; receipt cũ nguyên hash, không tự gửi lại/đổi luồng ba hook.
+- **Đã kiểm:** typecheck + 954/954 (285 domain, 29 API, 632 desktop, 8 runner), 0 fail/skip; 6 kiểm mới T-050, giết Worker giả/mở lại; T-041/T-048 đạt, mốc thật 85–100 giây giữ nguyên.
+- **Build:** riêng outputs/T-050-build từ cây sạch `6d5fd72`, đạt 20:32:27 +07; chưa thay desktop/local-dist vì app thật vừa được mở trong lúc kiểm.
+- **Launcher/ảnh:** bản sao source/build chạy START-HERMES-CLIP.cmd + IPC/userData QA riêng đạt 20:33:48 +07, đóng êm; tổng 6 PNG 1366/1920 trong outputs/T-050-ui và T-050-launcher.
+- **Phạm vi:** 0 gửi Muse/đăng/DM, không DB/profile/cookie/token thật; Muse/hồ sơ/VPN fixture giữ bật; theme/font/command giữ nguyên. Khóa codex-T-050.txt đã nhả; WIP văn phòng giữ nguyên.
+- **Chưa kiểm/áp:** Muse/quota/VPN/dữ liệu cài thật; build chính chờ app rảnh/đóng, câu hỏi async chưa có trả lời. Giữ app đang dùng, không coi im lặng là duyệt dừng.
+- **Chạy tiếp:** app đóng → pnpm local:build → node scripts/check-t050-launcher.mjs → START-HERMES-CLIP.cmd. [Báo cáo](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-050.md) · [Review](REVIEW-T-050.md).
+# T-049 — ĐẠT source, kiểm local, build và launcher (15/11/2026)
+
+- **Đã push:** main `f3e3573`, source/runtime `7a4005c`, tag `before-T-049=a77c054`; push thường, app sạch.
+- **Chặn trùng:** sổ SHA-256 trước/sau chuẩn hóa, migration thêm bảng/index và đọc bù job/take cũ; không rewrite dữ liệu cũ.
+- **Đủ luồng:** đơn, gói 3, tạo lại T-042, Video dài T-046; Trùng clip cũ #N có link nguồn, giữ file/receipt, không tự gửi lại/ghi đè.
+- **Biến thể:** hai file cùng job là một ý tưởng khi đếm/hiện; mọi take còn trong bộ chọn phiên bản.
+- **Đã kiểm:** typecheck + 948 kiểm khác nhau (285 domain, 29 API, 626 desktop, 8 runner), 0 fail/skip; focused cuối 26/26 gồm T-041/T-048/T-049.
+- **Build/launcher:** build chính 20:15:47 +07 tại runtime 7a4005c, cây sạch/app tắt; launcher thật + IPC trên QA riêng đạt, đóng êm; commit cuối chỉ báo cáo.
+- **Ảnh/bảo toàn:** 8 PNG 1366/1920 tại outputs/T-049-ui và outputs/T-049-launcher; liên kết/phát nguồn, receipt/công tắc giữ đúng; 0 gửi Muse/đăng/DM.
+- **Chưa kiểm:** Muse/VPN/quota/tài khoản/DB thật, Explorer thật; chỉ fixture + FFmpeg/OpenMontage local. Không AppData/profile/cookie/token thật; không đổi theme/font.
+- **Dùng tiếp:** START-HERMES-CLIP.cmd → mở nguồn clip trùng → chọn tạo lại nháp hoặc nhập tay; Video dài giữ quy tắc dừng T-046. [Báo cáo](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-049.md) · [Review](REVIEW-T-049.md).
+- **Cần anh chốt:** không có blocker; khóa codex-T-049.txt đã nhả. STATUS/review văn phòng lưu local, giữ WIP có trước.
+# T-047 — ĐẠT source, kiểm local và build (15/11/2026)
+
+- **Đã push:** main `a77c054`, source/runtime `580e112`, tag `before-T-047=d3b365f`; S-2 `372a7e5` cherry-pick thành `6336055`. Push thường, cây app sạch.
+- **Chức năng:** Sao chép link hội thoại thật; timeout 60–1800 giây (900 mặc định) trong Cấu hình Muse; hiện/mở thư mục xuất worker/outputs.
+- **Receipt 24 giờ:** text gốc làm sạch ≤240 ký tự + failedAt nối nhãn S-2; không đổi dispatch/retry/đường gửi, giữ công tắc, phanh riêng hồ sơ đã kiểm bằng fixture.
+- **Đã kiểm:** typecheck + 943 kiểm khác nhau: domain 285, API 29, desktop 617, runner 8, S-2 4; không skip/lỗi còn lại. Desktop 616/617 rồi sửa đường Agent-Reach harness, chạy riêng 1/1 đạt.
+- **Build/launcher:** 19:53:39 +07, cây sạch/app tắt; START-HERMES-CLIP.cmd với QA riêng/IPC/persistence đạt, active=0/budget=0; đã đóng QA êm.
+- **Ảnh:** 8 PNG 1366/1920 đã xem, tại app outputs/T-047-ui và outputs/T-047-launcher; không lỗi trang/console/request ngoài trong kiểm UI.
+- **Bảo toàn:** không AppData/DB/profile/cookie/token thật, không sửa muse.mjs/muse-bundle.mjs/theme/font/data/evidence; 0 gửi Muse/Chi, không đăng/DM. Khóa codex-T-047.txt đã nhả.
+- **Chưa kiểm:** Muse/VPN/quota/tài khoản thật; clipboard/Explorer của phiên người dùng. Clipboard và shell.openPath kiểm bằng double; không dùng fixture chứng nhận dịch vụ.
+- **Dùng tiếp:** Tài khoản Muse → Cấu hình Muse và dữ liệu (đóng hồ sơ trước lưu timeout); Hàng đợi → Chi tiết → Sao chép link. [Báo cáo](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-047.md) · [Review](REVIEW-T-047.md).
+- **Cần anh chốt:** không có blocker kỹ thuật; dữ liệu thật chưa mở/đổi. App đang tắt, mở bằng START-HERMES-CLIP.cmd khi cần.
+
+# T-046 — Video dài, ĐẠT kỹ thuật và đo thật (15/11/2026)
+
+- **Đã làm:** source `ca12345`, kiểm launcher `7f0f1fc`, main **d3b365f** và tag `before-T-046=6f5aa3b` đã push thường; cây app sạch, khóa T-046 đã nhả.
+- **Chức năng:** mặc định TẮT theo dự án; viết 2–5 cảnh/gói đã duyệt, nối khung cuối→đầu, ghép một MP4; lỗi dừng và giữ cảnh/công tắc, không retry/đổi hồ sơ; ba hook giữ nguyên.
+- **Đã kiểm:** typecheck + **934 kiểm khác nhau**, 0 lỗi/skip; Muse giả + FFmpeg/OpenMontage thật, command đầu đúng 1 lần/cảnh, phanh lỗi/restart/default-off đạt.
+- **Build/UI:** build chính **19:20:30 +07**, runtime `ca12345`; launcher QA/IPC/persistence đạt; 6 PNG UI + 2 launcher + 2 app thật 1366/1920. Commit sau build chỉ script kiểm/tài liệu.
+- **Đo thật:** đúng **3/3 lượt Duc→Chim→Cho**, VPN connected; ba clip 8s → **MP4 24s, 720×1280, 1.667.245 byte**, giải mã/phát lại đạt. Tổng **306,281s**, tính năng riêng, không đạt 3 video/60s.
+- **Khung nối:** ảnh đính khớp PNG khung cuối giải mã độc lập; RGB 32×32/SHA-256, lệch **0,89% / 0,92%**, dưới ngưỡng **12%** đặt trước đo; không thay duyệt nội dung.
+- **Bảo toàn:** **148 record** và request/providerId/output/history **90 job cũ nguyên hash**; Muse/hồ sơ/VPN giữ bật, active=0/budget=0; Chi vắng baseline, 0 gửi, không tự tạo lại.
+- **Chưa kiểm:** Muse thật 2/4/5 cảnh/gói có sẵn; độ giống nhân vật toàn clip/SKU/âm thanh và công tắc Chi thật. Không đăng/DM; media/receipt mới chỉ lưu local.
+- **Bằng chứng:** [MP4](D:/hermes-wt/artifacts/T-046/T046-long-video.mp4), [progress](D:/hermes-wt/artifacts/T-046/progress.md), [báo cáo](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-046.md), [review](REVIEW-T-046.md).
+- **Cần anh chốt:** không có blocker kỹ thuật; xem/duyệt nội dung trước khi dùng. Đã hết ba lượt, đo thêm cần phạm vi/lượt mới. Dùng: Video→Cài đặt dự án→Video dài; app đang mở kết quả T-046.
+
+# T-045 — thư viện nhân vật, ĐẠT source/QA local (15/11/2026)
+
+- **Đã làm:** source `a8c9426` + `0b07146`, main **6f5aa3b** và tag `before-T-045=c741ced` đã push thường; cây app sạch.
+- **Chức năng:** menu Nhân vật; CRUD 1–3 ảnh, tên Unicode duy nhất, xoá xác nhận, nhắc không dùng ảnh người thật; chip @tên.
+- **Đính ảnh:** Giữ nguyên nhân vật mặc định TẮT; bật + @tên đính đúng ảnh, tổng ≤4; tên lạ chặn trước enqueue; retry giữ ảnh cũ.
+- **Đã kiểm:** typecheck + **922 kiểm khác nhau đạt**, 0 lỗi/skip chưa khép; Muse giả 1/2/3 ảnh, command đầu đúng 1 lần, migration/null/file/công tắc giữ nguyên.
+- **UI/launcher:** 6 PNG UI + 2 PNG launcher QA 1366/1920; CRUD/reload, IPC thật 2 ảnh, tên lạ bị chặn, persistence; **0 gửi Muse**, không lỗi console/request ngoài.
+- **Build:** local:build exit 0 lúc **18:53:53 +07**, source sạch, output riêng `outputs/T-045-package/desktop/local-dist`; chưa thay build của app thật đang mở.
+- **Chưa kiểm:** Muse/VPN/quota/Chi và dữ liệu thật; độ giống nhân vật trong clip. Không AppData/profile/cookie/DB thật, không đăng/DM, không đổi công tắc hoặc đóng phiên thật.
+- **Bằng chứng:** app [báo cáo](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-045.md), [review](REVIEW-T-045.md), `outputs/T-045-ui` và `outputs/T-045-launcher` (chỉ local).
+- **Cần anh chốt:** thời điểm áp build nếu muốn dùng ngay; chờ việc đang chạy xong, đóng app, chạy local:build mặc định rồi launcher. Không chép fixture QA. Khoá T-045 đã nhả khi kết thúc.
+
+# T-044 — prompt nối khung; CHƯA ĐẠT nghiệm thu thật (15/11/2026)
+
+- **Đã làm:** source **4f6d33f**, main **2bb9e4a** và tag before-T-044=49a267f đã push thường; cây app sạch.
+- **Prompt:** một dòng nối ở điểm cắt 4s, đúng 1 MUSE_VIDEO_COMMAND; snapshot 3 hook giữ nguyên prompt cũ ngoài +658 ký tự. Worker/đường gửi/font/theme không đổi.
+- **Đã kiểm:** typecheck + **907/907**, 0 fail/skip; build 18:08:18 +07 cây sạch/app tắt; launcher QA thật/persistence/ảnh 1366–1920 đạt.
+- **Muse thật:** đúng 3 gửi Cho/Duc/Chim song song (lệch 25ms), VPN connected; 3 MP4 15s khác SHA-256, full decode/A-V đạt, <6 MiB. Không retry/đăng/DM.
+- **Chưa đạt tốc độ:** **112,423s**, chậm hơn T-041 **11,888s**, T-038 **25,291–27,079s**; không đạt +3s.
+- **Chưa đạt nối khung:** ảnh còn khác bố cục/ánh sáng; RGB32 H1/H2 xấu hơn T-041, H3 giảm nhẹ. Không gọi nối mượt đạt.
+- **Bảo toàn/chưa kiểm:** 141 record cũ nguyên hash, job cũ còn; Muse/3 hồ sơ/VPN giữ bật, active=0/budget=0. Chi vắng sẵn như T-041, 0 gửi, chưa kiểm công tắc Chi; chưa duyệt toàn clip/SKU.
+- **Bằng chứng/chạy tiếp:** [progress + ảnh](D:/hermes-wt/artifacts/T-044/progress.md), [báo cáo](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-044.md), [review](REVIEW-T-044.md). App đang mở Video với ba bản T-044; bằng chứng thật mới chỉ local.
+- **Cần anh chốt:** phạm vi/lượt gửi mới nếu muốn sửa và đo tiếp; đã dùng đủ đúng 3 lượt. Nhả khóa codex-T-044.txt khi kết thúc; giữ WIP văn phòng cũ.
+
+# T-043 — hàng đợi và xem trước video, đạt local (15/11/2026)
+
+- **Đã làm:** source **1464aff**, main **49a267f** và tag before-T-043=e87c3d3 đã push thường; remote khớp, cây sạch.
+- **Hàng đợi:** Tất cả/Đang chạy/Lỗi/Xong có đếm theo cảnh; tìm prompt hoặc #N bền; lý do lỗi một dòng che URL/token, giữ lịch sử và T-042.
+- **Xem trước:** 3 hook + số thẻ + hồ sơ từ trạng thái worker; hồ sơ đang dừng không tính. Chỉ hiện thời gian từ lượt mới hoàn tất đã đo cùng số thẻ/hồ sơ; chưa có thì ẩn.
+- **Đã kiểm:** typecheck + **903 kiểm khác nhau đạt**, không hạ assertion; 282 domain + 29 API + 584 desktop + 8 runner giả. Ca OpenMontage skip trong suite đã chạy riêng đạt.
+- **Build/launcher:** build cuối **17:59:15 +07**, cây sạch/app tắt; Electron/IPC/reload/đóng-persistence trên workspace giả đạt, giữ hash receipt gốc, 0 console error/request ngoài.
+- **Ảnh/bằng chứng:** 6 PNG UI + 4 PNG launcher, 1366/1920; [UI](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/T-043-ui/), [báo cáo](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-043.md), [review](REVIEW-T-043.md). ~85s trong ảnh là số đo fixture, không phải lượt Muse thật.
+- **Chưa kiểm:** phiên/quota/VPN và thời gian Muse thật; 0 gửi Muse thật, không đọc AppData/profile/DB/cookie/token thật, không đăng/DM. Không đổi công tắc, font/theme hay prompt cố định; fixture Chi bật/dừng nhận 0 gửi.
+- **Chạy tiếp:** START-HERMES-CLIP.cmd → Hàng đợi để lọc/tìm; Video → chọn sản phẩm → đọc dòng xem trước. Ước lượng xuất hiện sau lượt mới hoàn tất hợp lệ.
+- **Cần anh chốt:** không có để khép T-043. Đã nhả khóa codex-T-043.txt; giữ WIP văn phòng cũ, không commit/push kèm.
+
+# T-048 — sửa T-041, đạt ngưỡng local, không gọi Muse (15/11/2026)
+
+- **Dựng/chọn đoạn:** 3 vòng ×3 hook song song; trước 5,141–5,402s / 0,803–0,818s → sau **4,380–4,768s / 0,800–0,827s**, gồm polling750ms; trung vị nhánh dựng cuối giảm9,7%.
+- **Giới hạn trace:** không tái hiện chậm live T-041; compose trước/sau chờ<0,001s, chưa thể quy regression cho slot. Có trace ffprobe/decode/chờ slot/FFmpeg/API và thử threads0/2/3, thứ tự kiểm/dựng.
+- **Đã sửa:** pool compose riêng; kiểm nguồn song song, threads3 máy≥6 CPU; blob đủ byte/Content-Length/MP4 boxes trước nhận; ghi earlyRenderError nguyên tử; tab ấm đóng/giữ đúng khi dispatch lỗi, kể cả hết hạn. Full decode giữ nguyên.
+- **MP4:** 3 hash khác,720×1280,15s,1,61–1,71MB≤6MiB,giữ tiếng/CTA; giải mã và ảnh1/5,5/13,5s đạt. Chỉ media cục bộ T-038/T-041, không ghi bản thử vào dự án người dùng.
+- **Chi còn trong danh sách: không; enabled: không áp dụng.** IPC status2 lần giống nhau; không thêm/bật/tắt. Muse và VPN/profile flags còn bật; active0,budget0,worker paused; không xác minh kết nối VPN thật.
+- **Kiểm/build:** typecheck + **896/896**,0fail/skip; race2 kết nối/blob dở/pool/tab đạt; assertion cũ giữ. Build cuối **16:30:04 +07**, cây sạch/app tắt; launcher QA1366/1920,persistence,0console/request ngoài đạt.
+- **Git:** source2bea405; main **dc9c43b** + tag before-T-048=6d20dee đã push thường, remote khớp/cây sạch; khóa codex-T-048.txt đã nhả. WIP văn phòng cũ giữ nguyên, không push kèm.
+- **Bằng chứng:** [progress/trace](D:/hermes-wt/artifacts/T-048/progress.md), [báo cáo](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-048.md), [review](REVIEW-T-048.md). Không Muse thật/đăng/DM/nhãn mới; không đọc DB/cookie/token thật trực tiếp.
+- **Chạy tiếp:** START-HERMES-CLIP.cmd; replay local `node --experimental-strip-types scripts/trace-t048-media.mjs ten-moi --poll`. Không cần chốt thêm; hiệu năng cùng browser Muse/phiên/quota/SKU thật chưa kiểm.
+
+# T-042 — đã tạo lại hàng loạt + Sửa & chạy lại (15/11/2026)
+
+- **Đã làm:** source 8ec8849 + wrap nút 0c9344e; main **6d20dee** và tag before-T-042=1eae6c5 đã push thường, remote khớp/cây sạch.
+- **Hàng đợi:** lọc Lỗi / đã dừng, chọn nhiều → N việc mới có liên kết gốc; receipt cũ giữ hash, cả lô bị chặn nếu chưa đối soát, mã thao tác chống nhân đôi.
+- **Sửa & chạy lại:** chỉ sửa body trên thẻ; MUSE_VIDEO_COMMAND chỉ đọc, đúng một lần ở đầu; lưu việc mới rồi duyệt gửi. Giữ font/theme.
+- **Phanh:** ≥60s/hồ sơ, video tạo lại không gửi Chi/hồ sơ dừng/tắt, không đổi hồ sơ để né phanh; giữ công tắc Muse/hồ sơ/VPN và lịch sử.
+- **Đã kiểm:** typecheck + **891 kiểm khác nhau đạt** (278 domain + 29 API + 576 desktop + 8 runner giả); ca OpenMontage skip đã chạy riêng đạt. Không hạ assertion. [Review](REVIEW-T-042.md).
+- **Build/ảnh:** build cuối **16:07:34 +07**, cây sạch/app tắt; launcher Electron/IPC/đóng-reload với workspace giả, 4 PNG 1366/1920, không console error/request ngoài. [Ảnh và result](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/outputs/T-042-ui/).
+- **Chưa kiểm:** Muse/VPN/quota/phiên/dữ liệu người dùng thật; 0 gửi Muse thật, không đọc cookie/token/DB/profile/AppData thật, không đăng/DM. Chi thật không được mở/tạo lại; fixture Chi bật nhận 0 gửi.
+- **Cách dùng:** START-HERMES-CLIP.cmd → Hàng đợi → Lỗi / đã dừng → chọn → Tạo lại; trên thẻ chọn Sửa & chạy lại → sửa mô tả → Lưu & chạy lại → duyệt lượt gửi. [Báo cáo](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-042.md).
+- **Cần anh chốt:** không có để khép T-042. Khóa codex-T-042.txt đã nhả; WIP văn phòng có trước được giữ, không commit/push kèm.
+
+---
+# T-041 — giảm phần app, đủ 3 MP4 thật (15/11/2026)
+
+| Lần (giây) | Preflight→gửi | Chờ Muse | Kết quả→tải | Tải | Kiểm+nhập | Nhập→yêu cầu dựng | Dựng | Bấm→3 MP4 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| T-038/1 | 2,857–3,038 | 54,118–64,866 | 2,494–4,337 | 3,227–5,585 | 0,515–0,542 | 0,944–1,363 | 6,502–7,996 | 85,344 |
+| T-038/2 | 2,066–4,724 | 58,434–64,693 | 3,563–5,631 | 2,750–4,813 | 1,322–1,488 | 0,853–1,745 | 8,349–11,085 | 87,132 |
+| T-041 | 0,245–0,270 | 54,543–85,178 | 0,057–0,073 | 0,732–4,823 | 0,597–2,149 | 2,566–3,424 | 12,321–19,630 | 100,535 |
+
+- **Mốc:** DOM click→export_saved; tải gồm chuẩn hóa, dựng gồm kiểm nguồn/hàng đợi/encode/kiểm cuối. Dựng sớm trước nhập 0,541–2,083s; các cột chồng nhau, không cộng. Mốc dựng worker bị ghi đè trong lần đo nên dùng receipt compose; giữ measurement nguyên. [Bằng chứng/từng hồ sơ](D:/hermes-wt/artifacts/T-041/progress.md).
+- **Kết luận:** mới **100,535s** so với **85,344/87,132s**; nhánh cuối còn **15,357s app** so với **85,178s Muse**, app giảm **5,121/7,082s** từ 20,478/22,439s; chưa dưới 60s, **phụ thuộc Muse**. Chưa chứng minh giảm cho mọi hook/lần chạy.
+- **SHA-256 H1/H2/H3:** f3991c093534973f5ad9a7998fb143b778e76d6b3e92a46f800e3dbff5030395 · 7eec7ea4e13beef53f140798adab06c4d207d6d7e5acd1b1328b54795180c2e6 · d327e4f83bfe63879cdb0f98d4c6fd3e4f1e7c10ee34e21112a75c4a8201b6a2.
+- **Sửa/kiểm/push:** a47faaf warm/URL/dựng sớm/CPU; a0e9716 fixture launcher; b9d5dd5 giữ timing + assertion. Typecheck + **887/887**, 0 lỗi/skip; build **15:46:30 +07**, launcher QA 1366/1920/persistence/0 console error. Main **1eae6c5** và before-T-041 đã push thường, remote khớp/cây sạch. [Review](REVIEW-T-041.md).
+- **Thật/bảo toàn:** đúng 3 gửi Cho/Duc/Chim, 3 nguồn 8s/3 MP4 15s, 720×1280/2,325–2,427 MB/A-V/giải mã/hash đạt; hook khác, thân/CTA giữ. VPN connected/Muse/hồ sơ bật nguyên; Chi đã vắng trước task, 0 gửi; không retry/đổi hồ sơ/đăng/DM. 134 record cũ nguyên hash/84 job cũ giữ ID; cuối worker paused/active0/budget0.
+- **Lỗi/chưa kiểm:** dựng 12,321–19,630s còn chậm hơn T-038, chưa có trace quy nguyên nhân; không nhận mọi chặng đều nhanh hơn. Timing sửa sau đo chỉ kiểm fixture/full suite, không gửi lần hai. Chưa duyệt mọi frame/SKU/công dụng/chất lượng cảm nhận toàn bộ, độ ổn định tốc độ hoặc hash toàn bộ media cũ; không cookie/token/DB trực tiếp, không nhãn AI.
+- **Cần anh chốt:** không có để khép task. Mở START-HERMES-CLIP.cmd → Video → xem ba bản T-041 trước khi dùng; không tự gửi thêm. [Báo cáo](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-041.md).
+
+---
+
+# T-040 — Chưa đo được Muse có/không VPN (15/11/2026)
+
+- **Cách có sẵn:** Tài khoản Muse → Duc → đóng browser → Sửa / proxy → bỏ “Tự cài và bật Touch VPN khi mở trình duyệt”, proxy trống; giữ công tắc hồ sơ/Muse bật. Chưa thực hiện lưu.
+- **Điểm chặn:** cơ chế duyệt tự động từ chối lệnh đóng êm/mở lại Electron để dùng IPC, nguyên văn “blocked by policy”; UI Automation hiện có chỉ đọc được khung cửa sổ. Không vượt chặn.
+- **Hai lượt:** Duc không VPN **0 gửi**, Cho có VPN **0 gửi**; preflight→gửi/chờ Muse/tải/nhập đều **chưa đo**, không có receipt/clip mới. [Bằng chứng và checkpoint](D:/hermes-wt/artifacts/T-040/progress.md).
+- **Kết luận:** chưa biết bỏ VPN nhanh/chậm bao nhiêu giây; chưa đánh giá tài khoản/vùng. Một mẫu mỗi bên, khác hồ sơ, cũng không đủ kết luận thống kê.
+- **Khôi phục:** không cần vì chưa tắt VPN/chưa lưu cấu hình; không đổi công tắc, không thao tác Chi/Chim, không đăng/DM. Không nhận VPN đang connected từ cấu hình hay lần đo cũ.
+- **Mã/kiểm:** main aebe4e4 sạch, tag before-T-040=aebe4e4; không sửa/commit mã, không build/test lại. Electron PID 55496 vẫn chạy; ảnh cửa sổ thật chỉ local. Khóa codex-T-040.txt đã nhả.
+- **Chưa kiểm / Cần anh chốt:** chưa có checkProfile trước/sau hoặc mẫu thật; chạy lại trong phiên có đường UI/IPC được phép, hoặc anh thử tay đúng 1 Duc + 1 Cho rồi bật lại VPN Duc và đo hạn mức. Không cần sửa mã để tắt VPN riêng.
+
+---
+# T-039 — đã sửa xóa hồ sơ Muse (15/11/2026)
+
+- **Không chặn:** hồ sơ đang bật/tắt, Muse bật/tạm dừng và worker paused tự chúng không khóa xóa; UI busy chờ thao tác trước. [Ma trận từng ca](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-039.md).
+- **Chặn phiên:** browser mở/chạy nền → bấm Đóng trình duyệt; đang mở/đóng, kiểm phiên, VPN, chat, xóa hoặc runner chưa dừng hẳn → chờ xong. Trước chỉ tooltip gộp; nay hiện đúng lý do + cách gỡ dưới nút.
+- **Chặn tác vụ:** queued → Hàng đợi/hủy lượt chưa gửi; preflight/prepared/submitting/submitted/waiting/downloading/validating/active hoặc chat preparing/waiting → chờ kết thúc; đợt queued/running → chờ hoặc tạm dừng đợt triển khai. Không bypass đang gửi.
+- **Việc cũ:** needs_attention/unknown và đợt partial/paused đã dừng hẳn từng khóa xóa; nay có **Bỏ qua và xóa**, cảnh báo không lấy tiếp kết quả chưa tải, buộc gõ đúng tên. Skip cảnh T-028b vẫn giữ; tác vụ thuộc B/nhà cung cấp khác không được bỏ thay.
+- **Lỗi khi xóa:** sai tên/boolean, hồ sơ mất, mã/path sai, thiết bị Windows, alias hoa/thường, target file/link hoặc parent junction → báo tiếng Việt, không xóa; thiếu thư mục phiên vẫn bỏ cấu hình được; Windows giữ file → báo còn file và bước đóng browser, không nhận đã dọn sạch.
+- **Sửa/build/push:** mã 41cf5cf + c708fe7; build cuối **13:18:04 +07**, cây sạch/app tắt. Main **aebe4e4** và tag before-T-039=4520466 đã push thường, remote khớp; khóa codex-T-039.txt đã nhả.
+- **Đã kiểm:** baseline 26 ca; TypeScript + **884/884**, 0 lỗi/skip; Electron qua launcher, SQLite/phiên giả riêng, UI/IPC/reload/persistence, 4 PNG 1366/1920, không tràn/console lỗi/request ngoài. [Review](REVIEW-T-039.md); log ở D:/hermes-wt/artifacts/T-039/, ảnh ở app outputs/T-039-ui/.
+- **Cách dùng:** mở START-HERMES-CLIP.cmd → Tài khoản Muse → đóng trình duyệt hồ sơ nếu được nhắc → Xóa hồ sơ hoặc Bỏ qua và xóa → gõ đúng tên → xác nhận. Không cần tắt Muse chung.
+- **Bảo toàn/chưa kiểm:** không tự xóa hồ sơ thật, không gọi đổi công tắc Cho/Duc/Chim/Chi hay Muse; không đọc DB/cookie/token thật, không gửi Muse. Chưa nghiệm thu xóa hồ sơ thật, mọi ACL/phần mềm giữ file hoặc băm toàn bộ media cũ; app dữ liệu thật để đóng cho người dùng tự mở/chọn.
+- **Cần anh chốt:** không có để khép sửa. Người dùng tự chọn hồ sơ muốn xóa và xác nhận; fixture không chứng nhận tài khoản thật.
+
+---
+
 # T-038 — 2 lần × 3 hồ sơ, đủ 6 MP4 (15/11/2026)
 
 - **Hồ sơ:** Cho/Duc/Chim bật, ready/signed_in, quota available, VPN connected; Chi bật/ready nhưng stopped=true, 0 gửi. Muse bật; cuối worker paused/active=0/budget=0. Đúng 6/6 gửi, mỗi hồ sơ 2; giãn 140,698–143,406s, không retry/reset/đổi công tắc.
@@ -26,6 +212,21 @@
 - **Sửa/kiểm/push:** cd31ad6 chờ receipt ổn định ≤30s và ghim profile qua IPC; typecheck + **862/862**, 0 lỗi/skip; build **12:21:07 +07**, launcher thật đạt; main **1515a30** và before-T-037 đã push thường, remote khớp.
 - **Bảo toàn/chưa kiểm:** Muse/ba hồ sơ vẫn bật; 77 job cũ đủ, 78 job cuối; active=0/budget=0/worker paused. Không cookie/token/DB trực tiếp, đăng/DM. Chưa xác minh entitlement/HTTP 403 trên web, toàn văn ngoài receipt 2.000 ký tự; không clip để duyệt chất lượng.
 - **Cần anh chốt: Chi bị hạn chế quyền video phía Muse (kiểm trên web bằng tay).** Giữ phanh Chi. [Review](REVIEW-T-037.md) · [Báo cáo](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-037.md).
+
+---
+
+# T-036 — sửa gói một tin ba video, chỉ Muse giả (15/11/2026)
+
+- **Sửa:** `ab54f57`; báo cáo `42bac14`. Một Codex, tự review; không đổi theme/font/workflow.
+- **Chờ thẻ:** poll 750ms, placeholder có video sau 3–10s vẫn đạt; giữ ordinal, bỏ mốc 15s, hết timeout cấu hình mới báo thiếu.
+- **Chống trùng:** SHA nguồn/file khác; so khung giữa RGB 32×32, bất kỳ cặp lệch trung bình ≤2,5% từ chối cả gói, giữ file/receipt/lý do, không tự đoán cảnh.
+- **Cờ/log:** chỉ lỗi ánh xạ/trùng đặt cờ; mạng/timeout không đổi. Restart worker xóa cờ tạm, giữ phanh/ledger. Log tải URL chỉ ghi loại lỗi, không URL ký/token.
+- **Kiểm:** typecheck sạch; **859 đạt, 0 lỗi/skip** = 278 domain + 29 API + 544 desktop + 8 Codex. Muse giả; Chromium/FFmpeg/OpenMontage local thật. Đủ ba test T-034; không bỏ/nới kiểm media cũ.
+- **Build/launcher:** `pnpm local:build` 05:53:02 +07, cây sạch/app tắt; START-HERMES-CLIP với QA riêng đạt, 0 request ngoài/console error, receipt/phanh/switch giữ, đóng êm.
+- **Push:** app `main=42bac14` và tag `before-T-036=fa41fbc` đã push thường, remote khớp; khóa `codex-T-036.txt` đã nhả.
+- **Bảo toàn:** 0 gọi Muse thật; không ghi công tắc hồ sơ/Muse, không đọc AppData/DB/profile/credentials thật; không đăng/DM. Giữ WIP văn phòng có trước.
+- **Chưa kiểm:** Muse/tài khoản thật, quyền Chi, đúng cảnh/SKU/chất lượng clip thật; một khung giữa không chứng minh đúng nội dung, có thể chặn cảnh hợp lệ giống hình.
+- **Cần anh chốt:** không có cho T-036. Mở lại app để dùng bản build; kiểm Muse thật cần phạm vi riêng, receipt chưa rõ vẫn phải đối soát. [Review](REVIEW-T-036.md) · [Báo cáo](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-036.md).
 
 ---
 
@@ -112,6 +313,21 @@
 
 ---
 
+# T-031 — ĐẠT đường tạo video, 15/11/2026 (+07)
+
+- **Nguyên nhân T-030 chưa xác định duy nhất:** receipt IPC đã có `Create a vertical 9:16 video...`; không thể nói thiếu mọi lệnh tạo. Xác định lỗi prefix/thứ tự scope (`muse.mjs:83–91`), mất message từ chối (:161–163), regex bỏ sót (:6), retry kế thừa mã lỗi (`store.mjs:42`). Không có bước chọn tab/model riêng; chat chữ đi đường riêng.
+- **Đã sửa:** 2cab2bf khóa một hằng số `You create a video for me.` + newline ở đầu mọi đường video, UI chỉ đọc/body riêng, lưu/import/retry tự gỡ trùng và gắn lại; giữ mô tả/dedupe/receipt. 4cedacb sửa metadata retry và nhãn ready có output; không gắn prefix vào chat chữ/ảnh.
+- **Đúng 1/1 lượt Cho, cảnh 1:** 02:37:22.327 → 02:38:25.871 +07, 63,544s tới nhập. Nguyên văn: **“Đã tự nhập file vào đúng cảnh trong Thư viện.”** State ready; MUSE_NO_MEDIA trong raw receipt là mã kế thừa, được giữ nguyên lịch sử. Không gửi thêm/cảnh khác, không dùng Chi/ss.
+- **Clip:** H.264/AAC, 720×1280, 8,000s, 3.308.570 byte; ffprobe/giải mã toàn bộ đạt. SHA-256 `b81dfaf8329c7cd392f7dd3c913b012140ba6e63cab7f64bd9a16e4b8646f405`. File/receipt/bằng chứng mới chỉ local tại D:/hermes-wt/artifacts/T-031/; take pending.
+- **Đã kiểm:** typecheck + 831 test (276 domain/29 API/518 desktop gồm OpenMontage local/8 Codex), 0 lỗi/skip; Muse giả đủ prefix/xóa/trùng/chat chữ/403. Một lần sai đường REACH trong môi trường test đã sửa và chạy lại full desktop xanh, không hạ assertion. UI fixture 4 ảnh 1366/1920.
+- **Build/restart:** 4cedacb build 02:48:51 +07 cây sạch/app đóng êm; launcher chính mở lại, kiểm 02:51:06: 57 job/78 record nguyên hash so trước đóng, clip đúng cảnh; 56 job cũ nguyên baseline. 0 page error quan sát, ảnh thật 1366/1920. Muse bật, worker paused=true/active=0, Chi tắt; tổng gửi vẫn 1.
+- **Push:** app origin/main **49467c6**, remote khớp, cây sạch; không force. Báo cáo source `ops/office/reports/T-031.md`; [Review](REVIEW-T-031.md); chi tiết local `D:/hermes-wt/artifacts/T-031/REPORT.md`, nhật ký `progress.md`.
+- **Chưa kiểm:** HTTP 403/công cụ backend thật của T-030, selector/URL lịch sử (receipt không lưu cấu hình), quyền video của Chi, chất lượng/SKU, 3 hook, nhiều video trong một tin. PROMPT ONLY/403 là lời đáp Muse, chưa phải HTTP status được xác minh. Không đọc trực tiếp DB/cookie/token, không đăng/DM/paid API.
+- **Cần anh chốt:** không có để khép T-031. **Đề xuất thử 1 tin yêu cầu nhiều video để giảm số lượt** ở task sau. Chạy tiếp từ clip pending trong app sau khi duyệt nội dung; không tự gửi thêm trong task này.
+- **Khóa:** codex-T-031.txt đã xóa và kiểm không còn lúc 02:52:29 +07 ở văn phòng/.git/office-locks. Giữ live-attempt.json để chặn vô tình chạy lại lượt thật.
+
+---
+
 # T-028b — ĐẠT, xóa ss qua UI, 15/11/2026 01:58 +07
 
 - Đã Xóa hồ sơ → nhập đúng ss → xác nhận; reload chỉ còn Cho/Chi, không lỗi dọn hồ sơ. Hai hồ sơ khác nguyên hash/trạng thái; không đóng phiên khác.
@@ -134,6 +350,18 @@
 
 ---
 
+# T-031 — checkpoint, chưa áp sửa (15/11/2026, +07)
+
+- **Nguyên nhân thật: chưa xác định.** Source gói đã có `Create a vertical 9:16 video...` (`desktop/src/muse-package.mjs:51`); adapter thêm đoạn cho phép media phía trước (`muse.mjs:82–85`), chưa có câu mở đầu cố định người dùng chốt.
+- Adapter mở `/thread/new`, gắn ảnh nếu có, bấm Send (`muse.mjs:49,54–76,121`); không chọn tab/model video riêng. Chat chữ đi đường riêng (`muse-chat.mjs:191`), chưa thấy bằng chứng nó phủ lên đường video.
+- Regex `explicitMediaRefusal` (`muse.mjs:5`) bỏ sót đúng dạng `Video generation is unavailable...403 video_not_available`; có thể chờ tới timeout, chưa chứng minh đây là nguyên nhân không tạo clip.
+- **Đã kiểm:** 6 assertion fixture/exit 0 qua `D:/hermes-wt/artifacts/T-031/diagnose.mjs`; không network/tài khoản thật. **0/1 lượt Muse thật**, không đổi công tắc/hồ sơ; chưa mở app hay đọc DB/cookie/token.
+- **Source/SHA:** d2b666b nguyên trạng/sạch; tag before-T-031 cùng SHA. Chưa có sửa/commit/push/build; không chạy full suite cho bản sửa chưa tồn tại. Khóa codex-T-031.txt đã nhả sau ghi checkpoint.
+- **Chưa kiểm:** receipt T-030 và receipt thành công qua IPC, selector/URL lịch sử, UI khóa prefix, test sửa/full suite, một lượt Cho/clip/ffprobe/hash. Không kết luận HTTP 403 từ văn bản báo cáo cũ.
+- **Cần anh chốt:** đề mục 1 yêu cầu “Chạy sau T-028b lần 2”, nhưng chưa có kết quả lần 2; runner hiện xếp T-031 trước rồi T-028b. Đã hỏi làm T-031 ngay giữ ss, hay chờ T-028b; chưa nhận trả lời. Không tự chạy runner/xóa ss.
+- **Chạy tiếp:** sau khi rõ thứ tự, sửa shared prefix/lưu–nhập/UI/adapter, kiểm đủ rồi đúng một lượt cảnh 1 bằng Cho; Chi tạm ngưng, ss nguyên trạng. Chi tiết và lệnh tái hiện: `D:/hermes-wt/artifacts/T-031/progress.md`.
+
+---
 # T-030 — Muse thật lại (15/11/2026, +07)
 
 - Main/tag trước chạy 92307c6, cây sạch/một worker theo checkpoint; T-028b hết worker nhưng chỉ có checkpoint. IPC: Muse bật; Chi/Cho ready, quota available (trạng thái lưu); nhịp 60s, timeout 900s.
@@ -158,6 +386,16 @@
 ---
 
 Chế độ: CODEX-BOSS
+
+# T-028b — checkpoint trước bỏ qua, 2026-11-15 00:16:55 +07
+
+- Sau T-029; app main 92307c6 sạch, không có khóa Codex khác và chỉ một codex exec. App đang chạy đúng checkout; phiên khác giữ nguyên.
+- Hai lượt thuộc ss (a7338c4e-16f4-45e6-a741-629962e42a37): fe1b4424-2493-4ec4-8b4a-d8efd276bb5c và 54df93df-1f89-4f2e-9b68-9ea018b25ee3; hiện cả hai needs_attention.
+- Lý do được người dùng duyệt cho đúng hai lượt: **bỏ qua theo xác nhận người dùng: hồ sơ bị ban**. Sắp bấm Bỏ qua, không đối soát qua UI; chưa bỏ qua/xóa tại checkpoint này.
+- Baseline qua app: 3 hồ sơ; 76 record; 31 asset (23 MP4); 34 take (32 video); 6 bản xuất; 50 job/receipt; 265 receipt lệnh production; 13 receipt tích hợp (7 compose). musePaused=false, worker paused=true, active=0.
+- Không đọc trực tiếp AppData/DB/cookie/token, không gửi Muse hoặc đóng phiên khác. Bằng chứng giới hạn số đếm/metadata qua app.
+
+---
 
 # T-029 — chạy thử 1 sản phẩm (14/11/2026, +07)
 
@@ -184,6 +422,19 @@ Chế độ: CODEX-BOSS
 - **Nhẹ:** mở Chi tiết từ new_product bật thêm hộp tạo dự án (`components/lab/production.tsx:59`); thumbnail MP4 trả200 nhưng đen (`desktop/local/thumbnails.mjs`, chưa chốt nguyên nhân). Prompt gói còn lẫn tiếng Việt từ problem; thiếu ảnh chuẩn kiểm SKU.
 - **Đã kiểm/chưa kiểm:** UI/IPC thật, tải/ffprobe/hash/decode đạt; tài liệu được kiểm trước commit, không chạy full suite/build vì không sửa code. Chưa cold-start, Muse clip mới/latency, nghe toàn bộ audio, SKU, 3 hook khác nhau, cột tài khoản/tải-copy-UTM và thẻ số thật; không Instagram/DM/paid API. Ảnh/media/receipt mới chỉ local.
 - **Cần anh chốt/chạy tiếp:** quyền tạo video của hồ sơ hiện tại hoặc cung cấp clip tay đúng 5 cảnh; báo giá ship đúng SKU, link landing và tài khoản sẽ dùng. Tiếp tục qua gói tay trong app; MP4 T-029 chỉ thử kỹ thuật, chưa duyệt đăng. [Review](REVIEW-T-029.md); nhật ký local `progress.md` và báo cáo chi tiết `REPORT.md`. Khóa `.git/office-locks/codex-T-029.txt` chưa nhả: công cụ chặn xóa (`blocked by policy`); cần người dùng xóa đúng khóa này sau khi worker kết thúc.
+
+---
+
+# T-028 — chưa xoá `ss`, giữ nguyên vì hai lượt chưa rõ kết quả
+
+- **Giờ làm:** 14/11/2026 23:38–23:42 +07. App đang chạy từ checkout chính, `main` **92307c6**; cây app sạch, không có khoá `codex-*.txt`, chỉ worker T-028 là `codex exec` (các tiến trình Codex khác là app-server/exec-server/sandbox nền). Không sửa code, build, commit hay push. WIP văn phòng có trước giữ nguyên.
+- **Đúng hồ sơ:** thẻ `ss`, nhãn `11`, đã gửi 0 lượt trong đợt, công tắc riêng tắt; browser/VPN đã đóng, không busy. Bộ đếm đợt 0 không chứng minh các lượt lịch sử chưa gửi. Hai hồ sơ còn lại giữ `health=ready` theo trạng thái app; phiên đang mở của hồ sơ khác giữ nguyên. Công tắc Muse toàn cục vẫn bật (`musePaused=false`).
+- **Lý do chặn từ IPC `profile.deleteBlockedReason`:** “Hồ sơ còn tác vụ đang chờ, đang chạy hoặc cần đối soát. Giữ hồ sơ để lấy đúng kết quả.” Nút **Xóa hồ sơ** mờ và có đúng lý do này; chưa có bằng chứng lỗi code.
+- **Hai lượt chặn:** `fe1b4424-2493-4ec4-8b4a-d8efd276bb5c` và `54df93df-1f89-4f2e-9b68-9ea018b25ee3`. Cả hai `needs_attention`, không có `providerId`/output, nhưng lịch sử đã qua `prepared` → `submitting` (“Đang gửi và chờ Muse”) → `needs_attention`. Không đủ bằng chứng là chưa từng gửi, nên không thuộc quyền “Bỏ qua, không đối soát” của T-028.
+- **Kết quả:** chưa xoá; hồ sơ vẫn **3 → 3**. Không gọi delete/skip/reconcile/send/toggle/closeProfile; không đọc trực tiếp AppData, cookie, token hoặc DB. App để mở tại Tài khoản Muse.
+- **Đã kiểm qua API/IPC trước–sau kiểm giao diện:** 74 record, 30 asset (22 MP4 + 8 ảnh), 24 take (22 video), 3 bản xuất render MP4, 50 job/receipt worker, 218 mã biên nhận lệnh production, 10 receipt tích hợp (4 compose) đều không đổi. SHA-256 của toàn bộ records, worker jobs, integration receipts và metadata hồ sơ đã chọn đều khớp; ledger Muse cũng khớp. Đây là số đếm của các nhóm khác nhau, không cộng thành tổng clip/receipt chung. Bằng chứng chỉ local: `D:/hermes-wt/artifacts/T-028/result.json`.
+- **Chưa kiểm:** chưa thực hiện xoá nên chưa nghiệm thu trạng thái sau xoá; chưa đối soát hai lượt với dịch vụ Muse, chưa xác minh lại phiên/quota trực tiếp, chưa quét/đọc/phát file media trên đĩa. Số MP4 ở trên lấy từ metadata của app, không phải kiểm kê filesystem. Không chạy full suite vì không thay code.
+- **Cần anh chốt / chạy tiếp:** cần quyết định xử lý hoặc cho đối soát hai lượt lịch sử trên qua app trước khi xoá `ss`; không tự bỏ qua hay gửi lại. Khi kết quả đã được làm rõ và `deleteBlockedReason` rỗng, kiểm lại chỉ một Codex/không khoá/WIP app, lấy số đếm mới, dùng chức năng Xóa hồ sơ với tên xác nhận `ss`, rồi đối chiếu giảm đúng một hồ sơ và giữ media/biên nhận.
 
 ---
 
