@@ -1,3 +1,16 @@
+# T-037 — đã kiểm Chi, 1 gửi / 0 clip (15/11/2026)
+
+- **Receipt cũ:** “Video generation still isn't available here, as a lasting restriction, so I can't make the 8-second video — no video was made.” [Toàn bộ receipt nguyên giá trị IPC](D:/hermes-wt/artifacts/T-037/receipts-verbatim.md); app có giới hạn 2.000 ký tự, không phải toàn văn web.
+- **Đối soát:** hai lượt mục tiêu đều failed/reconciled=true, không gửi lại; pha đọc còn khép một receipt chữ cũ f6588818, sáu lượt khác bị guard từ chối; providerResponse cũ giữ nguyên.
+- **Phanh đầu:** Chi đã stopped=false do kỳ app mới sau 10:00; không cần gỡ, không reset hoặc ghi công tắc. Lượt mới ghim Chi, quota/phiên kiểm lại, pacing giữ 60s/null.
+- **Thật:** cảnh 1 đã duyệt của auto_T033_measure1, 8s/9:16, mở đầu MUSE_VIDEO_COMMAND; gửi **12:22:17.891**, ghi kết quả **12:23:34.664 +07** (**76,773s**); timeout 900s giữ nguyên, kết thúc sớm do từ chối rõ; **0 clip**, ffprobe/SHA không có file.
+- **Receipt mới:** “Video generation still isn't available here, as a lasting restriction, so I can't make the 8-second video — no video was made.” Có chữ “403 video_not_available”; MUSE_NO_MEDIA/needs_attention, Chi stopped=true, không thử lại/đổi hồ sơ. [Kết quả IPC](D:/hermes-wt/artifacts/T-037/result.json).
+- **Sửa/kiểm/push:** cd31ad6 chờ receipt ổn định ≤30s và ghim profile qua IPC; typecheck + **862/862**, 0 lỗi/skip; build **12:21:07 +07**, launcher thật đạt; main **1515a30** và before-T-037 đã push thường, remote khớp.
+- **Bảo toàn/chưa kiểm:** Muse/ba hồ sơ vẫn bật; 77 job cũ đủ, 78 job cuối; active=0/budget=0/worker paused. Không cookie/token/DB trực tiếp, đăng/DM. Chưa xác minh entitlement/HTTP 403 trên web, toàn văn ngoài receipt 2.000 ký tự; không clip để duyệt chất lượng.
+- **Cần anh chốt: Chi bị hạn chế quyền video phía Muse (kiểm trên web bằng tay).** Giữ phanh Chi. [Review](REVIEW-T-037.md) · [Báo cáo](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-037.md).
+
+---
+
 # T-035 — một tin đủ ba MP4; Chi giữ phanh (15/11/2026)
 
 - **Chi, nguyên văn IPC:** “Video generation still isn't available here, as a lasting restriction, so I can't make the 8-second video — no video was made.” Muse còn nêu “403 video_not_available” theo tài khoản/khu vực; chưa xác minh HTTP/entitlement. Prompt đúng command, cùng đường gửi với Cho/Duc, không tìm thấy nhánh riêng Chi. Hai lần đối soát báo nội dung đang thay đổi; receipt chưa khép, **0 gửi Chi**.
