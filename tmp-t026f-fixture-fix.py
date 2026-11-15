@@ -1,0 +1,5 @@
+from pathlib import Path
+r=Path(r'C:\Users\ADMIN\Downloads\Product-Lab-Local\Product-Lab-Local')
+def write(p,s):p.write_text(s,encoding='utf-8',newline='\n')
+p=r/'scripts/office-ui.mjs';s=p.read_text(encoding='utf-8').replace('officeUI(task,records,run)','officeUI(task,records,run,options={})').replace('root:join(temp,\'workspace\'),seedPath','root:join(temp,\'workspace\'),seedPath,workerStore:options.workerStore??null').replace('run({page,origin:local.origin,out,screenshot})','run({page,origin:local.origin,out,screenshot,local})');write(p,s)
+p=r/'scripts/check-t026f-ui.mjs';s=p.read_text(encoding='utf-8');s=s.replace("for(const mode of ['full','empty','refused'])await officeUI(","for(const mode of ['full','empty','refused']){const store=new Store(':memory:');store.set('muse_paused',false);await officeUI(").replace("const store=new Store(':memory:'),integrations=",'const integrations=').replace("if(mode==='refused')throw Error('Muse từ chối (fixture)');","if(mode==='refused'){store.set('muse_paused',true);throw Error('Muse từ chối (fixture)');}");s=s.rstrip();assert s.endswith('});');s=s[:-3]+'},{workerStore:store});}\n';write(p,s)

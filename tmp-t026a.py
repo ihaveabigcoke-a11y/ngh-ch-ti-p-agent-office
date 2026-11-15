@@ -1,0 +1,15 @@
+from pathlib import Path
+root=Path(r'C:\Users\ADMIN\Downloads\Product-Lab-Local\Product-Lab-Local')
+p=root/'components/lab/app.tsx'
+s=p.read_text(encoding='utf-8')
+s=s.replace('label: "Làm video", icon: Video','label: "Video", icon: Video').replace('label: "Số liệu", icon: BarChart3','label: "Kết quả", icon: BarChart3').replace('label: "Đăng bài", icon: Globe2','label: "Đăng", icon: Globe2')
+s=s.replace('const businessViews =','const primaryViews = ["signals","overview","research","products","production","social","results","settings"];\nconst businessViews =',1)
+s=s.replace('const [quickProduct,setQuickProduct]','const [advancedScreens,setAdvancedScreens]=useState(false);\n  useEffect(()=>{setAdvancedScreens(localStorage.getItem("hermes-advanced-screens")==="true");},[]);\n  const [quickProduct,setQuickProduct]',1)
+s=s.replace('[view, setView] = useState("overview")','[view, setView] = useState("signals")').replace('p.get("view") || "overview"','p.get("view") || "signals"').replace('? v : "overview"','? v : "signals"')
+s=s.replace("['overview','research','products','production','library','social','results','experiments','settings'].map",'primaryViews.map')
+s=s.replace('<details className="nav-other"><summary>Khác</summary>','{advancedScreens&&<details className="nav-other"><summary>Nâng cao</summary>').replace("!['overview','research','products','production','library','social','results','experiments','settings'].includes",'!primaryViews.includes').replace('</nav></details>\n        </div>','</nav></details>}\n        </div>')
+s=s.replace('href="?view=production"\n          onClick','href="?view=signals"\n          onClick',1).replace('navigate("overview");\n          }}','navigate("signals");\n          }}',1)
+s=s.replace('<MuseConnectionStrip onNavigate={navigate} />','<label className="advanced-toggle"><input type="checkbox" checked={advancedScreens} onChange={e=>{setAdvancedScreens(e.target.checked);localStorage.setItem("hermes-advanced-screens",String(e.target.checked));}}/>Hiện màn nâng cao</label>\n        <nav className="provider-tabs"><a href="?view=accounts">Tài khoản Muse</a><a href="?view=chat">Chat Muse</a></nav>\n        <MuseConnectionStrip onNavigate={navigate} />',1)
+p.write_text(s,encoding='utf-8',newline='\n')
+p=root/'desktop/src/main.mjs';s=p.read_text(encoding='utf-8');s=s.replace('?view=overview','?view=signals');p.write_text(s,encoding='utf-8',newline='\n')
+p=root/'components/lab/department-nav.css';s=p.read_text(encoding='utf-8');s+='\n.department-sidebar nav a:last-child[href="?view=settings"]{margin-top:16px;border-top:1px solid var(--lab-border);padding-top:14px}.advanced-toggle{display:flex;align-items:center;gap:10px;margin:18px 0;font-size:13px}\n';p.write_text(s,encoding='utf-8',newline='\n')

@@ -1,3 +1,15 @@
+# T-058 — Source/build đạt; chưa xác nhận clip mới (15/11/2026)
+
+- **Đã push thường:** main `1b8ac94`, source `8573485`, tag `before-T-058=460c387`; đã thêm dòng nhắc tiếng Anh và ổn định test t057, giữ prompt/dispatch/theme/font.
+- **Lượt thật duy nhất:** Duc, #91 → #95; VPN connected/signed_in/quota available, active=0; gửi **22:57:37.075 → dừng 22:58:57.480 +07** (80,405s); đúng 1 submit/1 tin user mới/1 MUSE_VIDEO_COMMAND.
+- **Clip mới: không**; SHA-256=null, ffprobe=không áp dụng, chưa có file để so 136 hash cũ; #95 needs_attention/MUSE_NO_MEDIA. Đã dừng, không thử lại/đổi hồ sơ/reset; công tắc nguyên.
+- **Nguyên văn Muse:** “I can't make that new video — video generation isn't available for this account in your country or region. It's a lasting restriction, not a temporary outage, so retrying won't help.”
+- **T-052: chưa xác nhận** đường nhận clip mới vì Muse từ chối theo khu vực; không coi không nhận clip cũ trong lượt này là nghiệm thu clip mới. Nguyên văn/ảnh/mốc: [progress](D:/hermes-wt/artifacts/T-058/progress.md), [phản hồi](D:/hermes-wt/artifacts/T-058/provider-response.txt).
+- **Receipt #94:** chỉ đọc, giữ nguyên “Trùng clip cũ #90”; reconciled=true nhưng provider ID thuộc baseline cũ; **cần người dùng đối soát tay: có**. 94 job/cảnh cũ nguyên, chỉ thêm một cảnh, không asset/take mới.
+- **Đã kiểm:** typecheck + **974/974**, 0 fail/skip/cancel; t057 **10/10 lần, 40/40** giữ assertion; 4 PNG UI + 2 PNG launcher 1366/1920, hint/aria-describedby/Hủy/sai hồ sơ đạt, 0 gửi Muse từ fixture. [Review](REVIEW-T-058.md).
+- **Build chính:** `pnpm local:build` mặc định xong **23:06:48 +07**, exit 0 tại `1b8ac94`, cây sạch/app tắt; launcher/IPC QA riêng sau build đạt và đóng êm, 0 gửi thêm. Mở bằng `START-HERMES-CLIP.cmd`.
+- **Chưa kiểm / Cần anh chốt:** clip mới/hash/ffprobe/đường tải mới và kết quả mới của #94 chưa xác nhận; cần đối soát tay #94, không có câu hỏi kỹ thuật. Không tự gửi tiếp khi còn hạn chế; lượt nghiệm thu khác cần quyền mới. Khóa T-058 đã nhả, app sạch.
+---
 # Bản build mới nhất 15/11/2026 22:29 +07 — mở Hermes được (boss)
 
 - **`pnpm local:build` xong 22:29:35 +07, exit 0**, cây app sạch, HEAD **460c387** (gồm T-043..T-051, T-052, T-057), app tắt khi build. Mở bằng `START-HERMES-CLIP.cmd`.
