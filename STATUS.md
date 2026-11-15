@@ -1,3 +1,21 @@
+# T-038 — 2 lần × 3 hồ sơ, đủ 6 MP4 (15/11/2026)
+
+- **Hồ sơ:** Cho/Duc/Chim bật, ready/signed_in, quota available, VPN connected; Chi bật/ready nhưng stopped=true, 0 gửi. Muse bật; cuối worker paused/active=0/budget=0. Đúng 6/6 gửi, mỗi hồ sơ 2; giãn 140,698–143,406s, không retry/reset/đổi công tắc.
+
+| Lần | Preflight→gửi | Chờ Muse | Kết quả→tải | Tải | Kiểm+nhập | Nhập→chọn đoạn/yêu cầu dựng | Dựng | Bấm→3 MP4 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 2,857–3,038 | 54,118–64,866 | 2,494–4,337 | 3,227–5,585 | 0,515–0,542 | 0,944–1,363 | 6,502–7,996 | 85,344 |
+| 2 | 2,066–4,724 | 58,434–64,693 | 3,563–5,631 | 2,750–4,813 | 1,322–1,488 | 0,853–1,745 | 8,349–11,085 | 87,132 |
+
+- **Mốc/bằng chứng:** giây, DOM click thật; 3 hook mới + thân có sẵn; dựng chồng các chặng. T-035 76,123–87,636s (gọi handler). [Bảng từng hồ sơ và progress](D:/hermes-wt/artifacts/T-038/progress.md). 6 nguồn 8s/6 MP4 15s, 720×1280, A/V/giải mã/hash tải lại đạt; mỗi bộ 3 hash khác nhau.
+- **SHA-256 MP4 lần 1 H1/H2/H3:** 0eb7872c421f2ac137a0cbfb7d73de4ceef94f3df10afed6a3ee84d042ae46d0 · 6a32e46fe5a03bd8d3407541b269d3f518c8b292996a54b65a41224985b4a126 · c508cf04f8226b01961ec406babef8a719c007028e5af011960182daf0beca21
+- **SHA-256 MP4 lần 2 H1/H2/H3:** c06f0a26fca1bf58d7279b407a63b6aece09f69f5504432bd04174a8f9ee60e9 · c1c17ab0e31fb75ed1d33187f720f996464081d0646f4f090528297420dae93e · 2711a798a69905ea54fa148fa9ddd0255e9b87753bf5999843ceee0a42b75b6f
+- **Kết luận:** nhánh chậm lần 1: 64,866 + 5,585 + 6,502 = 76,953s; lần 2: 64,693 + 2,848 + 8,349 = 75,890s (chờ Muse+tải+dựng, chưa preflight/kiểm/lưu). **mục tiêu <60 s phụ thuộc Muse**; đây là sàn điều kiện theo mẫu đo, không phải bảo đảm thời gian.
+- **Mã/kiểm/push:** không cần sửa mã; chọn hồ sơ động đã loại Chi theo phanh. Source cd31ad6, build giữ T-037 12:21:07 +07; typecheck + 862/862, 0 lỗi/skip (Muse giả trong suite). Báo cáo main 4520466 và tag before-T-038=1515a30 đã push thường, remote khớp/cây sạch; khóa codex-T-038.txt đã nhả. 120 record cũ nguyên hash, 78 job cũ giữ ID, receipt/phanh Chi nguyên.
+- **Chưa kiểm/Cần anh chốt:** chưa duyệt SKU/công dụng/mọi frame, chưa kiểm rollover phanh sang kỳ mới hay toàn bộ byte media cũ. Không có quyết định cần chốt để khép đo; xem hai bộ MP4 trong Video/Thư viện trước khi dùng. Không đăng/DM/gửi thêm. [Review](REVIEW-T-038.md) · [Báo cáo](C:/Users/ADMIN/Downloads/Product-Lab-Local/Product-Lab-Local/ops/office/reports/T-038.md).
+
+---
+
 # T-037 — đã kiểm Chi, 1 gửi / 0 clip (15/11/2026)
 
 - **Receipt cũ:** “Video generation still isn't available here, as a lasting restriction, so I can't make the 8-second video — no video was made.” [Toàn bộ receipt nguyên giá trị IPC](D:/hermes-wt/artifacts/T-037/receipts-verbatim.md); app có giới hạn 2.000 ký tự, không phải toàn văn web.
