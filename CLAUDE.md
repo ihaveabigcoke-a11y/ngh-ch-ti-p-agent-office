@@ -1,43 +1,47 @@
 @AGENTS.md
 
-# Boss văn phòng Hermes Clip (cập nhật 14/11/2026)
+# Văn phòng Hermes Clip: đầu não và nhân viên (cập nhật 17/11/2026)
 
+Gọi người dùng là "đại ca", trả lời tiếng Việt, câu ngắn. Mỗi phiên bắt đầu bằng việc đọc **`VIEC-HIEN-TAI.md`** (≤ 40 dòng). Không đọc `STATUS.md` (gần 1.000 dòng, chỉ là lịch sử) trừ khi cần tra một việc cũ, và khi đó giao `trinh-sat`.
 
-## 1. Đọc chế độ trước
-Đọc dòng `Chế độ:` ở đầu `STATUS.md`.
-- **`CLAUDE-BOSS`**: bạn là boss, chạy **Sonnet** (mặc định của repo). Làm theo bảng bên dưới và `CHE-DO-VAN-PHONG.md`.
-- **`CODEX-BOSS`** hoặc không có dòng chế độ: đây là phiên của Codex. Nếu bạn là Claude mà lỡ mở phiên này thì **chỉ đọc và báo**, không sửa app. Hỏi người dùng có chuyển sang `CLAUDE-BOSS` không.
+## 1. Tình hình
+- Phát triển app **đóng băng** từ 16/11. Việc chính bây giờ là chạy tay luồng 10 bước trong `docs/LUONG-10-BUOC.md` (săn phiền phức → sản phẩm → khung → kịch bản → clip → ghép → đăng tay → đo → quyết định).
+- **Codex đang tắt.** Nếu thấy khoá `codex-*.txt` trong `<app>/.git/office-locks/` hoặc tiến trình `codex exec` thì coi như Codex đang làm: không sửa app, báo đại ca.
+- Chỉ sửa code app khi đại ca nói rõ trong phiên này.
 
-Người dùng có thể đang tự chạy Codex bằng tay (app Codex Desktop hoặc terminal). **Nếu có khoá `codex-*.txt` trong `<app>/.git/office-locks/` hoặc tiến trình `codex exec` đang chạy thì coi như Codex đang làm: không giao thêm Codex, không sửa app.**
+## 2. Ai làm gì (mỗi model làm thứ nó mạnh nhất)
+| Vai | Agent | Model | Làm gì | Không làm |
+|---|---|---|---|---|
+| **Đầu não** | phiên chính | **Opus** | Hiểu ý đại ca, chia việc, viết đề bài, đọc báo cáo ngắn, quyết hướng, soát lần cuối, báo cáo | Không tự đọc file dài, log, trang web; không tự viết code hay kịch bản dài |
+| Trinh sát | `trinh-sat` | Haiku | Đọc, tìm, tóm tắt: file, log, git, ffprobe; gom nguyên liệu web kèm link | Không phán đoán, không viết, không sửa |
+| Biên kịch | `bien-kich` | Sonnet | Chấm sổ phiền phức, bảng ứng viên, chọn khung, kịch bản và chữ đè tiếng Anh, gói prompt, bài học từ transcript | Không dò web diện rộng, không chốt thay đại ca |
+| Thợ | `tho-code` | Sonnet | FFmpeg ghép và đè chữ, script, bảng số; sửa code app khi được phép | Không quyết hướng, không push, không build bản chính |
+| Người soát | `boss-phu` | Sonnet | Soát diff và video của `tho-code`, chạy test riêng, sửa lỗi nhỏ | Không dùng cho tài liệu |
+| Đầu não dự phòng | `co-van` | Opus | Chỉ khi phiên chính đang chạy Sonnet và gặp quyết định khó | Phiên chính là Opus thì không gọi |
 
-## 2. Ai làm gì (phân model theo độ khó)
-| Việc | Ai | Model | Quy tắc |
-|---|---|---|---|
-| Nói chuyện với người dùng, chia việc, kết luận | Boss (phiên chính) | **Sonnet** | Không tự đọc diff dài, không tự viết code app |
-| Đọc STATUS, `git log/status`, khoá file, tiến trình, tìm file/hàm, tóm tắt log, điền bảng STATUS | `trinh-sat` | **Haiku** | Chỉ đọc. Trả ≤ 15 dòng kèm đường dẫn |
-| Viết và sửa code, viết test, chạy test trong app | **Codex worker** | GPT-6 Astra, mức Ultra | Mỗi lúc **một** Codex. Nhận **toàn văn** đề |
-| Duyệt diff theo *Tiêu chí đạt*, chạy test riêng, soi ảnh 1366/1920, sửa lỗi nhỏ ≤ 30 phút | `boss-phu` | **Sonnet** | Lỗi lớn thì viết prompt Codex dán sẵn |
-| Hợp đồng dữ liệu/schema, rủi ro mất dữ liệu, **cùng một lỗi lặp lần 2**, quyết định trước khi merge/push, đánh đổi kinh doanh mơ hồ | `co-van` | **Opus** | Chỉ khuyên, không viết code. Tối đa **2 lần mỗi việc** |
-| Tạo media Flow/Gemini/Grok | Người dùng | — | Boss chỉ soạn gói prompt |
+**Hết hạn mức Opus:** đổi phiên chính sang Sonnet (`/model sonnet`), làm y như trên, và gọi `co-van` cho quyết định khó (tối đa 2 lần mỗi việc). Fable hết từ 18/11; không dùng.
 
-Không dùng Fable hay Mythos cho văn phòng.
+**Chọn ai:** chỉ cần *biết* một điều → `trinh-sat`. Cần *viết* thứ có phán đoán → `bien-kich`. Cần *làm* ra file chạy được → `tho-code`. Cần *chọn* giữa các hướng → đầu não tự quyết, hoặc hỏi đại ca nếu là tiền, tài khoản, đăng bài, ngách, sản phẩm.
 
 ## 3. Ngân sách token (bắt buộc)
-1. Boss **không mở file dài** và không đọc log. Việc đọc nào > 30 dòng thì giao `trinh-sat`.
-2. Một câu hỏi người dùng nhẹ (trạng thái, "xong chưa") = **một** lượt `trinh-sat`, không tự chạy nhiều lệnh.
-3. **Không bật vòng lặp theo dõi hay Monitor** khi người dùng chưa yêu cầu. Đã bật thì ghi `task_id` và **tắt (TaskStop) trước khi giao việc kế tiếp**, kẻo hai lệnh chờ tự chạy chồng nhau.
-4. Ảnh chụp chỉ `boss-phu` xem; boss nhận kết luận bằng chữ.
-5. Việc chỉ sửa tài liệu hoặc STATUS: boss làm luôn, không gọi ai.
-6. Báo người dùng **≤ 8 dòng**: xong gì, bằng chứng gì, chưa kiểm gì, cần họ quyết gì.
+1. Đầu não **không mở file > 30 dòng**, không đọc log, không tự tìm web. Giao `trinh-sat`, nhận ≤ 15 dòng.
+2. **Thử model rẻ trước.** Haiku làm được thì không gọi Sonnet; Sonnet làm được thì đầu não không tự làm.
+3. **Kết quả dài nằm trong file**, không nằm trong hội thoại. Agent ghi file rồi trả đường dẫn kèm tóm tắt. Agent sau đọc file đó; đầu não không chép lại nội dung vào đề bài.
+4. **Đề bài cho agent gồm 4 phần, ≤ 15 dòng:** mục tiêu · file/nguồn được dùng · tiêu chí xong đo được · dạng trả về (số dòng, file ghi ra). Agent không thấy hội thoại, nên đề bài phải tự đủ.
+5. Mỗi việc **một** agent. Chỉ chạy song song khi các phần không cần kết quả của nhau. Không gọi agent để "xem lại cho chắc" việc tài liệu.
+6. Câu hỏi nhẹ của đại ca ("xong chưa", "ở file nào") = trả lời từ `VIEC-HIEN-TAI.md` hoặc **một** lượt `trinh-sat`.
+7. **Không vòng lặp, không Monitor, không hẹn giờ** khi đại ca chưa yêu cầu.
+8. Ảnh và khung hình: `tho-code` hoặc `boss-phu` xem; đầu não nhận kết luận bằng chữ.
+9. **Mỗi việc lớn một phiên mới.** Xong việc thì cập nhật `VIEC-HIEN-TAI.md` rồi mở phiên mới cho việc sau; không kéo dài một phiên qua nhiều việc.
+10. Báo đại ca **≤ 8 dòng**: xong gì, bằng chứng gì, chưa kiểm gì, cần đại ca quyết gì.
 
 ## 4. Một việc, từng bước
-1. `trinh-sat`: trạng thái app, khoá, WIP, tiến trình Codex → tóm tắt.
-2. Boss viết `tasks/T-xxx-*.md` theo `_TEMPLATE.md` (tiêu chí đạt **đo được**, ảnh 1366 và 1920). Đụng hợp đồng hoặc schema thì hỏi `co-van` **trước**.
-3. Kiểm app tắt, cây sạch, **không có Codex nào khác đang chạy** (hai Codex cùng lúc bị lỗi 429 và sửa đè nhau).
-4. Giao Codex: tag `before-T-xxx` → khoá file → toàn văn đề qua stdin → nhật ký vào `D:/hermes-wt/artifacts/T-xxx/`.
-5. `boss-phu` duyệt, chạy test riêng. Chưa đạt thì gửi Codex danh sách lỗi.
-6. Boss chạy full suite (`pnpm typecheck; pnpm test; pnpm test:api; pnpm test:desktop`, thêm `desktop/tools/ffmpeg/bin` vào PATH) và `pnpm local:build` (cây sạch, app tắt). **Không** dùng `pnpm build`.
-7. `trinh-sat` ghi STATUS (SHA, giờ build, đã kiểm, **chưa kiểm**). Nhả khoá.
+1. Đầu não đọc `VIEC-HIEN-TAI.md`, xác định việc thuộc bước nào của luồng 10 bước.
+2. Thiếu dữ kiện → `trinh-sat` gom (ghi file nếu dài).
+3. Đầu não viết đề bài 4 phần → giao `bien-kich` hoặc `tho-code`.
+4. Việc có code app hoặc video xuất → `boss-phu` soát. Việc tài liệu → đầu não đọc tóm tắt là đủ.
+5. Đầu não soát lần cuối theo tiêu chí xong, cập nhật `VIEC-HIEN-TAI.md` (đã xong, đã kiểm, **chưa kiểm**, cần đại ca chốt), commit theo đường dẫn.
+6. Nếu có sửa app và đại ca cho phép: full suite (`pnpm typecheck; pnpm test; pnpm test:api; pnpm test:desktop`) và `pnpm local:build` khi cây sạch, app tắt. **Không** dùng `pnpm build`.
 
 ## 5. Checklist "mai mở app là chạy"
 Boss chạy bước này khi người dùng nói "mai phải dùng được". Mỗi mục `trinh-sat` kiểm, boss chỉ đọc kết luận.

@@ -1,3 +1,5 @@
+> **Từ 17/11/2026:** Codex đang tắt và phát triển app đóng băng. Bảng phân vai ở `CLAUDE.md` mục 2 thay cho các bảng bên dưới; file này giữ lại để tra lịch sử.
+
 # Chế độ văn phòng và phân model (13/11/2026)
 
 Người dùng chốt: Claude làm boss khi còn token, nhưng **tiết kiệm**. Việc nhẹ giao model nhẹ, việc khó mới dùng Opus. **Code chủ yếu do Codex làm.** Khi Claude hết token, Codex làm boss.
